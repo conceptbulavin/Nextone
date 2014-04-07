@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <install>
+            <date><![CDATA[Wed, 17 Nov 2010 13:52:07 +0000]]></date>
+        </install>
+        <crypt>
+            <key><![CDATA[f580364ef3b8b15b1d878bb2e646c957]]></key>
+        </crypt>
+        <disable_local_modules>false</disable_local_modules>
+        <resources>
+            <db>
+                <table_prefix><![CDATA[]]></table_prefix>
+            </db>
+            <default_setup>
+                <connection>
+                    <host><![CDATA[localhost]]></host>
+                    <username><![CDATA[root]]></username>
+                    <password><![CDATA[123456]]></password>
+                    <dbname><![CDATA[magento_temashop]]></dbname>
+                    <active>1</active>
+                </connection>
+            </default_setup>
+        </resources>
+        <session_save><![CDATA[files]]></session_save>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <frontName><![CDATA[admin]]></frontName>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+	<!-- COPY AND PASTE THE FOLLOWING INTO local.xml FILE, WITHIN <config> -->
+
+    <lightspeed>
+		
+        <global><!-- this is a read-only db connection and should have access to core_config_data, sales_flat_quote, and sales_flat_quote_item  -->
+            <connection>
+                <host><![CDATA[localhost]]></host>
+                <username><![CDATA[root]]></username>
+                <password><![CDATA[goblin21]]></password>
+                <dbname><![CDATA[magento]]></dbname>
+            </connection>
+            <multi_currency>0</multi_currency> <!-- defaults to false "0" -->
+            <request_path></request_path> <!-- this will almost always be blank -->
+            <!--
+                    Examples - If your base_url looks like:
+                            http://www.tinybrick.com 		then 	'' 
+                            http://www.tinybrick.com/tempstore 	then 	'/tempstore'
+            -->
+        </global>
+		
+        <session>
+            <type></type><!-- files|memcached|db; empty defaults to files -->
+            <!-- file -->
+            <path></path><!-- empty defaults to var/session -->
+			
+            <!-- memcached -->
+            <servers> <!-- can use multiple servers in a federated, distributed cluster -->
+                <localhost><!-- name is arbitrary -->
+                    <host><![CDATA[localhost]]></host>
+                    <port><![CDATA[11211]]></port>
+                    <persistent><![CDATA[1]]></persistent>
+                </localhost>
+            </servers>
+	  		
+            <!-- db -->
+            <connection>
+                <host><![CDATA[localhost]]></host>
+                <username><![CDATA[root]]></username>
+                <password><![CDATA[goblin21]]></password>
+                <dbname><![CDATA[magento]]></dbname>
+            </connection>
+        </session>
+
+        <cache>
+            <backend>apc</backend>
+            <slow_backend>database</slow_backend>
+            <prefix>NEXTONE_</prefix>
+        </cache>
+
+        <cache>
+            <type>memcached</type>
+            <backend>memcached</backend><!-- files|memcached; empty default to files, memcached is STRONGLY encouraged in environments where possible -->
+			
+            <!-- file -->
+            <path></path><!-- empty defaults to var/lightspeed -->
+            <memcached>
+                <!-- memcached -->
+                <servers> <!-- can use multiple servers in a federated, distributed cluster -->
+                    <localhost><!-- name is arbitrary -->
+                        <host><![CDATA[localhost]]></host>
+                        <port><![CDATA[11211]]></port>
+                        <!--persistent><![CDATA[1]]></persistent-->
+                    </localhost>
+                </servers>
+                <!--compression><![CDATA[0]]></compression-->
+                <cache_dir><![CDATA[]]></cache_dir>
+                <hashed_directory_level><![CDATA[]]></hashed_directory_level>
+                <hashed_directory_umask><![CDATA[]]></hashed_directory_umask>
+                <file_name_prefix><![CDATA[]]></file_name_prefix>
+            </memcached>
+        </cache>
+    </lightspeed>
+
+</config>
