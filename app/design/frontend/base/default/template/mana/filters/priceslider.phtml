@@ -1,0 +1,18 @@
+    <div class="layout-slider" style="width: 100%;clear:both;margin-top:15px;margin-bottom:15px;">
+         <input style="visibility: hidden;" id="SliderPrice" type="slider" name="price" value="<?php echo $this->_currMinPrice?>;<?php echo $this->_currMaxPrice?>" />
+         <input type="hidden" id="prevMinPrice" value="<?php echo $this->_currMinPrice?>">
+         <input type="hidden" id="prevMaxPrice" value="<?php echo $this->_currMaxPrice?>">
+    </div>
+    <script type="text/javascript" charset="utf-8">
+        jQuery.noConflict();
+        var priceUrl = '<?php echo Mage::helper('mana_filters')->getPriceSliderUrl();?>';
+
+        function changePrice(value)
+        {
+            var prices = value.split(';');
+            priceUrl = priceUrl + "&min=" + prices[0] + "&max=" + prices[1];
+            filterItems(priceUrl);
+        }
+
+      jQuery("#SliderPrice").slider({ from: <?php echo $this->_minPrice?>, to: <?php echo $this->_maxPrice?>, step: 1, smooth: true, round: 0, dimension: "&nbsp;<?php echo $this->getCurrencySymbol();?>", skin: "plastic",callback: function(value){changePrice(value);}});
+    </script>
