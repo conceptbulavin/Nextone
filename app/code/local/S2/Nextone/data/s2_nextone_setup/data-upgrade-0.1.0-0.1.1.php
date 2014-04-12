@@ -55,7 +55,7 @@ HTML
 HTML
     ),
     array(
-        'id_new'  => 'banner_free_delivary',
+        'id_new'  => 'banner_free_delivery',
         'title'   => 'Бесплатная доставка',
         'content' => <<<HTML
 <div class="banner-free-delivery">
