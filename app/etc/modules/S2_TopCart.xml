@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+    <modules>
+        <S2_TopCart>
+            <active>true</active>
+            <codePool>community</codePool>
+        </S2_TopCart>
+    </modules>
+</config>

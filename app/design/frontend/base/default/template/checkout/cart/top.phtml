@@ -1,0 +1,43 @@
+<?php
+    /**
+     * Shoping cart top
+     *
+     * @see Mage_Checkout_Block_Cart_Sidebar
+     */
+
+    ?>
+<?php if ($this->getIsNeedToDisplaySideBar()): ?>
+<div class="b-topcart">
+    <?php $_cartQty = $this->getSummaryCount() ? $this->getSummaryCount() : 0 ?>
+    <div class="b-topcart-title"><?php echo $this->__('My Cart') ?></div>
+    <div class="b-topcart-link"><?php echo $this->__('%s items', '<span>' . $_cartQty . '</span>') ?>, <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?><?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?> / <?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?><?php endif; ?></div>
+    <div class="b-topcart-cart"><a href="<?php echo $this->getUrl('checkout/cart') ?>">&rsaquo; <?php echo $this->__('My Cart') ?></a></div>
+    <div class="b-topcart-popup" style="display: none;">
+        <?php $_items = $this->getRecentItems() ?>
+        <?php if (count($_items)): ?>
+            <ul class="b-topcart-list">
+                <?php foreach ($_items as $_item): ?>
+                <?php echo $this->getItemHtml($_item) ?>
+                <?php endforeach; ?>
+            </ul>
+        <?php if ($_cartQty > 0): ?>
+            <div class="b-topcart-bottom">
+                <div class="b-topcart-bottom-total">
+                    <?php echo $this->__('%s products', $_cartQty) ?>
+                    <b class="b-topcart-bottom-price"><?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?></b>
+                </div>
+                <div style="padding-bottom: 5px;"><a href="<?php echo $this->getUrl('checkout/cart') ?>" class="b-topcart-link-cart button"><span><span><?php echo $this->__('My Cart') ?></span></span></a></div>
+                <div><a href="<?php echo $this->getUrl('checkout/onepage') ?>" class="b-topcart-link-checkout">&rsaquo; <?php echo $this->__('My Checkout') ?></a></div>
+            </div>
+        <?php endif ?>
+            <?php else: ?>
+            <p class="b-topcart-empty"><?php echo $this->__('You have no items in your shopping cart.') ?></p>
+            <?php endif ?>
+    </div>
+</div>
+<script type="text/javascript">
+    var $cart  = topCart;
+    $cart.initialize('.b-topcart-popup');
+    // Below can be used to show minicart after item added
+</script>
+<?php endif ?>
