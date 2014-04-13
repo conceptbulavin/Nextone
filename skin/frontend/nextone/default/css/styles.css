@@ -510,12 +510,12 @@ tr.summary-details-excluded { font-style:italic; }
 
 /* Header ================================================================================ */
 .logo { float:left; }
-.header-container {  }
-.header { width:980px; margin:0 auto; padding:0 10px 0; text-align:right; position:relative; z-index:10; }
+.header-container { }
+.header { width:980px; margin:0 auto; padding:0; text-align:right; position:relative; z-index:10; height: 97px; }
 .header .logo { float:left; margin:25px 10px 10px 2px; text-decoration:none !important; }
 .header .logo strong { position:absolute; top:-999em; left:-999em; width:0; height:0; font-size:0; line-height:0; text-indent:-999em; overflow:hidden; }
 .header h1.logo { margin:0; }
-.header .quick-access { float:right; width:600px; padding:28px 10px 0 0; }
+.header .quick-access { float:right; width:536px; padding:45px 0 0 0; }
 .header .welcome-msg { margin:0; color:#fff; text-align:right; }
 .header .welcome-msg a { color:#ebbc58; }
 .header .form-search { position:relative; width:285px; height:28px; border: 1px solid #cccccc; }
@@ -537,30 +537,88 @@ tr.summary-details-excluded { font-style:italic; }
 .header .form-language label { font-weight:bold; padding-right:5px; color:#a7c6dd; vertical-align:middle; }
 .header .form-language select { padding:0; }
 .header .form-language select.flags option { background-position:4px 50%; background-repeat:no-repeat; padding-left:25px; }
-.header .links { float:right; margin:0 0 6px; }
-.header .links li { float:left; font-size:11px; background:url(../images/bkg_pipe1.gif) 100% 60% no-repeat; padding:0 8px 0 7px; }
-.header .links a { }
+.header .links {  float: right; margin: 15px 14px 0 0; padding-left: 20px; background: url("../images/login.png") 0 0 no-repeat   }
+.header .links li { float:left; font-size:12px; padding: 0 11px 0 0px;background:url(../images/bkg_pipe1.png) 100% 60% no-repeat; }
+
+.header .links a { color: #383838}
 .header-container .top-container { clear:both; padding:5px 10px 0 12px; text-align:right; }
 .header-container .top-container a { font-size:11px; color:#ebbc58; }
 
+
+
+.header-contacts{ float: left; width: 176px; color: #232321; font-size: 14px; margin: 25px 20px 0; padding-left: 18px; background: url("../images/phone-ico.png") 0 2px no-repeat; text-align: left }
+.header-contacts-phone{ margin-bottom: 2px; line-height: 16px}
+
+.header-links{ float: right;  height: 40px;  width: 240px; line-height: 41px;}
+.header-links li{ display: inline-block; text-align: right; padding-left: 16px}
+#search_mini_form{ display: block; float: left;}
+.account-cart{position: absolute; right: 0; top: 0;width: 188px;}
+
+
+
+.checkout-cart{
+    width: 36px;
+    height: 44px;
+    border-left: 1px solid #d3d3d3;
+    border-right: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
+    float: right;
+
+}
+
+.checkout-cart a{
+    background: url("../images/cart.png") 0 0 no-repeat;
+    display: block;
+    width: 36px;
+    height: 44px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 12px;
+    line-height: 32px;
+    transition: background-color 0.5s ease;
+}
+
+.checkout-cart a:hover{
+    background-color: #f1f1f1;
+}
+
+
+#nav,
+.checkout-cart,
+.gradient{
+        background: #ffffff; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijc5JSIgc3RvcC1jb2xvcj0iI2YxZjFmMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMGYwZjAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 79%, #f0f0f0 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(79%,#f1f1f1), color-stop(100%,#f0f0f0)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#f1f1f1 79%,#f0f0f0 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#f1f1f1 79%,#f0f0f0 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#f1f1f1 79%,#f0f0f0 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#f1f1f1 79%,#f0f0f0 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f0f0f0',GradientType=0 ); /* IE6-8 */
+}
+
+
 /********** < Navigation */
 .nav-container {  }
-#nav { width:980px; display: table; background: #eee; border: 1px solid #d3d3d3; margin:0 auto; font-size:14px; }
+#nav { width:980px; min-height: 39px; display: table;  border: 1px solid #d3d3d3; margin:0 auto; font-size:14px; }
 
 /* All Levels */ /* Style consistent throughout all nav levels */
 #nav li { position:relative; text-align:left; }
 #nav li.over { z-index:998; }
 #nav a,
-#nav a:hover { display:block; line-height:1.3em; text-decoration:none; }
+#nav a:hover { display:block;line-height: 28px;text-decoration:none; }
 #nav span { display:block; cursor:pointer; white-space:nowrap; }
 #nav li ul span {white-space:normal; }
 #nav ul li.parent a { }
 #nav ul li.parent li a { background-image:none; }
 
 /* 0 Level */
-#nav li { display: table-cell; text-align: center; }
+#nav li { display: table-cell; text-align: center; background: url("../images/dot-left.png") 0 50% no-repeat;}
 #nav li.active a { color:#008ff8; }
-#nav a { padding:5px 12px 6px 8px; color:#383838; text-shadow: 0 1px #fff; }
+
+#nav li:first-child{background: none}
+#nav a { padding:5px 12px 6px 8px; color:#383838; text-shadow: 0 1px #fff;  }
 #nav li.over a,
 #nav a:hover { color:#008ff8; }
 

@@ -29,6 +29,7 @@
 ?>
 <div class="header-container">
     <div class="header">
+
         <?php if ($this->getIsHomePage()):?>
         <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
         <?php else:?>
@@ -40,16 +41,18 @@
             <p class="header-contacts-call-back"><a href="#"><?php echo $this->__('request a call back'); ?></a></p>
         </div>
 
-
         <div class="quick-access">
             <?php echo $this->getChildHtml('topSearch') ?>
-            <p class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></p>
-            <?php echo $this->getChildHtml('accountLinks') ?>
             <?php echo $this->getChildHtml('store_language') ?>
             <?php echo $this->getChildHtml('topContainer'); ?>
-            <?php echo $this->getChildHtml('topCart'); ?>
+            <div class="header-links"><?php echo $this->getChildHtml('header_links'); ?>  </div>
         </div>
+        <div class="account-cart">
+            <?php echo $this->getChildHtml('topCart'); ?>
+            <?php echo $this->getChildHtml('accountLinks') ?>
 
+        </div>
+        </div>
     </div>
 </div>
 <?php echo $this->getChildHtml('topMenu') ?>

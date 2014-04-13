@@ -2,10 +2,6 @@
 <layout version="0.1.0">
 
     <default>
-        <reference name="head">
-             <action method="addItem"><type>skin_css</type><name>css/s2/s2.top.cart.css</name></action>
-             <action method="addItem"><type>skin_js</type><name>js/s2/s2.top.cart.js</name></action>
-        </reference>
         <reference name="header">
             <block type="checkout/cart_sidebar" name="cart_top" as="topCart" template="checkout/cart/top.phtml">
                 <action method="addItemRender">
