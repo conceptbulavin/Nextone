@@ -1,5 +1,0 @@
-Export:
-mysqldump -u [username] -p[password] [database] cms_page cms_page_store cms_block cms_block_store | grep INSERT | sed 's/INSERT INTO/REPLACE INTO/' > cms-export.sql
-
-Import:
-mysql -u [username] -p[password] [database] < cms-export.sql
