@@ -1,0 +1,103 @@
+<script type="text/javascript">
+    //<![CDATA[
+    var slidesTemplate = '<div class="option-box" id="slide_{{slide_id}}">'+
+        '<table id="<?php echo $this->getFieldId() ?>_{{slide_id}}" class="form-list" cellspacing="0">'+
+        '<tr>' +
+        '<td class="label"><label for="<?php echo $this->getFieldName() ?>[{{slide_id}}][title]"><?php echo Mage::helper('slider')->__('Slide name') ?> <span class="required">*</span></label></td>'+
+        '<td class="value"><input type="text" class="required-entry input-text" id="<?php echo $this->getFieldName() ?>[{{slide_id}}][title]" name="<?php echo $this->getFieldName() ?>[{{slide_id}}][title]" value="{{title}}"></td>'+
+        '<td class="a-right"><?php echo $this->getDeleteButtonHtml() ?></td>'+
+        '</tr>'+
+        '<tr>' +
+        '<td class="label"><label for="<?php echo $this->getFieldName() ?>[{{slide_id}}][link]"><?php echo Mage::helper('slider')->__('Link URL') ?></label></td>'+
+        '<td colspan="2" class="value"><input type="text" class="input-text" id="<?php echo $this->getFieldName() ?>[{{slide_id}}][link]" name="<?php echo $this->getFieldName() ?>[{{slide_id}}][link]" value="{{link}}"></td>'+
+        '</tr>'+
+        '<tr>' +
+        '<td class="label"><label for="<?php echo $this->getFieldName() ?>[{{slide_id}}][image]"><?php echo Mage::helper('slider')->__('Image') ?></label></td>'+
+        '<td class="value">'
+        + '<a href="/media/s2slider/{{image}}" onclick="imagePreview(\'image_slide_{{slide_id}}\'); return false;" title="{{image}}"><img id="image_slide_{{slide_id}}" src="/media/s2slider/{{image}}" alt="{{image}}" style="width: 21px; height: 21px; float: left;"/></a>'
+        + '<input type="file" style="width: 90%; margin-left: 3px;" id="<?php echo $this->getFieldName() ?>[{{slide_id}}][image]" name="<?php echo $this->getFieldName() ?>[{{slide_id}}][image]" value="{{image}}">'
+        +
+        '</td>'+
+        '<td><span class="delete-image"><input type="checkbox" style="margin-left: 25px;" name="<?php echo $this->getFieldName() ?>[{{slide_id}}][deleteimage]" id="<?php echo $this->getFieldName() ?>[{{slide_id}}][deleteimage]" value="{{deleteimage}}"><label for="<?php echo $this->getFieldName() ?>[{{slide_id}}][deleteimage]">Delete image</label></span></td>'+
+        '<tr>' +
+        '<td class="label"><label for="<?php echo $this->getFieldName() ?>[{{slide_id}}][position]"><?php echo Mage::helper('slider')->__('Sort Order') ?></label></td>'+
+        '<td class="value" colspan="2"><input type="text" class="validate-zero-or-greater input-text" name="<?php echo $this->getFieldName() ?>[{{slide_id}}][position]" id="<?php echo $this->getFieldName() ?>[{{slide_id}}][position]" value="{{position}}"></td>'+
+        '</tr>' +
+        '<tr>' +
+        '<td class="label"><label for="<?php echo $this->getFieldName() ?>_{{slide_id}}_is_active"><?php echo Mage::helper('slider')->__('Is Enabled') ?></label></td>'+
+        '<td class="value" colspan="2">' +
+        '<input type="hidden" value="{{is_active}}" disabled="disabled" class="is-enabled-hidden" />' +
+        '<?php echo $this->getIsEnabledSelectHtml() ?></td>'+
+
+        '</tr>' +
+        '<tr>'+
+        '<td class="label"><label for="<?php echo $this->getFieldName() ?>[{{slide_id}}][description]"><?php echo Mage::helper('slider')->__('Description') ?></label></td>'+
+        '<td class="value" colspan="2"><textarea rows="4" cols="15" class="textarea" id="<?php echo $this->getFieldName() ?>[{{slide_id}}][description]" name="<?php echo $this->getFieldName() ?>[{{slide_id}}][description]">{{description}}</textarea></td>'+
+        '</tr>'+
+
+        '</table>'+
+        '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{slide_id}}_is_delete" name="<?php echo $this->getFieldName() ?>[{{slide_id}}][is_delete]" value="" />'+
+        '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{slide_id}}_slide_id" name="<?php echo $this->getFieldName() ?>[{{slide_id}}][slide_id]" value="{{db_slide_id}}" />'+
+        '</div>';
+
+    var Slide = {
+        div : $('slider_container_top'),
+        templateSyntax : /(^|.|\r|\n)({{(\w+)}})/,
+        templateText : slidesTemplate,
+        itemCount: 1,
+        add : function(data) {
+            this.template = new Template(this.templateText, this.templateSyntax);
+            if(!data.slide_id){
+                data = {};
+                data.slide_id = this.itemCount;
+                data.db_slide_id = null;
+                data.position = 50;
+                //data.is_enabled = ;
+            } else {
+                data.db_slide_id = data.slide_id;
+                this.itemCount = Math.max(data.item_count, this.itemCount);
+                //this.fill(data);
+            }
+            Element.insert(this.div, {'top':this.template.evaluate(data)});
+            this.bindRemoveButtons();
+            this.itemCount++;
+        },
+        remove : function(event){
+            var element = $(Event.findElement(event, 'div'));
+            if (element) {
+                $(element.readAttribute('id')+'_is_delete').value = '1';
+                element.addClassName('no-display');
+                element.addClassName('ignore-validate');
+                element.hide();
+            }
+        },
+        bindRemoveButtons : function(){
+            var buttons = $$('div.slider-options .delete-slide');
+            for(var i=0;i<buttons.length;i++){
+                if(!$(buttons[i]).binded){
+                    $(buttons[i]).binded = true;
+                    Event.observe(buttons[i], 'click', this.remove.bind(this));
+                }
+            }
+        },
+        fill : function(data){
+
+        }
+    }
+
+    Slide.bindRemoveButtons();
+    Event.observe('<?php echo $this->getAddButtonId() ?>', 'click', Slide.add.bind(Slide));
+
+    <?php foreach ($this->getSlideValues() as $_value):  ?>
+
+    Slide.add(<?php echo $_value->toJson() ?>);
+
+    <?php endforeach; ?>
+
+    $$('.is-enabled-hidden').each(function(el){
+        el.next('select').select('option[value='+el.value+']')[0].writeAttribute('selected', 'selected');
+    });
+
+    //]]>
+</script>
+
