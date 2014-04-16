@@ -104,12 +104,13 @@ class Mana_Filters_Model_Filter_Attribute
             );
 
             $tags = $this->getLayer()->getStateTags($tags);
-            if ($sortMethod = $this->getFilterOptions()->getSortMethod()) {
-                foreach ($data as $position => &$item) {
-                    $item['position'] = $position;
-                }
-                usort($data, array(Mage::getSingleton('mana_filters/sort'), $sortMethod));
+
+            $sortMethod = $this->getFilterOptions()->getSortMethod() ? $this->getFilterOptions()->getSortMethod() : 'byPosition';
+            foreach ($data as $position => &$item) {
+                $item['position'] = $position;
             }
+            usort($data, array(Mage::getSingleton('mana_filters/sort'), $sortMethod));
+
             $this->getLayer()->getAggregator()->saveCacheData($data, $key, $tags);
         }
 

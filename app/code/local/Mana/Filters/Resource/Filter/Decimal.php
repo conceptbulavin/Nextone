@@ -62,25 +62,27 @@ class Mana_Filters_Resource_Filter_Decimal extends Mage_Catalog_Model_Resource_E
             $connection->quoteInto("{$tableAlias}.store_id = ?", $collection->getStoreId())
         );
 
-        $collection->getSelect()->join(
-            array($tableAlias => $this->getMainTable()),
-            join(' AND ', $conditions),
-            array()
-        );
-
-		// MANA BEGIN: modify select formation to include multiple price ranges
         $condition = '';
         foreach ($value as $selection) {
-        	list($index, $range) = explode(',', $selection);
-        	$range = $this->getRange($index, $range);
-        	if ($condition != '') $condition .= ' OR ';
-        	$condition .= '(('."{$tableAlias}.value" . ' >= '. $range['from'].') '.
-        		'AND ('."{$tableAlias}.value" . ($this->isUpperBoundInclusive() ? ' <= ' : ' < '). $range['to'].'))';
+            if (strpos($selection, ',') !== false) {
+                list($index, $range) = explode(',', $selection);
+                $range = $this->getRange($index, $range);
+                if ($condition != '') $condition .= ' OR ';
+                $condition .= '(('."{$tableAlias}.value" . ' >= '. $range['from'].') '.
+                    'AND ('."{$tableAlias}.value" . ($this->isUpperBoundInclusive() ? ' <= ' : ' < '). $range['to'].'))';
+            }
         }
-        $collection->getSelect()
-            ->distinct()
-        	->where($condition);
-        // MANA END
+
+        if ($condition) {
+            $collection->getSelect()
+                ->join(
+                    array($tableAlias => $this->getMainTable()),
+                    join(' AND ', $conditions),
+                    array()
+                )
+                ->distinct()
+                ->where($condition);
+        }
 
         return $this;
     }
@@ -122,7 +124,7 @@ class Mana_Filters_Resource_Filter_Decimal extends Mage_Catalog_Model_Resource_E
      */
     public function getMinMaxForCollection($filter, $collection)
     {
-        $select     = $this->_getSelect($filter, $collection);
+        $select     = $this->_getSelectForCollection($filter, $collection);
         $connection = $this->_getReadAdapter();
 
         $table = 'decimal_index';

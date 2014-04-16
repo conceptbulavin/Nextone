@@ -11,6 +11,9 @@
  */
 class Mana_Filters_Resource_Indexer_Source extends Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Indexer_Eav_Source {
     public function reindexEntities($processIds) {
+//        if (Mage::helper('mana_core')->isMageVersionEqualOrGreater('1.7')) {
+//            return parent::reindexEntities($processIds);
+//        }
         $adapter = $this->_getWriteAdapter();
 
         $this->clearTemporaryIndexTable();

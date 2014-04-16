@@ -38,15 +38,20 @@ class Mana_Filters_Resource_Filter_Reverse_Price extends Mana_Filters_Resource_F
 
         $condition = '';
         foreach ($model->getMSelectedValues() as $selection) {
-        	list($index, $range) = explode(',', $selection);
-        	$range = $this->getPriceRange($index, $range);
-        	if ($condition != '') $condition .= ' OR ';
-        	$condition .= '(('.$priceExpr . ' >= '. $range['from'].') '.
-        		'AND ('.$priceExpr . ($this->isUpperBoundInclusive() ? ' <= ' : ' < '). $range['to'].'))';
+            if (strpos($selection, ',') !== false) {
+                list($index, $range) = explode(',', $selection);
+                $range = $this->getPriceRange($index, $range);
+                if ($condition != '') $condition .= ' OR ';
+                $condition .= '(('.$priceExpr . ' >= '. $range['from'].') '.
+                    'AND ('.$priceExpr . ($this->isUpperBoundInclusive() ? ' <= ' : ' < '). $range['to'].'))';
+            }
         }
-        $select
-            ->distinct()
-        	->where("NOT ($condition)");
+
+        if ($condition) {
+            $select
+                ->distinct()
+                ->where("NOT ($condition)");
+        }
         return $this;
     }
 

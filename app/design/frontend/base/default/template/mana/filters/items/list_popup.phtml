@@ -25,11 +25,11 @@ list($rowCount, $columnCount) = $showmore->getPopupDimensions($items, $MAX_ROW_C
             <?php $_item = $items[$columnIndex * $rowCount + $rowIndex]; ?>
             <li <?php if ($_item->getMShowSelected()): ?>class="m-selected-ln-item"<?php endif; ?>>
                 <?php //if ($_item->getCount() > 0): ?>
-                <a href="#" title="<?php echo $_item->getLabel() ?>"
+                <a href="#" title="<?php echo $this->escapeHtml($_item->getLabel()) ?>"
                    onClick="jQuery(this).parent().toggleClass('m-selected-ln-item'); jQuery(this).children().toggleClass('m-selected-filter-item'); return jQuery.mShowMorePopupSelect('<?php echo $_item->getSeoValue() ?>', <?php echo $this->getFilterOptions()->getIsReverse() ? '!' : '' ?> jQuery(this).parent().hasClass('m-selected-ln-item'));">
-                    <span <?php if ($_item->getMShowSelected()): ?>class="m-selected-filter-item"<?php endif; ?> ><?php echo $_item->getLabel() ?></span>
+                    <span <?php if ($_item->getMShowSelected()): ?>class="m-selected-filter-item"<?php endif; ?> ><?php echo $this->escapeHtml($_item->getLabel()) ?></span>
                 </a>
-                <?php //else: echo $_item->getLabel(); ?>
+                <?php //else: echo $this->escapeHtml($_item->getLabel()); ?>
                 <?php //endif; ?>
                 <?php if (Mage::getStoreConfigFlag('mana_filters/display/count')) : ?>
                     (<?php echo $_item->getCount() ?>)

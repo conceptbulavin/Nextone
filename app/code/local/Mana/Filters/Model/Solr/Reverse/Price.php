@@ -22,16 +22,18 @@ class Mana_Filters_Model_Solr_Reverse_Price extends Mana_Filters_Model_Solr_Pric
         $field             = $this->_getFilterField();
         $fq = array();
         foreach ($this->getMSelectedValues() as $selection) {
-            list($index, $range) = explode(',', $selection);
-            $to = $range * $index;
-            if ($to < $this->getMaxPriceInt() && !$this->isUpperBoundInclusive()) {
-                $to -= 0.001;
-            }
+            if (strpos($selection, ',') !== false) {
+                list($index, $range) = explode(',', $selection);
+                $to = $range * $index;
+                if ($to < $this->getMaxPriceInt() && !$this->isUpperBoundInclusive()) {
+                    $to -= 0.001;
+                }
 
-            $fq[] = array(
-                'from' => ($range * ($index - 1)),
-                'to'   => $to,
-            );
+                $fq[] = array(
+                    'from' => ($range * ($index - 1)),
+                    'to'   => $to,
+                );
+            }
         }
 
         $collection->addFqFilter(array($field => array('reverse' => $fq)));

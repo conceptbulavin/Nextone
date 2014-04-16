@@ -25,12 +25,12 @@ list($rowCount, $columnCount) = $showmore->getPopupDimensions($items, $MAX_ROW_C
             <?php $_item = $items[$columnIndex * $rowCount + $rowIndex]; ?>
             <li <?php if ($_item->getMShowSelected()): ?>class="m-selected-ln-item"<?php endif; ?>>
                 <?php if ($_item->getMSelected()): ?>
-                <span class="m-selected-filter-item"><?php echo $_item->getLabel() ?></span>
+                <span class="m-selected-filter-item"><?php echo $this->escapeHtml($_item->getLabel()) ?></span>
                 <?php else : ?>
                 <?php if ($_item->getCount() > 0): ?>
                     <a href="#" onClick="return jQuery.mShowMorePopupApply('<?php echo $_item->getSeoValue() ?>');"
-                       title="<?php echo $_item->getLabel() ?>"><?php echo $_item->getLabel() ?></a>
-                    <?php else: echo $_item->getLabel() ?>
+                       title="<?php echo $this->escapeHtml($_item->getLabel()) ?>"><?php echo $this->escapeHtml($_item->getLabel()) ?></a>
+                    <?php else: echo $this->escapeHtml($_item->getLabel()) ?>
                     <?php endif; ?>
                 <?php endif; ?>
                 <?php if (Mage::getStoreConfigFlag('mana_filters/display/count')) : ?>

@@ -15,11 +15,26 @@ class Mana_Filters_Model_Solr_Category extends Mana_Filters_Model_Filter_Categor
         return true;
     }
 
+    /**
+     * Get facet field name based on current website and customer group
+     *
+     * @return string
+     */
+    protected function _getFilterField() {
+        $engine = Mage::getResourceSingleton('enterprise_search/engine');
+        if (method_exists($engine, 'getSearchEngineFieldName')) {
+            return 'category_ids';
+        }
+        else {
+            return 'categories';
+        }
+    }
+
     public function processCounts($counts) {
         /* @var $collection Enterprise_Search_Model_Resource_Collection */
         $collection = $counts;
 
-        $facetedData = $collection->getFacetedData('category_ids');
+        $facetedData = $collection->getFacetedData($this->_getFilterField());
         foreach ($this->getCountedCategories() as $category) {
             if (isset($facetedData[$category->getId()])) {
                 $category->setProductCount($facetedData[$category->getId()]);
@@ -42,7 +57,7 @@ class Mana_Filters_Model_Solr_Category extends Mana_Filters_Model_Filter_Categor
                 ? array_keys($this->getCountedCategories())
                 : array_keys($this->getCountedCategories()->toArray()));
 
-        $collection->setFacetCondition('category_ids', $categories);
+        $collection->setFacetCondition($this->_getFilterField(), $categories);
 
         return $collection;
     }
@@ -52,7 +67,7 @@ class Mana_Filters_Model_Solr_Category extends Mana_Filters_Model_Filter_Categor
      */
     public function applyToCollection($collection)
     {
-        $collection->addFqFilter(array('category_ids' => array('or' => $this->getMSelectedValues())));
+        $collection->addFqFilter(array($this->_getFilterField() => array('or' => $this->getMSelectedValues())));
     }
 
     public function isFilterAppliedWhenCounting($modelToBeApplied) {

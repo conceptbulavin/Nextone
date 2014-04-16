@@ -517,4 +517,16 @@ class Mana_Core_Helper_Data extends Mage_Core_Helper_Abstract {
             return null;
         }
     }
+
+    public function base64EncodeUrl($url) {
+        return base64_encode(Mage::getSingleton('core/url')->sessionUrlVar($url));
+    }
+
+    public function addDotToSuffix($suffix) {
+        if ($suffix && $suffix != '/' && strpos($suffix, '.') !== 0) {
+            $suffix = '.' . $suffix;
+        }
+
+        return $suffix;
+    }
 }

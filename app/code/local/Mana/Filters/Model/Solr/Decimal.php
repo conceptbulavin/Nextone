@@ -72,12 +72,14 @@ class Mana_Filters_Model_Solr_Decimal extends Mana_Filters_Model_Filter_Decimal
 
         $fq = array();
         foreach ($this->getMSelectedValues() as $selection) {
-            list($index, $range) = explode(',', $selection);
-            $range = $this->_getResource()->getRange($index, $range);
-            $fq[] = array(
-                'from' => $range['from'],
-                'to'   => $range['to'] - ($this->isUpperBoundInclusive() ? 0 : 0.001),
-            );
+            if (strpos($selection, ',') !== false) {
+                list($index, $range) = explode(',', $selection);
+                $range = $this->_getResource()->getRange($index, $range);
+                $fq[] = array(
+                    'from' => $range['from'],
+                    'to'   => $range['to'] - ($this->isUpperBoundInclusive() ? 0 : 0.001),
+                );
+            }
         }
 
         $collection->addFqFilter(array($field => array('or' => $fq)));

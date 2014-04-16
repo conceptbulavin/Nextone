@@ -50,7 +50,11 @@ class Mana_Filters_Model_Observer {
 	 * @param Varien_Event_Observer $observer
 	 */
 	public function fixAttributeIndexerSelectForConfigurableProductDefaultValues($observer) {
-	    /* @var $select Varien_Db_Select */ $select = $observer->getEvent()->getSelect();
+        if (Mage::helper('mana_core')->isMageVersionEqualOrGreater('1.7')) {
+            return;
+        }
+
+        /* @var $select Varien_Db_Select */ $select = $observer->getEvent()->getSelect();
 		/* @var $entityField Zend_Db_Expr */ $entityField = $observer->getEvent()->getEntityField();
 
         /* @var $res Mage_Core_Model_Resource */ $res = Mage::getSingleton('core/resource');

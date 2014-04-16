@@ -30,8 +30,8 @@ class Mana_Filters_Model_Filter_Decimal
             return $result->getLabel();
         } else {
             $store = Mage::app()->getStore();
-            $fromPrice = $store->formatPrice($range['from']);
-            $toPrice = $store->formatPrice($range['to']);
+            $fromPrice = $store->formatPrice($range['from'], false);
+            $toPrice = $store->formatPrice($range['to'], false);
 
             return Mage::helper('catalog')->__('%s - %s', $fromPrice, $toPrice);
         }
@@ -55,8 +55,10 @@ class Mana_Filters_Model_Filter_Decimal
         if ($this->_getIsFilterable() == 2) {
             $nonEmptyRanges = $dbRanges;
             $dbRanges = array();
-            for ($i = 1; ($i + 1) * $range > $this->getMinValue() && ($i - 1) * $range < $this->getMaxValue(); $i++) {
-                $dbRanges[$i]  = isset($nonEmptyRanges[$i]) ? $nonEmptyRanges[$i] : 0;
+            $from = (int)floor($this->getMinValue() / $range);
+            $to = (int)floor($this->getMaxValue() / $range);
+            for ($i = $from; $i <= $to; $i++) {
+                $dbRanges[$i] = isset($nonEmptyRanges[$i]) ? $nonEmptyRanges[$i] : 0;
             }
         }
         $data = array();
@@ -305,7 +307,7 @@ class Mana_Filters_Model_Filter_Decimal
         $range = $this->getData('range');
 
         $value = $this->getMSelectedValues();
-        if (!empty($value)) {
+        if (!empty($value) && strpos($value[0], ',') !== false) {
             list($index, $range) = explode(',', $value[0]);
         }
 
@@ -392,9 +394,11 @@ class Mana_Filters_Model_Filter_Decimal
      * Returns all values currently selected for this filter
      */
     public function getMSelectedValues() {
-        $values = Mage::helper('mana_core')->sanitizeRequestNumberParam($this->_requestVar,
-                array(array('sep' => '_', 'as_string' => true), array('sep' => ',', 'as_string' => true)));
-        return $values ? array_filter(explode('_', $values)) : array();
+        $values = Mage::helper('mana_core')->sanitizeRequestNumberParam($this->_requestVar, array(
+            array('sep' => '_', 'as_string' => true),
+            array('sep' => ',', 'as_string' => true)
+        ));
+        return $values ? explode('_', $values) : array();
     }
 
     /**
@@ -416,17 +420,19 @@ class Mana_Filters_Model_Filter_Decimal
     public function addToState()
     {
         foreach ($this->getMSelectedValues() as $selection) {
-            list($index, $range) = explode(',', $selection);
-            $this->getLayer()->getState()->addFilter(
-                $this->_createItemEx(
-                    array(
-                        'label' => $this->_renderItemLabel($range, $index),
-                        'value' => $selection,
-                        'm_selected' => true,
-                        'm_show_selected' => $this->getFilterOptions()->getIsReverse(),
+            if (strpos($selection, ',') !== false) {
+                list($index, $range) = explode(',', $selection);
+                $this->getLayer()->getState()->addFilter(
+                    $this->_createItemEx(
+                        array(
+                            'label' => $this->_renderItemLabel($range, $index),
+                            'value' => $selection,
+                            'm_selected' => true,
+                            'm_show_selected' => $this->getFilterOptions()->getIsReverse(),
+                        )
                     )
-                )
-            );
+                );
+            }
         }
     }
 

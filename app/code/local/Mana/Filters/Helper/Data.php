@@ -18,6 +18,7 @@ class Mana_Filters_Helper_Data extends Mage_Core_Helper_Abstract {
 	 * @param Mage_Catalog_Model_Layer_Filter_Abstract $model
 	 * @return string
 	 */
+
 	public function getFilterName($block, $model) {
 		if ($model instanceof Mana_Filters_Model_Filter_Category) {
             $result = 'category';
@@ -73,9 +74,9 @@ class Mana_Filters_Helper_Data extends Mage_Core_Helper_Abstract {
 		}
 		else {
 			if (!$this->_filterOptionsCollection) {
-				Mana_Core_Profiler::start('mln', __CLASS__, __METHOD__, '$productCollection->getSetIds()');
+				Mana_Core_Profiler::start('mln' . '::' . __CLASS__ . '::' . __METHOD__ . '::' . '$productCollection->getSetIds()');
 				$setIds = Mage::getSingleton('catalog/layer')->getProductCollection()->getSetIds();
-				Mana_Core_Profiler::stop('mln', __CLASS__, __METHOD__, '$productCollection->getSetIds()');
+				Mana_Core_Profiler::stop('mln' . '::' . __CLASS__ . '::' . __METHOD__ . '::' . '$productCollection->getSetIds()');
 				$this->_filterOptionsCollection = Mage::getResourceModel('mana_filters/filter2_store_collection')
 		        	->addFieldToSelect('*')
 		        	->addCodeFilter($this->_getAttributeCodes($setIds))
@@ -139,7 +140,6 @@ class Mana_Filters_Helper_Data extends Mage_Core_Helper_Abstract {
         if ($markUrl) {
             $result = $this->markLayeredNavigationUrl($result, '*/*/*', $params);
         }
-        $result = $this->getAjaxUrl($result);
         return $result;
     }
     public function getActiveFilters() {
@@ -176,16 +176,22 @@ class Mana_Filters_Helper_Data extends Mage_Core_Helper_Abstract {
         }
         $select->setPart(Zend_Db_Select::WHERE, $where);
     }
-    /**
-     * @return Mage_Catalog_Model_Layer
-     */
+
+    protected $_mode;
     public function getMode() {
-        if (in_array(Mage::helper('mana_core')->getRoutePath(), array('catalogsearch/result/index', 'manapro_filterajax/search/index','filters/ajax/search'))) {
+        if ($this->_mode) {
+            return $this->_mode;
+        }
+        elseif (in_array(Mage::helper('mana_core')->getRoutePath(), array('catalogsearch/result/index', 'manapro_filterajax/search/index', 'filters/search/index'))) {
             return 'search';
         }
         else {
             return 'category';
         }
+    }
+    public function setMode($mode) {
+        $this->_mode = $mode;
+        return $this;
     }
 
     /**
@@ -207,8 +213,11 @@ class Mana_Filters_Helper_Data extends Mage_Core_Helper_Abstract {
      * @return Mage_Catalog_Model_Layer
      * @throws Exception
      */
-    public function getLayer () {
-        switch ($this->getMode()) {
+    public function getLayer ($mode = null) {
+        if (!$mode) {
+            $mode = $this->getMode();
+        }
+        switch ($mode) {
             case 'category':
                 return Mage::getSingleton($this->useSolrForNavigation()
                     ? 'enterprise_search/catalog_layer'
@@ -228,6 +237,12 @@ class Mana_Filters_Helper_Data extends Mage_Core_Helper_Abstract {
             return true;
         }
         elseif ($block->getData('hide_' . $filter->getCode())) {
+            return false;
+        }
+        elseif ($block->getData('show_all_filters')) {
+            return true;
+        }
+        elseif ($block->getData('hide_all_filters')) {
             return false;
         }
         elseif ($showInFilter = $block->getShowInFilter()) {
@@ -426,64 +441,6 @@ class Mana_Filters_Helper_Data extends Mage_Core_Helper_Abstract {
             default:
                 throw new Exception('Not implemented');
         }
-    }
-
-    public function getAjaxUrl($itemUrl)
-    {
-        $category = $this->getCurrentCategory();
-        $action = 'search';
-        if($category)
-        {
-            if($category->getId())
-            {
-                $action = 'index';
-                $categoryId = $category->getId();
-            }
-            else
-                $categoryId = 0;
-        }
-        else
-            $categoryId = 0;
-        $getString = explode("?",$itemUrl);
-        if(!isset($getString[1]))
-            $getString[1] = '';
-        $getString[1] = str_replace('cat_id='.$categoryId,"",$getString[1]);
-        if($getString[1]{0} != '&' && $getString[1])
-            $getString[1] = "&".$getString[1];
-        if($categoryId)
-            $getString[1] = '?cat_id='.$categoryId.$getString[1];
-        else
-            $getString[1] = "?".substr($getString[1],1);
-        return Mage::getBaseUrl().'filters/ajax/'.$action.$getString[1];
-    }
-    public function getPriceSliderUrl()
-    {
-        $currentUrl = $this->getAjaxUrl(Mage::helper("core/url")->getCurrentUrl() ,$this->getCurrentCategory()->getId());
-        $previousMinPrice = Mage::app()->getRequest()->getParam('min');
-        $previousMaxPrice = Mage::app()->getRequest()->getParam('max');
-        if($previousMinPrice)
-            $currentUrl = str_replace("&min=".$previousMinPrice,"",$currentUrl);
-        if($previousMaxPrice)
-            $currentUrl = str_replace("&max=".$previousMaxPrice,"",$currentUrl);
-        return $currentUrl;
-    }
-    public function getCurrentCategory()
-    {
-        $currentCategory = Mage::registry('current_category');
-        if($currentCategory)
-        {
-            if(!$currentCategory->getId())
-            {
-                $categoryId = Mage::app()->getRequest()->getParam('cat_id');
-                $currentCategory = Mage::getModel("catalog/category")->load($categoryId);
-            }
-        }
-        else
-        {
-            $categoryId = Mage::app()->getRequest()->getParam('cat_id');
-            $currentCategory = Mage::getModel("catalog/category")->load($categoryId);
-        }
-        return $currentCategory;
     }
 
 }

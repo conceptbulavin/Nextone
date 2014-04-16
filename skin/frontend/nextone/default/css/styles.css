@@ -872,14 +872,18 @@ button.button:hover {
 /* View Type: Grid */
 .products-grid { border-bottom:1px solid #d9ddd3; position:relative; }
 .products-grid.last { border-bottom:0; }
-.products-grid li.item { float:left; width:188px; padding:12px 0 80px; border: 1px solid #ddd; margin-left: 12px; text-align: center; }
+.products-grid li.item { float:left; width:188px; padding:0 0 15px; border: 1px solid #ddd; margin-left: 12px; text-align: center; }
 .products-grid li.item.first {  margin-left: 0; }
-.products-grid .product-image { display:block; width:135px; height:135px; margin:0 0 10px; }
-.products-grid .product-name { /*min-height:2.7em;*/ margin:0 0 5px; font-weight:bold; font-size:13px; color:#203548; }
-.products-grid .product-name a { color:#203548; }
-.products-grid .price-box { margin:5px 0; }
+.products-grid .product-image { display:block; width:188px; height:188px; margin:0 0 10px; }
+.products-grid .product-name { margin:0 0 5px; font-weight:bold; font-size:14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.products-grid .product-name a { color:#1d1d1b; text-decoration: none; }
+.products-grid .product-name a:hover { color:#008ff8; }
+.products-grid .product-description { color:#1d1d1b; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.products-grid .price-box { margin:8px 0; height: 42px; overflow: hidden; text-overflow: ellipsis; }
+.products-grid .price-box .regular-price { display: block; padding-top: 18px; }
 .products-grid .availability { line-height:21px; }
-.products-grid .actions { position:absolute; bottom:12px; }
+.products-grid .actions { margin-top: 12px; }
 .col2-left-layout .products-grid,
 .col2-right-layout .products-grid { }
 .col1-layout .products-grid { width:790px; margin:0 auto; }
@@ -924,7 +928,7 @@ button.button:hover {
 .availability { margin:0; }
 .availability span { font-weight:bold; }
 .availability.in-stock span {}
-.availability.out-of-stock span { color:#d83820; }
+.availability.out-of-stock span { color: red; }
 
 .availability-only { margin:10px 0 7px; line-height:16px; background:url(../images/i_availability_only.gif) 0 50% no-repeat; padding-left:15px; }
 .availability-only span,
@@ -952,41 +956,41 @@ button.button:hover {
 .price { white-space:nowrap !important; }
 
 .price-box { margin:5px 0; }
-.price-box .price { font-weight:bold; color:#c76200; }
+.price-box .price { font-weight:bold; color:#008ff8; }
 
 /* Regular price */
-.regular-price { color:#c76200; }
-.regular-price .price { font-weight:bold; font-size:13px; color:#c76200; }
+.regular-price { color:#008ff8; }
+.regular-price .price { font-weight:bold; font-size:18px; color:#008ff8; }
 .block .regular-price,
-.block .regular-price .price { color:#2f2f2f; }
+.block .regular-price .price { color:#008ff8; }
 
 /* Old price */
-.old-price { margin:0; }
-.old-price .price-label { white-space:nowrap; color:#999; }
-.old-price .price { font-weight:bold; color:#c76200; text-decoration:line-through; }
+.old-price { margin:0; font-size: 10px; }
+.old-price .price-label { white-space:nowrap; color:#626262; }
+.old-price .price { font-weight: 400; color:#626262; }
 
 /* Special price */
 .special-price { margin:0; padding:3px 0; }
-.special-price .price-label { font-size:13px; font-weight:bold; white-space:nowrap; color:#cd5033; }
-.special-price .price { font-size:13px; font-weight:bold; color:#c76200; }
+.special-price .price-label { font-size:14px; font-weight:bold; white-space:nowrap; color:#008ff8; }
+.special-price .price { font-size:18px; font-weight:bold; color:#008ff8; }
 
 /* Minimal price (as low as) */
 .minimal-price { margin:0; }
 .minimal-price .price-label { font-weight:bold; white-space:nowrap; }
 
 .minimal-price-link { display:block; }
-.minimal-price-link .label {color:#1e7ec8;}
-.minimal-price-link .price { font-weight:normal; color:#1e7ec8; }
+.minimal-price-link .label {color:#008ff8;}
+.minimal-price-link .price { font-weight:normal; color:#008ff8; }
 
 /* Excluding tax */
-.price-excluding-tax { display:block; color:#999; }
-.price-excluding-tax .label { white-space:nowrap; color:#999; }
-.price-excluding-tax .price { font-size:13px; font-weight:normal; color:#c76200; }
+.price-excluding-tax { display:block; color:#008ff8; }
+.price-excluding-tax .label { white-space:nowrap; color:#008ff8; }
+.price-excluding-tax .price { font-size:14px; font-weight:normal; color:#008ff8; }
 
 /* Including tax */
-.price-including-tax { display:block; color:#999; }
-.price-including-tax .label { white-space:nowrap; color:#999; }
-.price-including-tax .price { font-size:13px; font-weight:bold; color:#c76200; }
+.price-including-tax { display:block; color:#008ff8; }
+.price-including-tax .label { white-space:nowrap; color:#008ff8; }
+.price-including-tax .price { font-size:14px; font-weight:bold; color:#008ff8; }
 
 /* Configured price */
 .configured-price { margin:0; }

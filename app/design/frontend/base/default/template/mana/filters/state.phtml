@@ -12,9 +12,14 @@
  *
  * @see Mage_Catalog_Block_Layer_State
  */
+/* @var $this Mage_Catalog_Block_Layer_State */
 ?>
-<div id="loadingmask" style="display: none;position:fixed;margin-left:420px;z-index:999;top:250px;">
-    <div class="loader" id="loading-mask-loader"><img src="<?php echo str_replace("index.php/","",$this->getUrl()) ?>skin/adminhtml/default/default/images/ajax-loader-tr.gif" alt="<?php echo $this->__('Loading...') ?>"/><?php echo $this->__('Loading...') ?></div>
+<?php
+    $filterUrls = Mage::helper('mana_filters/url');
+?>
+
+<div id="loadingmask" style="display: none;">
+    <div class="loader" id="loading-mask-loader"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'mana/ajax-loader.gif';?>" alt="<?php echo $this->__('Loading...') ?>"/><?php echo $this->__('Loading...') ?></div>
     <div id="loading-mask"></div>
 </div>
 <?php $_filters = $this->getActiveFilters() ?>
@@ -29,14 +34,14 @@
         <?php echo $_html ?>
     <?php else : ?>
         <li>
-            <a href="#" onclick="filterItems('<?php echo Mage::helper('mana_filters')->getAjaxUrl($_filter->getRemoveUrl()) ?>');return false;" title="<?php echo $this->__('Remove This Item') ?>" class="btn-remove"><?php echo $this->__('Remove This Item') ?></a>
+            <a href="#" onclick="filterItems('<?php echo $filterUrls->getFilterUrl($_filter->getRemoveUrl()); ?>');return false;" title="<?php echo $this->__('Remove This Item') ?>" class="btn-remove"><?php echo $this->__('Remove This Item') ?></a>
             <span class="label"><?php echo $this->__($_filter->getName()) ?>:</span> <?php echo $_filter->getMShowSelected() ? $this->__('not') : '' ?> <?php echo $this->stripTags($_filter->getLabel()) ?>
         </li>
     <?php endif; ?>
     <?php endforeach; ?>
     </ol>
     <?php if (!Mage::helper('mana_core')->isMageVersionEqualOrGreater('1.7') && ($_parent = $this->getParentBlock()) /*&& $_parent->getShowInFilter() != 'above_products'*/) : ?>
-    <div class="actions"><a href="#" onclick="filterItems('<?php echo $this->getClearUrl() ?>');return false;"><?php echo $this->__('Clear All') ?></a></div>
+    <div class="actions"><a href="#" onclick="filterItems('<?php echo $filterUrls->getFilterUrl($this->getClearUrl()); ?>');return false;"><?php echo $this->__('Clear All') ?></a></div>
     <?php endif; ?>
 </div>
 <?php endif; ?>

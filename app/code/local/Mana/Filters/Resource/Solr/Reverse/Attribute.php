@@ -19,8 +19,6 @@ class Mana_Filters_Resource_Solr_Reverse_Attribute extends Mana_Filters_Resource
      */
     public function applyToCollection($collection, $model, $value)
     {
-        $engine = Mage::getResourceSingleton('enterprise_search/engine');
-        $facetField = $engine->getSearchEngineFieldName($model->getAttributeModel(), 'nav');
-        $collection->addFqFilter(array($facetField => array('reverse' => $value)));
+        $collection->addFqFilter(array($model->getFilterField() => array('reverse' => $value)));
     }
 }

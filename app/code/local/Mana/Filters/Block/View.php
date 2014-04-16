@@ -14,36 +14,14 @@
 class Mana_Filters_Block_View extends Mage_Catalog_Block_Layer_View {
 
 
-    public $_currentCategory;
-    public $_searchSession;
-    public $_productCollection;
-    public $_maxPrice;
-    public $_minPrice;
-    public $_currMinPrice;
-    public $_currMaxPrice;
+    public  $_minPrice;
+    public  $_maxPrice;
+    public  $_currentMinPrice;
+    public  $_currentMaxPrice;
 
     protected function _construct()
     {
-        $this->_currentCategory = Mage::registry('current_category');
-        if($this->_currentCategory)
-        {
-            if(!$this->_currentCategory->getId())
-            {
-                $categoryId = $this->getRequest()->getParam('cat_id');
-                $this->_currentCategory = Mage::getModel("catalog/category")->load($categoryId);
-            }
-        }
-        else
-        {
-            $categoryId = $this->getRequest()->getParam('cat_id');
-            $this->_currentCategory = Mage::getModel("catalog/category")->load($categoryId);
-        }
-
-        $this->_searchSession = Mage::getSingleton('catalogsearch/session');
-        $this->setProductCollection();
-        $this->setMinPrice();
-        $this->setMaxPrice();
-        $this->setCurrentPrices();
+        $this->setPrices();
         parent::_construct();
         Mage::register('current_layer', $this->getLayer(), true);
     }
@@ -59,7 +37,7 @@ class Mana_Filters_Block_View extends Mage_Catalog_Block_Layer_View {
     {
         /* @var $layoutHelper Mana_Core_Helper_Layout */
         $layoutHelper = Mage::helper('mana_core/layout');
-        $layoutHelper->delayPrepareLayout($this, 1000);
+        $layoutHelper->delayPrepareLayout($this, 200);
 
         return $this;
     }
@@ -82,7 +60,7 @@ class Mana_Filters_Block_View extends Mage_Catalog_Block_Layer_View {
 
         $showState = 'all';
         if ($showInFilter = $this->getShowInFilter()) {
-            if ($template = Mage::getStoreConfig('mana_filters/positioning/' . $showInFilter)) {
+            if (($template = Mage::getStoreConfig('mana_filters/positioning/' . $showInFilter)) && !$this->getTakeTemplateFromXml()) {
                 $this->setTemplate($template);
             }
             $showState = Mage::getStoreConfig('mana_filters/positioning/show_state_' . $showInFilter);
@@ -111,7 +89,7 @@ class Mana_Filters_Block_View extends Mage_Catalog_Block_Layer_View {
                     'query' => $query,
                     'layer' => $layer,
                     'attribute_model' => $filterOptions->getAttribute(),
-                    'mode' => $helper->getMode(),
+                    'mode' => $this->getMode(),
                 ));
                 $block->init();
                 $this->setChild($filterOptions->getCode() . '_filter', $block);
@@ -124,6 +102,17 @@ class Mana_Filters_Block_View extends Mage_Catalog_Block_Layer_View {
         return $this;
     }
 
+    public function getMode() {
+        /* @var $helper Mana_Filters_Helper_Data */
+        $helper = Mage::helper(strtolower('Mana_Filters'));
+
+        if ($mode = $this->_getData('mode')) {
+            return $mode;
+        }
+        else {
+            return $helper->getMode();
+        }
+    }
     public function getFilters() {
         /* @var $helper Mana_Filters_Helper_Data */
         $helper = Mage::helper(strtolower('Mana_Filters'));
@@ -154,14 +143,15 @@ class Mana_Filters_Block_View extends Mage_Catalog_Block_Layer_View {
     public function getLayer() {
         /* @var $helper Mana_Filters_Helper_Data */
         $helper = Mage::helper(strtolower('Mana_Filters'));
-        return $helper->getLayer();
+
+        return $helper->getLayer($this->getMode());
     }
 
     public function canShowBlock() {
         /* @var $helper Mana_Filters_Helper_Data */
         $helper = Mage::helper(strtolower('Mana_Filters'));
 
-        switch ($helper->getMode()) {
+        switch ($this->getMode()) {
             case 'category':
                 return $this->_canShowBlockInCategory();
             case 'search':
@@ -182,7 +172,11 @@ class Mana_Filters_Block_View extends Mage_Catalog_Block_Layer_View {
         }
     }
     public function _canShowBlockInSearch() {
-        $_isLNAllowedByEngine = Mage::helper('catalogsearch')->getEngine()->isLeyeredNavigationAllowed();
+        $engine = Mage::helper('catalogsearch')->getEngine();
+        $_isLNAllowedByEngine = $engine->isLeyeredNavigationAllowed();
+        if (!$_isLNAllowedByEngine && method_exists($engine, 'isLayeredNavigationAllowed')) {
+            $_isLNAllowedByEngine = $engine->isLayeredNavigationAllowed();
+        }
         if (!$_isLNAllowedByEngine) {
             return false;
         }
@@ -194,69 +188,81 @@ class Mana_Filters_Block_View extends Mage_Catalog_Block_Layer_View {
         }
         return $this->_canShowBlockInCategory();
     }
+
+    public function setPrices()
+    {
+        $previousMinPrice = (Mage::getSingleton('core/session')->getMinPrice()) ? Mage::getSingleton('core/session')->getMinPrice() : 0;
+        $previousMaxPrice = (Mage::getSingleton('core/session')->getMaxPrice()) ? Mage::getSingleton('core/session')->getMaxPrice() : 1;
+
+        if(Mage::registry('current_category'))
+        {
+            $this->_minPrice = Mage::getSingleton('catalog/layer')
+                ->setCurrentCategory(Mage::registry('current_category'))
+                ->getProductCollection()
+                ->getMinPrice();
+
+            $this->_maxPrice = Mage::getSingleton('catalog/layer')
+                ->setCurrentCategory(Mage::registry('current_category'))
+                ->getProductCollection()
+                ->getMaxPrice();
+        }
+        else
+        {
+            $this->_minPrice = Mage::getSingleton('catalogsearch/layer')
+                ->getProductCollection()
+                ->getMinPrice();
+
+            $this->_maxPrice = Mage::getSingleton('catalogsearch/layer')
+                ->getProductCollection()
+                ->getMaxPrice();
+        }
+
+        if($this->_minPrice < $previousMinPrice || $previousMinPrice == 0)
+            Mage::getSingleton('core/session')->setMinPrice($this->_minPrice);
+        else
+            $this->_minPrice = $previousMinPrice;
+
+        if($this->_maxPrice > $previousMaxPrice && $this->_maxPrice > 0)
+            Mage::getSingleton('core/session')->setMaxPrice($this->_maxPrice);
+        else
+            $this->_maxPrice = $previousMaxPrice;
+
+
+        $requestMinPrice = $this->getRequest()->getParam('min');
+        $requestMaxPrice = $this->getRequest()->getParam('max');
+
+        $this->_currentMinPrice = ($requestMinPrice && $requestMinPrice > $this->_minPrice) ? $requestMinPrice : $this->_minPrice;
+        $this->_currentMaxPrice = ($requestMaxPrice && $requestMaxPrice < $this->_maxPrice) ? $requestMaxPrice : $this->_maxPrice;
+    }
+
     public function getPriceSlider()
     {
-        return $this->setTemplate('mana/filters/priceslider.phtml')->_toHtml();
+        return $this->setTemplate('mana/filters/price_slider.phtml')->toHtml();
     }
-    public function getCurrencySymbol()
+
+    public function getCleanPriceSliderUrl()
     {
-        return Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
-    }
-    public function setMinPrice()
-    {
-        if( (isset($_GET['q']) && !isset($_GET['min'])) || !isset($_GET['q'])){
+        $currentUrl = Mage::helper('mana_filters/url')->getFilterUrl(Mage::helper("core/url")->getCurrentUrl());
+        $previousMinPrice = Mage::app()->getRequest()->getParam('min');
+        $previousMaxPrice = Mage::app()->getRequest()->getParam('max');
 
-
-            $this->_minPrice = $this->_productCollection
-                ->getFirstItem()
-                ->getPrice();
-        if($this->_minPrice >= 1)
-            $this->_minPrice -= 1;
-
-        $this->_searchSession->setMinPrice($this->_minPrice);
-        }else{
-            $this->_minPrice = $this->_searchSession->getMinPrice();
+        if($previousMinPrice)
+        {
+            $currentUrl = str_replace("&min=".$previousMinPrice,"",$currentUrl);
+            $currentUrl = str_replace("?min=".$previousMinPrice,"",$currentUrl);
         }
 
-    }
-
-    public function setMaxPrice()
-    {
-        if( (isset($_GET['q']) && !isset($_GET['max'])) || !isset($_GET['q'])){
-            $this->_maxPrice = $this->_productCollection
-                ->getLastItem()
-                ->getPrice();
-            $this->_maxPrice += 1;
-            $this->_searchSession->setMaxPrice($this->_maxPrice);
-        }else{
-            $this->_maxPrice = $this->_searchSession->getMaxPrice();
+        if($previousMaxPrice)
+        {
+            $currentUrl = str_replace("&max=".$previousMaxPrice,"",$currentUrl);
+            $currentUrl = str_replace("?max=".$previousMaxPrice,"",$currentUrl);
         }
-    }
-
-    public function setProductCollection()
-    {
-        if($this->_currentCategory->getId()){
-            $this->_productCollection = $this->_currentCategory
-                ->getProductCollection()
-                ->addAttributeToSelect('*')
-                ->setOrder('price', 'ASC');
-        }else{
-            $this->_productCollection = Mage::getSingleton('catalogsearch/layer')->getProductCollection()
-                ->addAttributeToSelect('*')
-                ->setOrder('price', 'ASC');
-        }
-
-    }
-
-    public function setCurrentPrices()
-    {
-
-        $this->_currMinPrice = $this->getRequest()->getParam('min');
-        if(!$this->_currMinPrice)
-            $this->_currMinPrice = $this->_minPrice;
-        $this->_currMaxPrice = $this->getRequest()->getParam('max');
-        if(!$this->_currMaxPrice)
-            $this->_currMaxPrice = $this->_maxPrice;
+        $isGetRequest = explode("?", $currentUrl);
+        if(!isset($isGetRequest[1]))
+            $currentUrl .= '?';
+        else
+            $currentUrl .= '&';
+        return $currentUrl;
     }
 
 }

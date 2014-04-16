@@ -14,16 +14,20 @@
  */
 /* @var $this Mana_Filters_Block_Filter_Attribute */
 ?>
+<?php
+    $filterUrls = Mage::helper('mana_filters/url');
+?>
+
 <ol class="m-filter-item-list <?php echo $this->getFilterOptions()->getIsReverse() ? 'm-reverse' : '' ?>">
 <?php foreach ($this->getItems() as $_item): ?>
     <li <?php if ($_item->getMShowSelected()): ?>class="m-selected-ln-item"<?php endif; ?>>
         <?php // MANA BEGIN ?>
         <?php if ($_item->getMSelected()): ?>
-        	<span class="m-selected-filter-item"><?php echo $_item->getLabel() ?></span>
+        	<span class="m-selected-filter-item"><?php echo $this->escapeHtml($_item->getLabel()) ?></span>
         <?php else : ?>
 	        <?php if ($_item->getCount() > 0): ?>
-	        <a href="#" onclick="filterItems('<?php echo Mage::helper('mana_filters')->getAjaxUrl($_item->getUrl()) ?>');return false;" title="<?php echo $_item->getLabel() ?>"><?php echo $_item->getLabel() ?></a>
-	        <?php else: echo $_item->getLabel() ?>
+	        <a href="#" onclick="filterItems('<?php echo $filterUrls->getFilterUrl($this->urlEscape($_item->getUrl())); ?>');return false;" title="<?php echo $this->escapeHtml($_item->getLabel()) ?>"><?php echo $this->escapeHtml($_item->getLabel()) ?></a>
+	        <?php else: echo $this->escapeHtml($_item->getLabel()) ?>
 	        <?php endif; ?>
         <?php endif; ?>
         <?php // MANA END ?>

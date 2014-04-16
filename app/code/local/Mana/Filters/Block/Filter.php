@@ -104,6 +104,21 @@ class Mana_Filters_Block_Filter extends Mage_Catalog_Block_Layer_Filter_Abstract
         return $this;
     }
 
-
+    public function getListItemClass($item) {
+        $result = '';
+        if ($item->getMShowSelected()) {
+            $result .= 'm-selected-ln-item';
+        }
+        if (!$item->getCount()) {
+            if ($result) {
+                $result .= ' ';
+            }
+            $result .= 'm-disabled';
+        }
+        if ($result) {
+            $result = "class=\"$result\"";
+        }
+        return $result;
+    }
 
 }

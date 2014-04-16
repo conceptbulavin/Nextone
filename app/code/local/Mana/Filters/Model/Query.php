@@ -160,6 +160,7 @@ class Mana_Filters_Model_Query extends Varien_Object
                         $filterModel->applyToCollection($collection);
                     }
                 }
+
                 $counts = $currentFilterModel->countOnCollection($collection);
                 $currentFilter['processedCounts'] = $currentFilterModel->processCounts($counts);
 

@@ -13,14 +13,12 @@ class Mana_Filters_Resource_Solr_Attribute extends Mana_Filters_Resource_Filter_
 {
     /**
      * @param Enterprise_Search_Model_Resource_Collection $collection
-     * @param Mana_Filters_Model_Filter_Attribute $model
+     * @param Mana_Filters_Model_Solr_Attribute $model
      * @return Mana_Filters_Resource_Solr_Attribute
      */
     public function countOnCollection($collection, $model)
     {
-        $engine = Mage::getResourceSingleton('enterprise_search/engine');
-        $facetField = $engine->getSearchEngineFieldName($model->getAttributeModel(), 'nav');
-        $collection->setFacetCondition($facetField);
+        $collection->setFacetCondition($model->getFilterField());
 
         return $collection;
     }
@@ -33,8 +31,6 @@ class Mana_Filters_Resource_Solr_Attribute extends Mana_Filters_Resource_Filter_
      */
     public function applyToCollection($collection, $model, $value)
     {
-        $engine = Mage::getResourceSingleton('enterprise_search/engine');
-        $facetField = $engine->getSearchEngineFieldName($model->getAttributeModel(), 'nav');
-        $collection->addFqFilter(array($facetField => array('or' => $value)));
+        $collection->addFqFilter(array($model->getFilterField() => array('or' => $value)));
     }
 }

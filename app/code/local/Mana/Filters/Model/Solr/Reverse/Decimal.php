@@ -21,11 +21,13 @@ class Mana_Filters_Model_Solr_Reverse_Decimal extends Mana_Filters_Model_Solr_De
 
         $fq = array();
         foreach ($this->getMSelectedValues() as $selection) {
-            list($index, $range) = explode(',', $selection);
-            $fq[] = array(
-                'from' => ($range * ($index - 1)),
-                'to'   => $range * $index - ($this->isUpperBoundInclusive() ? 0 : 0.001),
-            );
+            if (strpos($selection, ',') !== false) {
+                list($index, $range) = explode(',', $selection);
+                $fq[] = array(
+                    'from' => ($range * ($index - 1)),
+                    'to'   => $range * $index - ($this->isUpperBoundInclusive() ? 0 : 0.001),
+                );
+            }
         }
 
         $collection->addFqFilter(array($field => array('reverse' => $fq)));

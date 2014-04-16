@@ -26,7 +26,7 @@ class Mana_Filters_Model_Solr_Price extends Mana_Filters_Model_Filter_Price
      */
     public function countOnCollection($collection)
     {
-        if (Mage::app()->getStore()->getConfig(self::XML_PATH_RANGE_CALCULATION) == self::RANGE_CALCULATION_IMPROVED) {
+        if (Mage::app()->getStore()->getConfig(self::XML_PATH_RANGE_CALCULATION) == 'improved') {
             return $this->_addCalculatedFacetConditionToCollection($collection);
         }
 
@@ -79,17 +79,19 @@ class Mana_Filters_Model_Solr_Price extends Mana_Filters_Model_Filter_Price
         $field             = $this->_getFilterField();
         $fq = array();
         foreach ($this->getMSelectedValues() as $selection) {
-            list($index, $range) = explode(',', $selection);
-            $range = $this->_getResource()->getPriceRange($index, $range);
-            $to = $range['to'];
-            if ($to < $this->getMaxPriceInt() && !$this->isUpperBoundInclusive()) {
-                $to -= 0.001;
-            }
+            if (strpos($selection, ',') !== false) {
+                list($index, $range) = explode(',', $selection);
+                $range = $this->_getResource()->getPriceRange($index, $range);
+                $to = $range['to'];
+                if ($to < $this->getMaxPriceInt() && !$this->isUpperBoundInclusive()) {
+                    $to -= 0.001;
+                }
 
-            $fq[] = array(
-                'from' => $range['from'],
-                'to'   => $to,
-            );
+                $fq[] = array(
+                    'from' => $range['from'],
+                    'to'   => $to,
+                );
+            }
         }
 
         $collection->addFqFilter(array($field => array('or' => $fq)));
@@ -120,7 +122,14 @@ class Mana_Filters_Model_Solr_Price extends Mana_Filters_Model_Filter_Price
     protected function _getFilterField()
     {
         $engine = Mage::getResourceSingleton('enterprise_search/engine');
-        $priceField = $engine->getSearchEngineFieldName('price');
+        if (method_exists($engine, 'getSearchEngineFieldName')) {
+            $priceField = $engine->getSearchEngineFieldName('price');
+        }
+        else {
+            $websiteId = Mage::app()->getStore()->getWebsiteId();
+            $customerGroupId = Mage::getSingleton('customer/session')->getCustomerGroupId();
+            $priceField = 'price_' . $customerGroupId . '_' . $websiteId;
+        }
 
         return $priceField;
     }
@@ -274,7 +283,7 @@ class Mana_Filters_Model_Solr_Price extends Mana_Filters_Model_Filter_Price
 
         $max = $stats[$this->_getFilterField()]['max'];
         if (!is_numeric($max)) {
-            $max = parent::getRangeOnCollection($collection);
+            return parent::getRangeOnCollection($collection);
         } else {
             $max = floor($max * $this->getCurrencyRate());
         }

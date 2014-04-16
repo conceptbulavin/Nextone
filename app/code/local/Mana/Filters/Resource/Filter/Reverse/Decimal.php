@@ -28,25 +28,27 @@ class Mana_Filters_Resource_Filter_Reverse_Decimal extends Mana_Filters_Resource
             $connection->quoteInto("{$tableAlias}.store_id = ?", $collection->getStoreId())
         );
 
-        $collection->getSelect()->join(
-            array($tableAlias => $this->getMainTable()),
-            join(' AND ', $conditions),
-            array()
-        );
-
-		// MANA BEGIN: modify select formation to include multiple price ranges
         $condition = '';
         foreach ($value as $selection) {
-        	list($index, $range) = explode(',', $selection);
-        	$range = $this->getRange($index, $range);
-        	if ($condition != '') $condition .= ' OR ';
-        	$condition .= '(('."{$tableAlias}.value" . ' >= '. $range['from'].') '.
-        		'AND ('."{$tableAlias}.value" . ($this->isUpperBoundInclusive() ? ' <= ' : ' < '). $range['to'].'))';
+            if (strpos($selection, ',') !== false) {
+                list($index, $range) = explode(',', $selection);
+                $range = $this->getRange($index, $range);
+                if ($condition != '') $condition .= ' OR ';
+                $condition .= '(('."{$tableAlias}.value" . ' >= '. $range['from'].') '.
+                    'AND ('."{$tableAlias}.value" . ($this->isUpperBoundInclusive() ? ' <= ' : ' < '). $range['to'].'))';
+            }
         }
-        $collection->getSelect()
-            ->distinct()
-        	->where("NOT ($condition)");
-        // MANA END
+
+        if ($condition) {
+            $collection->getSelect()
+                ->join(
+                    array($tableAlias => $this->getMainTable()),
+                    join(' AND ', $conditions),
+                    array()
+                )
+                ->distinct()
+                ->where("NOT ($condition)");
+        }
 
         return $this;
     }

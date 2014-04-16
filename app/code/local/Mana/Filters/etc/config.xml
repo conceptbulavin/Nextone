@@ -12,7 +12,7 @@
 		<Mana_Filters>
 		  	<!-- This version number identifies version of database tables specific to this extension. It is written to
 		  	core_resource table.  -->
-		    <version>12.12.21.19</version>
+		    <version>13.07.19.15</version>
 		</Mana_Filters>
 	</modules>
 	
@@ -65,17 +65,12 @@
                     <adapter_phpExtension>Mana_Filters_Model_Solr_Adapter_PhpExtension</adapter_phpExtension>
                 </rewrite>
 			</enterprise_search>
-
-            <catalog>
+            <enterprise_search_resource>
                 <rewrite>
-                    <layer>Mana_Filters_Model_Catalog_Layer</layer>
+                    <collection>Mana_Filters_Resource_Solr_Collection</collection>
+                    <engine>Mana_Filters_Resource_Solr_Engine</engine>
                 </rewrite>
-            </catalog>
-            <catalogsearch>
-                <rewrite>
-                    <layer>Mana_Filters_Model_Catalogsearch_Layer</layer>
-                </rewrite>
-            </catalogsearch>
+            </enterprise_search_resource>
 			<!-- BASED ON SNIPPET: Resources/Resource support (config.xml) -->
 			<!-- This says that string 'mana_filters' corresponds to Mana_Filters_Resource pseudo-namespace in 
 			getResourceModel() calls. -->
@@ -97,6 +92,17 @@
                 </rewrite>
 			</catalog_resource_eav_mysql4>
             <!-- INSERT HERE: rewrites, ... -->
+            <catalog>
+                <rewrite>
+                    <layer>Mana_Filters_Model_Catalog_Layer</layer>
+                </rewrite>
+            </catalog>
+            <catalogsearch>
+                <rewrite>
+                    <layer>Mana_Filters_Model_Catalogsearch_Layer</layer>
+                </rewrite>
+            </catalogsearch>
+
 		</models>
 		
 		<!-- BASED ON SNIPPET: Resources/Installation script support (config.xml) -->

@@ -25,14 +25,11 @@ class Mana_Filters_Resource_Filter_Price extends Mage_Catalog_Model_Resource_Eav
     {
         $collection->addPriceData($filter->getCustomerGroupId(), $filter->getWebsiteId());
 
-        if (!is_null($collection->getCatalogPreparedSelect())) {
-            $select = clone $collection->getCatalogPreparedSelect();
-        } else {
-            $select = clone $collection->getSelect();
-        }
+        $select = clone $collection->getSelect();
 
         // reset columns, order and limitation conditions
         $select->reset(Zend_Db_Select::COLUMNS);
+        $select->reset(Zend_Db_Select::GROUP);
         $select->reset(Zend_Db_Select::ORDER);
         $select->reset(Zend_Db_Select::LIMIT_COUNT);
         $select->reset(Zend_Db_Select::LIMIT_OFFSET);
@@ -100,15 +97,15 @@ class Mana_Filters_Resource_Filter_Price extends Mage_Catalog_Model_Resource_Eav
         if (Mage::helper('mana_core')->isMageVersionEqualOrGreater('1.7')) {
             $table = Mage_Catalog_Model_Resource_Product_Collection::MAIN_TABLE_ALIAS;
             $select = $this->_getSelectOnCollection($collection, $model);
-            $priceExpression = $this->_getFullPriceExpression($model, $select);
+            $rate = $model->getCurrencyRate();
+            $priceExpression = "({$this->_getPriceExpression($model, $select)}) * {$rate}";
 
             $range = floatval($model->getPriceRange());
             if ($range == 0) {
                 $range = 1;
             }
-            $fix = $this->_getConfigurablePriceFix();
             $countExpr = new Zend_Db_Expr('COUNT(*)');
-            $rangeExpr = new Zend_Db_Expr("FLOOR(({$priceExpression} {$fix}) / {$range}) + 1");
+            $rangeExpr = new Zend_Db_Expr("FLOOR(({$priceExpression}) / {$range}) + 1");
 
             $select->columns(array(
                 'range' => $rangeExpr,
@@ -119,6 +116,8 @@ class Mana_Filters_Resource_Filter_Price extends Mage_Catalog_Model_Resource_Eav
             Mage::helper('mana_filters')->resetProductCollectionWhereClause($select);
             $select->where("{$table}.min_price > 0");
 
+//Mage::log($select->__toString(), Zend_Log::DEBUG, 'price.log' );
+//Mage::log(json_encode($this->_getReadAdapter()->fetchPairs($select)), Zend_Log::DEBUG, 'price.log' );
             return $this->_getReadAdapter()->fetchPairs($select);
         }
         else {
@@ -174,15 +173,20 @@ class Mana_Filters_Resource_Filter_Price extends Mage_Catalog_Model_Resource_Eav
 
         $condition = '';
         foreach ($model->getMSelectedValues() as $selection) {
-        	list($index, $range) = explode(',', $selection);
-        	$range = $this->getPriceRange($index, $range);
-        	if ($condition != '') $condition .= ' OR ';
-        	$condition .= '(('.$priceExpr . ' >= '. $range['from'].') '.
-        		'AND ('.$priceExpr . ($this->isUpperBoundInclusive() ? ' <= ' : ' < '). $range['to'].'))';
+            if (strpos($selection, ',') !== false) {
+                list($index, $range) = explode(',', $selection);
+                $range = $this->getPriceRange($index, $range);
+                if ($condition != '') $condition .= ' OR ';
+                $condition .= '(('.$priceExpr . ' >= '. $range['from'].') '.
+                    'AND ('.$priceExpr . ($this->isUpperBoundInclusive() ? ' <= ' : ' < '). $range['to'].'))';
+            }
         }
-        $select
-            ->distinct()
-        	->where($condition);
+
+        if ($condition) {
+            $select
+                ->distinct()
+                ->where($condition);
+        }
         return $this;
     }
 
@@ -201,21 +205,19 @@ class Mana_Filters_Resource_Filter_Price extends Mage_Catalog_Model_Resource_Eav
     {
         $select     = $this->_getSelectOnCollection($collection, $filter);
         $connection = $this->_getReadAdapter();
-        $response   = $this->_dispatchPreparePriceEvent($filter, $select);
 
         if (Mage::helper('mana_core')->isMageVersionEqualOrGreater('1.7')) {
-            $table = Mage_Catalog_Model_Resource_Product_Collection::MAIN_TABLE_ALIAS;
-            $additional = $this->_replaceTableAlias(join('', $response->getAdditionalCalculations()));
+            $maxPriceExpr = new Zend_Db_Expr("MAX({$this->_getPriceExpression($filter, $select)}) AS m_max_price");
         }
         else {
+            $response = $this->_dispatchPreparePriceEvent($filter, $select);
             $table = $this->_getIndexTableAlias();
             $additional = join('', $response->getAdditionalCalculations());
+            $fix = $this->_getConfigurablePriceFix();
+            $maxPriceExpr = new Zend_Db_Expr("MAX({$table}.min_price {$additional} {$fix}) AS m_max_price");
         }
 
-        $fix = $this->_getConfigurablePriceFix();
-        $maxPriceExpr = new Zend_Db_Expr("MAX({$table}.min_price {$additional} {$fix}) AS m_max_price");
-
-        Mage::helper('mana_filters')->resetProductCollectionWhereClause($select);
+        //Mage::helper('mana_filters')->resetProductCollectionWhereClause($select);
         $select->columns(array($maxPriceExpr))->order('m_max_price DESC');
 
         $result  = $connection->fetchOne($select) * $filter->getCurrencyRate();
@@ -255,4 +257,49 @@ class Mana_Filters_Resource_Filter_Price extends Mage_Catalog_Model_Resource_Eav
         }
         return $subSelect ? " + COALESCE(($subSelect), 0)" : '';
     }
+
+    protected $_preparedExpressions = array();
+
+    protected function _getPriceExpression($filter, $select, $replaceAlias = true) {
+        foreach ($this->_preparedExpressions as $expr) {
+            if ($expr['select'] == $select) {
+                return $expr['result'];
+            }
+        }
+
+        $response = new Varien_Object();
+        $response->setAdditionalCalculations(array());
+        $tableAliases = array_keys($select->getPart(Zend_Db_Select::FROM));
+        if (in_array(Mage_Catalog_Model_Resource_Product_Collection::INDEX_TABLE_ALIAS, $tableAliases)) {
+            $table = Mage_Catalog_Model_Resource_Product_Collection::INDEX_TABLE_ALIAS;
+        }
+        else {
+            $table = reset($tableAliases);
+        }
+
+        // prepare event arguments
+        $eventArgs = array(
+            'select' => $select,
+            'table' => $table,
+            'store_id' => $filter->getStoreId(),
+            'response_object' => $response
+        );
+
+        Mage::dispatchEvent('catalog_prepare_price_select', $eventArgs);
+
+        $table = Mage_Catalog_Model_Resource_Product_Collection::MAIN_TABLE_ALIAS;
+        $additional = $this->_replaceTableAlias(join('', $response->getAdditionalCalculations()));
+
+        $fix = $this->_getConfigurablePriceFix();
+        $result = "{$table}.min_price {$additional} {$fix}";
+
+        if ($replaceAlias) {
+            $result = $this->_replaceTableAlias($result);
+        }
+
+        $this->_preparedExpressions[] = compact('select', 'result');
+
+        return $result;
+    }
+
 }
