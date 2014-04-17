@@ -355,9 +355,8 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
 /* Pager */
 .pager { font-size:11px; padding:4px 8px; text-align:center; }
 .pager .amount { float:left; margin:0; }
-.pager .limiter { float:right; }
-.pager .limiter label { vertical-align:middle; }
-.pager .limiter select { padding:0; margin:0 0 1px; vertical-align:middle; }
+.pager .limiter { float:right; font-size: 10px; text-decoration: underline; }
+.pager .limiter:hover { text-decoration: none; color: #383838; }
 .pager .pages { margin:0 140px; }
 .pager .pages ol { display:inline; }
 .pager .pages li { display:inline; margin:0 2px; }
@@ -744,7 +743,9 @@ button.button:hover {
 .block-layered-nav .block-title { border:0; padding:0; height:24px; text-indent:-999em; overflow:hidden; display: none; }
 .block-layered-nav .block-subtitle { line-height:1.35; padding:3px 9px; text-transform:uppercase; color:#1f5070; }
 .block-layered-nav .block-content {  }
-.block-layered-nav dt { background:url(../images/bkg_block-layered-dt.gif) 9px 11px no-repeat; padding:7px 10px 0 25px; font-weight:bold; text-transform:uppercase; }
+.block-layered-nav dt { padding:7px 0 0 0; font-size: 16px; }
+.block-layered-nav dt .collapse-filter { background:url(../images/icon-arrow-down.png) 100% 0 no-repeat; display: inline-block; width: 14px; height: 17px; vertical-align: middle; margin: 0 3px; cursor: pointer; }
+
 .block-layered-nav dd { padding:0 12px 12px; background:url(../images/bkg_block-layered-dd.gif) 0 100% repeat-x; }
 .block-layered-nav dd.last { background:none; }
 .block-layered-nav .currently li { background:#fff url(../images/bkg_block-layered-li.gif) 0 100% repeat-x; padding:6px 24px 6px 10px; position:relative; z-index:1; line-height:1.5; }
@@ -870,9 +871,9 @@ button.button:hover {
 .category-products {}
 
 /* View Type: Grid */
-.products-grid { border-bottom:1px solid #d9ddd3; position:relative; }
+.products-grid { }
 .products-grid.last { border-bottom:0; }
-.products-grid li.item { float:left; width:188px; padding:0 0 15px; border: 1px solid #ddd; margin-left: 12px; text-align: center; }
+.products-grid li.item { float:left; width:188px; padding:0 0 15px; border: 1px solid #ddd; margin-left: 6px; text-align: center; }
 .products-grid li.item.first {  margin-left: 0; }
 .products-grid .product-image { display:block; width:188px; height:188px; margin:0 0 10px; }
 .products-grid .product-name { margin:0 0 5px; font-weight:bold; font-size:14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

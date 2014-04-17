@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+@category    Mana
+@package     Mana_Filters
+@copyright   Copyright (c) http://www.manadev.com
+@license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ -->
+<!-- BASED ON SNIPPET: Static Visuals/Empty layout file -->
+<!-- This file defines the rules which should be applied when module mana_filters is installed and active. Typically, 
+rules consists of the following parts:
+	1. 	You say on which types of pages you would like your changes to be applied (in Magento wording, you need to 
+		specify layout handle), for example, layout handle "catalog_category_layered" selects all pages where 
+		specific category products are shown and where layered navigation is enabled. Layout handle "default" selects
+		every each page rendered by Magento.
+	2. 	You say in which blocks you would like to make the changes (in Magento wording you reference parent block).
+	3.	You say what changes you would like to apply to that block (you could specify to remove child blocks, to add
+		your own blocks, to invoke methods on referenced block).
+Review standard Magento layout XML's for full list of available layout handles, blocks to be referenced, and for 
+examples on what kind of actions can be applied to referenced blocks. 
+ -->
+<layout version="0.1.0">
+    <catalog_category_layered> <!-- find all category pages with layered navigation -->
+        <reference name="root">
+            <action method="setTemplate">
+                <template>mana/page/2columns-left.phtml</template>
+            </action>
+        </reference>
+        <reference name="left"> <!-- find left column block -->
+            <remove name="catalog.leftnav"/>
+            <!-- remove standard layered navigation -->
+            <remove name="enterprisecatalog.leftnav"/>
+            <!-- remove enterprise layered navigation -->
+            <block type="mana_filters/view" name="mana.catalog.leftnav" before="-" template="mana/catalog/layer/view.phtml"/>
+        </reference>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/mana_filters.css</stylesheet>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/slider.css</stylesheet>
+            </action>
+            <action method="addItem">
+            	<type>skin_js</type>
+            	<path>js/jquery-1.8.2.min.js</path>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <path>js/mana/ajaxfilter.js</path>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <path>js/mana/bootstrap-slider.js</path>
+            </action>
+        </reference>
+        <reference name="mana.catalog.leftnav">
+            <action method="setTemplate" ifconfig="mana_filters/advanced/enabled">
+                <template>manapro/filteradvanced/view.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar">
+            <action method="setTemplate">
+                <template>mana/catalog/product/list/toolbar.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar_pager">
+            <action method="setTemplate">
+                <template>mana/page/html/pager.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_layered>
+    <filters_category_view>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>mana/filters/ajax_page/category_ajaxtemplate.phtml</template>
+            </action>
+        </reference>
+    </filters_category_view>
+    <catalogsearch_result_index> <!-- find all catalog search result page -->
+        <reference name="root">
+            <action method="setTemplate">
+                <template>mana/page/2columns-left.phtml</template>
+            </action>
+        </reference>
+        <reference name="left"> <!-- find left column block -->
+            <remove name="catalogsearch.leftnav"/>
+            <!-- remove standard layered navigation -->
+            <remove name="enterprisesearch.leftnav"/>
+            <!-- remove enterprise layered navigation -->
+            <block type="mana_filters/search" name="mana.catalogsearch.leftnav" before="-"
+                   template="mana/catalog/layer/view.phtml"/>
+        </reference>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/mana_filters.css</stylesheet>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/slider.css</stylesheet>
+            </action>
+            <action method="addItem">
+            <type>skin_js</type>
+            <path>js/jquery-1.8.2.min.js</path>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <path>js/mana/ajaxfilter.js</path>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <path>js/mana/bootstrap-slider.js</path>
+            </action>
+        </reference>
+        <reference name="mana.catalogsearch.leftnav">
+            <action method="setTemplate" ifconfig="mana_filters/advanced/enabled">
+                <template>manapro/filteradvanced/view.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar">
+            <action method="setTemplate">
+                <template>mana/catalog/product/list/toolbar.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar_pager">
+            <action method="setTemplate">
+                <template>mana/page/html/pager.phtml</template>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+    <filters_search_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>mana/filters/ajax_page/category_ajaxtemplate.phtml</template>
+            </action>
+        </reference>
+        <reference name="left"> <!-- find left column block -->
+            <remove name="catalogsearch.leftnav"/>
+            <!-- remove standard layered navigation -->
+            <remove name="enterprisesearch.leftnav"/>
+            <!-- remove enterprise layered navigation -->
+            <block type="mana_filters/search" name="mana.catalogsearch.leftnav" before="-"
+                   template="mana/catalog/layer/state.phtml"/>
+            <block type="mana_filters/search" name="mana.catalogsearch.leftnav" after="mana.catalogsearch.leftnav"
+                   template="mana/catalog/layer/view.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="catalogsearch/result" name="search.result" template="catalogsearch/result.phtml">
+                <block type="catalog/product_list" name="search_result_list" template="catalog/product/list.phtml">
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar"
+                           template="mana/catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager" template="mana/page/html/pager.phtml"/>
+                    </block>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>empty</layout>
+                        <count>6</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>one_column</layout>
+                        <count>5</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>two_columns_left</layout>
+                        <count>4</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>two_columns_right</layout>
+                        <count>4</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>three_columns</layout>
+                        <count>3</count>
+                    </action>
+                    <action method="setToolbarBlockName">
+                        <name>product_list_toolbar</name>
+                    </action>
+                </block>
+                <action method="setListOrders"/>
+                <action method="setListModes"/>
+                <action method="setListCollection"/>
+            </block>
+        </reference>
+    </filters_search_index>
+    <discounts_index_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>mana/page/2columns-left.phtml</template>
+            </action>
+        </reference>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/mana_filters.css</stylesheet></action>
+            <action method="addCss">
+                <stylesheet>css/slider.css</stylesheet>
+            </action>
+            <action method="addItem">
+            	<type>skin_js</type>
+            	<path>js/jquery-1.8.2.min.js</path>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <path>js/mana/ajaxfilter.js</path>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <path>js/mana/bootstrap-slider.js</path>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar">
+            <action method="setTemplate">
+                <template>mana/catalog/product/list/toolbar.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar_pager">
+            <action method="setTemplate">
+                <template>mana/page/html/pager.phtml</template>
+            </action>
+        </reference>
+    </discounts_index_index>
+    <filters_discounts_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>mana/filters/ajax_page/category_ajaxtemplate.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="codevog_discounts/view" name="category.products" template="catalog/category/view.phtml">
+                <block type="codevog_discounts/sales" name="product_list" template="catalog/product/list.phtml">
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar"
+                           template="mana/catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"
+                               template="mana/page/html/pager.phtml"/>
+                    </block>
+                    <action method="setColumnCount"><count>3</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                </block>
+            </block>
+        </reference>
+        <reference name="left">
+            <remove name="catalog.leftnav"/>
+            <block type="codevog_discounts/categories" name="left.discounts"
+                   template="catalog/product/discounts_categories_left.phtml" before="-"/>
+        </reference>
+    </filters_discounts_index>
+    <cms_page_layered>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>mana/page/2columns-left.phtml</template>
+            </action>
+        </reference>
+        <reference name="left"> <!-- find left column block -->
+            <block type="mana_filters/search" name="mana.catalogsearch.leftnav" before="-"
+                   template="mana/catalog/layer/state.phtml"/>
+            <block type="mana_filters/search" name="mana.catalogsearch.leftnav" after="mana.catalogsearch.leftnav"
+                   template="mana/catalog/layer/view.phtml"/>
+        </reference>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/mana_filters.css</stylesheet></action>
+            <action method="addCss">
+                <stylesheet>css/slider.css</stylesheet>
+            </action>
+            <action method="addItem">
+            	<type>skin_js</type>
+            	<path>js/jquery-1.8.2.min.js</path>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <path>js/mana/ajaxfilter.js</path>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <path>js/mana/bootstrap-slider.js</path>
+            </action>
+        </reference>
+        <reference name="mana.catalog.leftnav">
+            <action method="setTemplate" ifconfig="mana_filters/advanced/enabled"><template>manapro/filteradvanced/view.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="cms.products" template="mana/filters/cms.phtml" />
+        </reference>
+        <reference name="product_list_toolbar">
+            <action method="setTemplate">
+                <template>mana/catalog/product/list/toolbar.phtml</template>
+            </action>
+        </reference>
+        <reference name="product_list_toolbar_pager">
+            <action method="setTemplate">
+                <template>mana/page/html/pager.phtml</template>
+            </action>
+        </reference>
+    </cms_page_layered>
+    <filters_page_layered>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>mana/filters/ajax_page/category_ajaxtemplate.phtml</template>
+            </action>
+        </reference>
+        <reference name="left"> <!-- find left column block -->
+            <block type="mana_filters/search" name="mana.catalogsearch.leftnav" before="-"
+                   template="mana/catalog/layer/state.phtml"/>
+            <block type="mana_filters/search" name="mana.catalogsearch.leftnav" after="mana.catalogsearch.leftnav"
+                   template="mana/catalog/layer/view.phtml"/>
+        </reference>
+        <reference name="mana.catalog.leftnav">
+            <action method="setTemplate" ifconfig="mana_filters/advanced/enabled"><template>manapro/filteradvanced/view.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="cms.products" template="mana/filters/cms.phtml" />
+        </reference>
+    </filters_page_layered>
+</layout>

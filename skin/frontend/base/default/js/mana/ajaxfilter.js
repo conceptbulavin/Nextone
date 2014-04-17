@@ -1,5 +1,4 @@
-function filterItems(url)
-{
+function filterItems(url) {
     jQuery.noConflict();
     jQuery('#loadingmask').show();
     jQuery.post(url,{},function(data)
