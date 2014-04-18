@@ -175,17 +175,15 @@ class S2_Slider_Block_Adminhtml_Slider_Edit_Tab_Form extends Mage_Adminhtml_Bloc
             ));
 
 
-        if (!Mage::app()->isSingleStoreMode()) {
-            $field = $fieldset->addField('stores', 'multiselect', array(
-                'name'      => 'stores[]',
-                'label'     => Mage::helper('widget')->__('Assign to Store Views'),
-                'title'     => Mage::helper('widget')->__('Assign to Store Views'),
-                'required'  => true,
-                'values'    => Mage::getSingleton('adminhtml/system_store')->getStoreValuesForForm(false, true),
-            ));
-            $renderer = $this->getLayout()->createBlock('adminhtml/store_switcher_form_renderer_fieldset_element');
-            $field->setRenderer($renderer);
-        }
+        $field = $fieldset->addField('stores', 'multiselect', array(
+            'name'      => 'stores[]',
+            'label'     => Mage::helper('widget')->__('Assign to Store Views'),
+            'title'     => Mage::helper('widget')->__('Assign to Store Views'),
+            'required'  => true,
+            'values'    => Mage::getSingleton('adminhtml/system_store')->getStoreValuesForForm(false, true),
+        ));
+        $renderer = $this->getLayout()->createBlock('adminhtml/store_switcher_form_renderer_fieldset_element');
+        $field->setRenderer($renderer);
 
 
         if ( Mage::registry('slider_data') )
