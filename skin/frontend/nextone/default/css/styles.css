@@ -101,7 +101,7 @@ ul,ol         { list-style:none; }
 
 /* Base Columns */
 .col-left { float:left; width:190px; padding:0 0 1px; }
-.col-main { float:left; width:780px; padding:0 0 1px; }
+.col-main { float:left; width:782px; padding:0 0 1px; }
 .col-right { float:right; width:190px; padding:0 0 1px; }
 
 /* 1 Column Layout */
@@ -527,8 +527,8 @@ tr.summary-details-excluded { font-style:italic; }
 .header .form-search input.input-text { float:left; border: none; border-right: 1px solid #cccccc; width:228px; height: 16px; line-height: 16px; color: #8d8d92; padding: 6px 12px; }
 .header .form-search input.input-text:focus {color: #383838;}
 .header .form-search button.button { float:left; }
-.header .form-search button.button > span { border:0; padding: 0; width:32px; height:28px; background:#008ff8 url(../images/btn_search.png) 0 0 no-repeat; }
-.header .form-search button.button span span { background: none; text-indent: -999em; overflow: hidden; }
+.header .form-search button.button > span { border:0; padding: 0; width:32px; height:28px; background:#008ff8 url(../images/btn_search.png) 0 0 no-repeat; text-indent: -999em; }
+.header .form-search button.button span span { background: none; overflow: hidden;}
 .header .form-search button.button > span:hover { background-color: #0175cb; }
 
 .header .form-search .search-autocomplete { z-index:999; left:40px !important; top:22px !important; }
@@ -743,10 +743,11 @@ button.button:hover {
 .block-layered-nav .block-title { border:0; padding:0; height:24px; text-indent:-999em; overflow:hidden; display: none; }
 .block-layered-nav .block-subtitle { line-height:1.35; padding:3px 9px; text-transform:uppercase; color:#1f5070; }
 .block-layered-nav .block-content {  }
-.block-layered-nav dt { padding:7px 0 0 0; font-size: 16px; }
-.block-layered-nav dt .collapse-filter { background:url(../images/icon-arrow-down.png) 100% 0 no-repeat; display: inline-block; width: 14px; height: 17px; vertical-align: middle; margin: 0 3px; cursor: pointer; }
+.block-layered-nav dt { padding:7px 0 0 0; font-size: 16px; cursor: pointer; }
+.block-layered-nav dt .collapse-filter { background:url(../images/icon-arrow-down.png) 100% 0 no-repeat; display: inline-block; width: 14px; height: 17px; vertical-align: middle; margin: 0 3px; }
 
-.block-layered-nav dd { padding:0 12px 12px; background:url(../images/bkg_block-layered-dd.gif) 0 100% repeat-x; }
+.block-layered-nav dd { display: none; padding:12px 0 24px; }
+.block-layered-nav dd.is-expanded { display: block; }
 .block-layered-nav dd.last { background:none; }
 .block-layered-nav .currently li { background:#fff url(../images/bkg_block-layered-li.gif) 0 100% repeat-x; padding:6px 24px 6px 10px; position:relative; z-index:1; line-height:1.5; }
 .block-layered-nav .currently .label { font-weight:bold; padding-left:15px; background:url(../images/bkg_block-layered-label.gif) 0 4px no-repeat; text-transform:uppercase; display:inline-block; vertical-align:top; }
@@ -870,16 +871,23 @@ button.button:hover {
 .category-description { margin:0 0 10px; }
 .category-products {}
 
+.category-list { background: #fbfbfb; border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; }
+.category-list a { color: #4f4f4f; text-decoration: none; }
+.category-list a:hover { color: #008ff8; }
+.category-list .category-name{ color: #008ff8; font-size: 14px; }
+.category-list ol { padding: 8px 8px 4px 0; line-height: 21px; }
+
 /* View Type: Grid */
-.products-grid { }
+.products-grid { margin-bottom: 10px; }
 .products-grid.last { border-bottom:0; }
-.products-grid li.item { float:left; width:188px; padding:0 0 15px; border: 1px solid #ddd; margin-left: 6px; text-align: center; }
+.products-grid li.item { float:left; width:186px; padding:0 0 15px; border: 1px solid #ddd; margin-left: 10px; text-align: center; }
 .products-grid li.item.first {  margin-left: 0; }
-.products-grid .product-image { display:block; width:188px; height:188px; margin:0 0 10px; }
+.products-grid .product-image { display:block; width:186px; height:186px; margin:0 0 10px; }
 .products-grid .product-name { margin:0 0 5px; font-weight:bold; font-size:14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .products-grid .product-name a { color:#1d1d1b; text-decoration: none; }
 .products-grid .product-name a:hover { color:#008ff8; }
 .products-grid .product-description { color:#1d1d1b; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.products-grid button span { min-width: 82px; }
 
 .products-grid .price-box { margin:8px 0; height: 42px; overflow: hidden; text-overflow: ellipsis; }
 .products-grid .price-box .regular-price { display: block; padding-top: 18px; }
