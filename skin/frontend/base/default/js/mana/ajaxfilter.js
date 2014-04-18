@@ -1,10 +1,9 @@
-function filterItems(url)
-{
+function filterItems(url) {
     jQuery.noConflict();
-    Element.show('loadingmask');
+    jQuery('#loadingmask').show();
     jQuery.post(url,{},function(data)
     {
         jQuery('.main').html(data);
-        Element.hide('loadingmask');
+        jQuery('#loadingmask').hide();
     },'html');
 }
