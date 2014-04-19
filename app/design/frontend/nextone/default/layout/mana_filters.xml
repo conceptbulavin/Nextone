@@ -26,7 +26,15 @@ examples on what kind of actions can be applied to referenced blocks.
             </action>
         </reference>
         <reference name="left"> <!-- find left column block -->
+<!--             <block type="core/text_list" name="top.menu" as="topMenu" translate="label">
+                <label>Navigation Bar</label>
+                <block type="page/html_topmenu" name="catalog.topnav" template="page/html/topmenu.phtml"/>
+            </block>
+ -->
             <remove name="catalog.leftnav"/>
+
+
+            <block type="catalog/navigation" name="leftaa" template="catalog/navigation/left.phtml" before="-"/>
             <!-- remove standard layered navigation -->
             <remove name="enterprisecatalog.leftnav"/>
             <!-- remove enterprise layered navigation -->
@@ -81,7 +89,7 @@ examples on what kind of actions can be applied to referenced blocks.
     <catalogsearch_result_index> <!-- find all catalog search result page -->
         <reference name="root">
             <action method="setTemplate">
-                <template>mana/page/2columns-left-category.phtml</template>
+                <template>page/2columns-left-category.phtml</template>
             </action>
         </reference>
         <reference name="left"> <!-- find left column block -->

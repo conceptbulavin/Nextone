@@ -46,17 +46,6 @@
         <?php endif; ?>
         <?php if($this->canShowOptions()): ?>
             <?php $_filters = $this->getFilters() ?>
-            <?php foreach ($_filters as $_filter): ?>
-                <?php if($_filter->getItemsCount()): ?>
-                    <?php if($_filter->getName() == 'Category'):?>
-                        <div class="category-list">
-                            <div class="category-name"><?php echo $this->getLayer()->getCurrentCategory()->getName(); ?></div>
-                            <?php echo $_filter->getHtml(); ?>
-                        </div>
-                        <?php break; ?>
-                    <?php endif;?>
-                <?php endif; ?>
-            <?php endforeach; ?>
             <dl id="narrow-by-list">
                 <?php foreach ($_filters as $_filter): ?>
                     <?php if($_filter->getItemsCount()): ?>

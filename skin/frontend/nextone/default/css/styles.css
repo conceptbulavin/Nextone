@@ -336,9 +336,9 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
 .breadcrumbs li.home a:hover {background-color: #008ff8; }
 
 /* Page Heading */
-.page-title { width:100%; overflow:hidden; border-bottom:1px solid #ccc; margin:0 0 25px; }
+.page-title { width:100%; overflow:hidden; margin:0 0 25px; }
 .page-title h1,
-.page-title h2 { margin:0; font-size:20px; color:#0a263c; }
+.page-title h2 { margin:0; font-size:20px; color:#383838; }
 .page-title .separator { margin:0 3px; }
 .page-title .link-rss { float:right; margin:7px 0 0; }
 .title-buttons { text-align:right; }
@@ -348,6 +348,7 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
 .title-buttons h4,
 .title-buttons h5,
 .title-buttons h6 { float:left; }
+.catalogsearch-result-index .page-title { display: none; }
 
 .subtitle,
 .sub-title { clear:both; padding:15px 0 0; font-size:15px; font-weight:bold; margin:0 0 6px; color:#e25203; }
@@ -882,9 +883,13 @@ button.button:hover {
 .category-products {}
 
 .category-list { background: #fbfbfb; border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; }
-.category-list a { color: #4f4f4f; text-decoration: none; }
-.category-list a:hover { color: #008ff8; }
-.category-list .category-name{ color: #008ff8; font-size: 14px; }
+.category-list li a { color: #4f4f4f; text-decoration: none; }
+.category-list li a:hover { color: #008ff8; }
+.category-list li.current { background: url(../images/icon-arrow-right.png) no-repeat 0 4px; padding-left: 17px; margin-left: -8px; }
+.category-list li.current span{ color: #008ff8; }
+.category-list .category-name a ,
+.category-list .category-name{ color: #008ff8; text-decoration: none; font-size: 14px; }
+.category-list .category-name a:hover { text-decoration: underline; }
 .category-list ol { padding: 8px 0 4px 8px; line-height: 21px; }
 
 /* View Type: Grid */
