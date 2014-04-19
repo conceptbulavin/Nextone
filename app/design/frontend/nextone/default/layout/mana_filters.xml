@@ -92,6 +92,8 @@ examples on what kind of actions can be applied to referenced blocks.
             <!-- remove enterprise layered navigation -->
             <block type="mana_filters/search" name="mana.catalogsearch.leftnav" before="-"
                    template="mana/catalog/layer/view.phtml"/>
+            <block type="catalog/navigation" name="left.nav" template="catalog/navigation/left.phtml" before="-"/>
+
         </reference>
         <reference name="head">
             <action method="addCss">
@@ -147,6 +149,8 @@ examples on what kind of actions can be applied to referenced blocks.
                    template="mana/catalog/layer/state.phtml"/>
             <block type="mana_filters/search" name="mana.catalogsearch.leftnav" after="mana.catalogsearch.leftnav"
                    template="mana/catalog/layer/view.phtml"/>
+            <block type="catalog/navigation" name="left.nav" template="catalog/navigation/left.phtml" before="-"/>
+
         </reference>
         <reference name="content">
             <block type="catalogsearch/result" name="search.result" template="catalogsearch/result.phtml">

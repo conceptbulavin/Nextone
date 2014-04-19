@@ -30,57 +30,30 @@
  * @see Mage_Catalog_Block_Navigation
  */
 ?>
-
 <?php if (!Mage::registry('current_category')) return ?>
 <?php $_categories = $this->getCurrentChildCategories() ?>
 <?php $_count = is_array($_categories)?count($_categories):$_categories->count(); ?>
 <?php if($_count): ?>
-<div class="block">
-    <div class="block-content1">
-    <div class="category-list">
-        <?php if ($this->getCurrentCategory()->getLevel() > 1): ?>
-            <div class="category-name"><?php echo $this->getCurrentCategory()->getName(); ?></div>
-        <?php endif; ?>
-        <ol>
-            <?php foreach ($_categories as $_category): ?>
-                <?php if($_category->getIsActive()): ?>
-                <li>
-                    <a href="<?php echo $this->getCategoryUrl($_category) ?>"<?php if ($this->isCategoryActive($_category)): ?> class="current"<?php endif; ?>><?php echo $this->escapeHtml($_category->getName()) ?></a>
-                </li>
-                <?php endif; ?>
-            <?php endforeach ?>
-            </ol>
+<div class="block block-layered-nav">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Browse By') ?></span></strong>
     </div>
-</div>
-<?php else: ?>
-<div class="block">
-    <div class="block-content1">
-    <div class="category-list">
-        <?php
-          $_parentId = $this->getCurrentCategory()->getParentId();
-          $_parent = Mage::getModel('catalog/category')->load($_parentId);
-        ?>
-        <?php if ($_parent->getLevel() > 1): ?>
-            <div class="category-name">
-                <a href="<?php echo $this->getCategoryUrl($_parent) ?>"><?php echo $this->escapeHtml($_parent->getName()) ?></a></div>
-        <?php endif; ?>
-        <ol>
-        <?php
-          $_categories=explode(',', $_parent->getChildren());
-          foreach($_categories as $_cat){
-             $_category=Mage::getModel('catalog/category')->load($_cat);
-        ?>
-            <?php if ($this->isCategoryActive($_category)): ?>
-            <li class="current">
-                <span><?php echo $this->escapeHtml($_category->getName()) ?></span>
-            </li>
-            <?php else: ?>
-                <li>
-                    <a href="<?php echo $this->getCategoryUrl($_category) ?>"><?php echo $this->escapeHtml($_category->getName()) ?></a>
-                </li>
-            <?php endif; ?>
-        <?php } ?>
-        </ol>
+    <div class="block-content">
+        <dl id="narrow-by-list2">
+            <dt><?php echo $this->__('Category') ?></dt>
+            <dd>
+                <ol>
+                <?php foreach ($_categories as $_category): ?>
+                    <?php if($_category->getIsActive()): ?>
+                    <li>
+                        <a href="<?php echo $this->getCategoryUrl($_category) ?>"<?php if ($this->isCategoryActive($_category)): ?> class="current"<?php endif; ?>><?php echo $this->escapeHtml($_category->getName()) ?></a> (<?php echo $_category->getProductCount() ?>)
+                    </li>
+                    <?php endif; ?>
+                <?php endforeach ?>
+                </ol>
+            </dd>
+        </dl>
+        <script type="text/javascript">decorateDataList('narrow-by-list2')</script>
     </div>
 </div>
 <?php endif; ?>
