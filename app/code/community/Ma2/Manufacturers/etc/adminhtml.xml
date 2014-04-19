@@ -1,0 +1,69 @@
+<?xml version="1.0"?>  
+	<config>
+    <menu>
+      <ma2 translate="title" module="ma2all">
+        <title>MA2</title>
+        <sort_order>89</sort_order>
+        <children>
+          <manufacturers translate="title" module="manufacturers">
+            <title>Ma2 Manufacturers</title>
+            <sort_order>20</sort_order>
+            <children>
+              <manufacturers_manager translate="title" module="manufacturers">
+                <title>Manufacturers Images</title>
+                <sort_order>1</sort_order>
+                <action>manufacturers/adminhtml_default</action>
+              </manufacturers_manager>
+              <manufacturers_options translate="title" module="manufacturers">
+                <title>Configurations</title>
+                <sort_order>2</sort_order>
+                <action>adminhtml/system_config/edit/section/manufacturers</action>
+              </manufacturers_options>
+            </children>
+          </manufacturers>
+        </children>
+      </ma2>
+    </menu>
+    
+		<acl>
+			<resources>
+				<admin>
+          <children>
+            <ma2>
+              <title>MA2</title>
+              <sort_order>89</sort_order>
+              <children>
+                <manufacturers>
+                  <title>Ma2 Manufacturers</title>
+                  <sort_order>20</sort_order>
+                  <children>
+                    <manufacturers_manager translate="title" module="manufacturers">
+                      <title>Manufacturers Images</title>
+                      <sort_order>1</sort_order>
+                    </manufacturers_manager>
+                    <manufacturers_options translate="title" module="manufacturers">
+                      <title>Configurations</title>
+                      <sort_order>2</sort_order>
+                    </manufacturers_options>
+                  </children>
+                </manufacturers>
+              </children>
+            </ma2>
+          
+            <system>
+              <children>
+                <config>
+                  <children>
+                      <manufacturers translate="title" module="manufacturers">
+                        <title>Manufacturers Section</title>
+                        <sort_order>1</sort_order>
+                      </manufacturers>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</config>

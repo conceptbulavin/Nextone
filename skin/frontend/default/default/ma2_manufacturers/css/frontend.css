@@ -1,0 +1,67 @@
+/**
+ * MagenMarket.com
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Edit or modify this file with yourown risk.
+ *
+ * @category    Extensions
+ * @package     Ma2_Manufacturers Free
+ * @copyright   Copyright (c) 2013 MagenMarket. (http://www.magenmarket.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+**/
+/* $Id: frontend.css 3 2014-01-13 09:15:57Z linhnt $ */
+
+.ma2-manufacturers{}
+.ma2-manufacturers .clear {clear: both;}
+.ma2-manufacturers .manufacturers{}
+
+/* LIST */
+.ma2-manufacturers .list{}
+.ma2-manufacturers .list .manufacturer{}
+
+/* GRID */
+
+.ma2-manufacturers .grid{ padding: 10px; }
+
+.ma2-manufacturers .grid .manufacturer{
+  float: left;
+}
+.ma2-manufacturers .manufacturer-inner{ padding: 5px;}
+.ma2-manufacturers .grid .manufacturer-name{
+  display: block;
+}
+
+/* SLIDER */
+.ma2-manufacturers .manufacturers {overflow: hidden;}
+.ma2-manufacturers .slider {overflow: hidden;}
+.ma2-manufacturers .slider .manufacturer{
+  float: left;
+}
+.ma2-manufacturers .slider .manufacturer-name{
+  display: block;
+}
+.ma2-manufacturers .block-inner {position: relative;}
+.ma2-manufacturers .slider-inner {width: 5000em;}
+.ma2-manufacturers .manufacturer-slide {float: left;}
+.ma2-manufacturers .manufacturer-slide .manufacturer-inner{padding: 5px; text-align: center;}
+.ma2-manufacturers .controls {position: absolute; top: 0; right: 5px; z-index: 1;}
+.ma2-manufacturers .controls a{
+  border: 1px solid #DDDDDD;
+  display: inline-block;
+  font-size: 18px;
+  height: 20px;
+  line-height: 18px;
+  margin: 1px;
+  outline: medium none;
+  text-align: center;
+  text-decoration: none;
+  width: 20px;
+}

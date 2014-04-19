@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * ISM Slider template
+ *
+ * @category    ISM
+ * @package     ISM_Slider
+ * @author      ISM FED Team
+ */
+
+$_slider = $this->getSlider();
+$_collection = $this->getSlides();
+
+if($_collection->count()):
+    $_prefix = $_slider->class ? $_slider->class : 'b-ism' . $_slider->slider_id;
+    $_width = ($_slider->width > 0) ? $_slider->width : 960;
+    $_height = ($_slider->height > 0) ? $_slider->height : 400;
+    $_preloadingText = $this->__('Loading...');
+    ?>
+<div class="b-ism-slider <?php echo $_prefix . '-slider' ?>"
+     id="ism-slider-<?php echo $_slider->slider_id ?>"
+     style="width:<?php echo $_width; ?>px; height:<?php echo $_height; ?>px;">
+    <ul class="b-ism-slider-list <?php echo $_prefix . '-list' ?>">
+        <?php $_i = 0 ?>
+        <?php foreach($_collection as $_item => $_value): ?>
+        <li class="b-ism-slider-item <?php echo $_prefix . '-item' ?>   "
+            style="width:<?php echo $_width; ?>px; height:<?php echo $_height; ?>px;">
+            <a class="b-ism-slider-item-link <?php echo $_prefix . '-item-link' ?>" <?php echo ($_value->link) ? 'href="' . $_value->link . '"' : ''?>></a>
+            <div class="b-ism-slider-item-info <?php echo $_prefix . '-item-img' ?>">
+                <div class="b-ism-slider-item-title <?php echo $_prefix . '-item-title' ?>"><?php echo strip_tags($_value->title) ?></div>
+                <div class="b-ism-slider-item-description <?php echo $_prefix . '-item-description' ?>"><?php echo strip_tags($_value->description) ?></div>
+            </div>
+        </li>
+        <?php $_nav .= '<a href="javascript: void(0);" class="b-ism-slider-pagination-item '. $_prefix . '-pagination-item" rel="nofollow" >'. ++$_i .'</a>';?>
+        <?php endforeach; ?>
+    </ul>
+    <?php if($_slider->controls): ?>
+    <a href="javascript: void(0);" class="b-ism-slider-control b-ism-slider-control-left <?php echo $_prefix . '-control' ?>" rel="nofollow" ><?php echo $this->__('Left') ?></a>
+    <a href="javascript: void(0);" class="b-ism-slider-control b-ism-slider-control-right <?php echo $_prefix . '-control' ?>" rel="nofollow" ><?php echo $this->__('Right') ?></a>
+    <?php endif; ?>
+    <?php if($_slider->pagination): ?>
+    <div class="b-ism-slider-pagination <?php echo $_prefix . '-pagination' ?>">
+        <?php echo $_nav ?>
+    </div>
+    <?php endif; ?>
+    <div class="b-ism-slider-preloader <?php echo $_prefix . '-preloader' ?>">
+        <span><?php echo $_preloadingText ?></span>
+    </div>
+</div>
+<script type="text/javascript">
+    var slider_<?php echo $_slider->slider_id ?> = new ISM.slider('#ism-slider-<?php echo $_slider->slider_id ?>', <?php echo $this->getJson() ?> || [], {
+            prefix:     <?php echo '"'.$_prefix.'"' ?>,
+            width:      <?php echo $_width ?>,
+            height:     <?php echo $_height ?>,
+            duration:   <?php echo ($_slider->duration > 0) ? $_slider->duration : 1000 ?>,
+            frequency:  <?php echo ($_slider->frequency > 0) ? $_slider->frequency : 3000 ?>,
+            autoSlide:  <?php echo $_slider->autoslide ?>,
+            controls:   <?php echo $_slider->controls ?>,
+            pagination: <?php echo $_slider->pagination ?>,
+            effect:     <?php echo '"'.$_slider->effect.'"' ?>
+            }
+    );
+</script>
+<?php endif; ?>
