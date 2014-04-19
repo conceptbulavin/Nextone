@@ -31,7 +31,7 @@
 	        <?php endif; ?>
         <?php endif; ?>
         <?php // MANA END ?>
-        <?php if (Mage::getStoreConfigFlag('mana_filters/display/count')) : ?>
+        <?php if ($this->shouldDisplayProductCount()): ?>
             (<?php echo $_item->getCount() ?>)
         <?php endif; ?>
     </li>

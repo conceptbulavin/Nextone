@@ -6,10 +6,17 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  */
+ #price-slider {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 180px;
+ }
 .slider {
   display: inline-block;
   vertical-align: middle;
   position: relative;
+  margin-left: 2px;
 }
 .slider.slider-horizontal {
   width: 210px;
@@ -70,6 +77,7 @@
 }
 .slider .tooltip-inner {
   white-space: nowrap;
+  display: none;
 }
 .slider-track {
   position: absolute;

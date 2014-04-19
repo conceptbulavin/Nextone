@@ -187,7 +187,7 @@ examples on what kind of actions can be applied to referenced blocks.
     <discounts_index_index>
         <reference name="root">
             <action method="setTemplate">
-                <template>mana/page/2columns-left.phtml</template>
+                <template>page/2columns-left-category.phtml</template>
             </action>
         </reference>
         <reference name="head">

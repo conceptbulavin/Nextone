@@ -17,7 +17,6 @@
 <?php
     $filterUrls = Mage::helper('mana_filters/url');
 ?>
-
 <ol class="m-filter-item-list <?php echo $this->getFilterOptions()->getIsReverse() ? 'm-reverse' : '' ?>">
 <?php foreach ($this->getItems() as $_item): ?>
     <li <?php if ($_item->getMShowSelected()): ?>class="m-selected-ln-item"<?php endif; ?>>
@@ -26,12 +25,12 @@
         	<span class="m-selected-filter-item"><?php echo $this->escapeHtml($_item->getLabel()) ?></span>
         <?php else : ?>
 	        <?php if ($_item->getCount() > 0): ?>
-	        <a href="#" onclick="filterItems('<?php echo $filterUrls->getFilterUrl($this->urlEscape($_item->getUrl())); ?>');return false;" title="<?php echo $this->escapeHtml($_item->getLabel()) ?>"><?php echo $this->escapeHtml($_item->getLabel()) ?></a>
+	        <a href="#" onclick="filterItems('<?php echo $filterUrls->getFilterUrl($this->urlEscape($_item->getReplaceUrl())); ?>');return false;" title="<?php echo $this->escapeHtml($_item->getLabel()) ?>"><?php echo $this->escapeHtml($_item->getLabel()) ?></a>
 	        <?php else: echo $this->escapeHtml($_item->getLabel()) ?>
 	        <?php endif; ?>
         <?php endif; ?>
         <?php // MANA END ?>
-        <?php if (Mage::getStoreConfigFlag('mana_filters/display/count')) : ?>
+        <?php if ($this->shouldDisplayProductCount()): ?>
             (<?php echo $_item->getCount() ?>)
         <?php endif; ?>
     </li>

@@ -1,21 +1,62 @@
-<dt><?php echo $this->__('Price') ?></dt>
+<dt><span class="filter-name"><?php echo $this->__('Price') ?><span class="collapse-filter"></span></span></dt>
 <dd>
-    <b><?php echo Mage::helper('core')->currency($this->_minPrice, true, false);?></b>
     <div class="slider slider-horizontal">
-        <input class="span2" id="priceSlider" type="text" class="span2" value="<?php echo $this->_currentMinPrice;?>,<?php echo $this->_currentMaxPrice;?>" data-slider-value="[<?php echo $this->_currentMinPrice;?>,<?php echo $this->_currentMaxPrice;?>]" data-slider-min="<?php echo $this->_minPrice;?>" data-slider-max="<?php echo $this->_maxPrice;?>" data-slider-step="1" data-slider-selection="after">
+        <input id="price-slider" type="text" value="<?php echo $this->_currentMinPrice;?>,<?php echo $this->_currentMaxPrice;?>" data-slider-value="[<?php echo $this->_currentMinPrice;?>,<?php echo $this->_currentMaxPrice;?>]" data-slider-min="<?php echo $this->_minPrice;?>" data-slider-max="<?php echo $this->_maxPrice;?>" data-slider-step="1" data-slider-selection="after">
     </div>
-    <b><?php echo Mage::helper('core')->currency($this->_maxPrice, true, false);?></b>
-    <button id="priceFilterButton"><?php echo $this->__('OK');?></button>
+    <input class="price-slider-min price-slider-input" type="text" value="<?php echo $this->_currentMinPrice;?>" />
+    <input class="price-slider-max price-slider-input" type="text" value="<?php echo $this->_currentMaxPrice;?>" />
+    <button id="price-filter-button"><?php echo $this->__('OK');?></button>
     <script>
-        jQuery('#priceSlider').slider({
-            onChange: function (v1, v2) {
-                console.log(v1, v2);
-            }
-        });
-        jQuery("#priceFilterButton").click(function()
-        {
-            var prices = (jQuery("#priceSlider").val()).split(',');
-            filterItems('<?php echo $this->getCleanPriceSliderUrl();?>min=' + prices[0] + '&max=' + prices[1]);
-        });
+        (function ($) {
+            var sliderInput = $('#price-slider'),
+                inputs = $(".price-slider-input"),
+                minInput = inputs.filter('.price-slider-min'),
+                maxInput = inputs.filter('.price-slider-max'),
+                button = $("#price-filter-button");
+
+            var parseValue = function (string) {
+                if (typeof string === "string") {
+                    return string.split(',');
+                } else {
+                    return [
+                        <?php echo $this->_currentMinPrice;?>,
+                        <?php echo $this->_currentMaxPrice;?>
+                    ]
+                }
+            };
+
+            minInput.change(function(event) {
+                var prices = parseValue(sliderInput.val()),
+                    value = $(this).val();
+
+                value =  (isFinite(value)) ? value : prices[0];
+                sliderInput.data('slider').setValue([value, prices[1]]);
+            });
+
+            maxInput.change(function(event) {
+                var prices = parseValue(sliderInput.val()),
+                    value = $(this).val();
+
+                value =  (isFinite(value)) ? value : prices[1];
+                sliderInput.data('slider').setValue([prices[0], value]);
+            });
+
+            sliderInput.slider({
+                onChange: function (min, max) {
+                    minInput.val(min);
+                    maxInput.val(max);
+                }
+            });
+
+            button.click(function() {
+                var prices = parseValue(sliderInput.val());
+
+                filterItems([
+                    '<?php echo $this->getCleanPriceSliderUrl();?>min=',
+                    prices[0], '&max=', prices[1]
+                ].join(''));
+            });
+
+        }(jQuery));
     </script>
 </dd>

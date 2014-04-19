@@ -26,7 +26,6 @@
 <?php if(!empty($_filters)): ?>
 <div class="currently">
     <?php if (Mage::helper('mana_filters')->renderHtml($this->getParentBlock(), 'currently_shopping_by')) : ?>
-    <p class="block-subtitle"><?php echo $this->__('Currently Shopping by:') ?></p>
     <?php endif; ?>
     <ol>
     <?php foreach ($_filters as $_filter): ?>

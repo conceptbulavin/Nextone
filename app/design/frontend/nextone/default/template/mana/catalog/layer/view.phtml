@@ -47,7 +47,7 @@
                 <?php if($_filter->getItemsCount()): ?>
                     <?php if($_filter->getName() == 'Category'):?>
                         <div class="category-list">
-                            <?php echo $this->getLayer()->getCurrentCategory()->getName(); ?>
+                            <div class="category-name"><?php echo $this->getLayer()->getCurrentCategory()->getName(); ?></div>
                             <?php echo $_filter->getHtml(); ?>
                         </div>
                         <?php break; ?>
@@ -62,7 +62,7 @@
                         <?php elseif($_filter->getName() == 'Category'):?>
                             <?php continue; ?>
                         <?php else:?>
-                            <dt><?php echo $this->__($_filter->getName()) ?><span class="collapse-filter"></span></dt>
+                            <dt><span class="filter-name"><?php echo $this->__($_filter->getName()) ?><span class="collapse-filter"></span></span></dt>
                             <dd><?php echo $_filter->getHtml() ?></dd>
                         <?php endif;?>
                     <?php endif; ?>
