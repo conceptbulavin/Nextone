@@ -1,11 +1,27 @@
-<dt><span class="filter-name"><?php echo $this->__('Price') ?><span class="collapse-filter"></span></span></dt>
+<?php
+    $_minDiff = $this->_currentMinPrice - $this->_minPrice;
+    $_maxDiff = $this->_currentMaxPrice - $this->_maxPrice;
+    $_isExpandedClass = "";
+    if ($_minDiff != 0 || $_maxDiff != 0) {
+        $_isExpandedClass = " m-selected-ln-item";
+    }
+?>
+<dt><span class="filter-name"><?php echo $this->__('Price') ?>
+        <span class="currency">(<?php echo Mage::app()->getStore()->getCurrentCurrencyCode() ?>)</span><span class="collapse-filter"></span></span></dt>
 <dd>
-    <div class="slider slider-horizontal">
+    <div class="slider price-slider-horizontal<?php echo $_isExpandedClass; ?>">
+        <span class="price-slider-min-price"><?php echo $this->_minPrice;?></span>
+        <span class="price-slider-max-price"><?php echo $this->_maxPrice;?></span>
         <input id="price-slider" type="text" value="<?php echo $this->_currentMinPrice;?>,<?php echo $this->_currentMaxPrice;?>" data-slider-value="[<?php echo $this->_currentMinPrice;?>,<?php echo $this->_currentMaxPrice;?>]" data-slider-min="<?php echo $this->_minPrice;?>" data-slider-max="<?php echo $this->_maxPrice;?>" data-slider-step="1" data-slider-selection="after">
     </div>
-    <input class="price-slider-min price-slider-input" type="text" value="<?php echo $this->_currentMinPrice;?>" />
-    <input class="price-slider-max price-slider-input" type="text" value="<?php echo $this->_currentMaxPrice;?>" />
-    <button id="price-filter-button"><?php echo $this->__('OK');?></button>
+    <div class="filter-actions">
+        <label for="price-slider-min"><?php echo $this->__('From');?></label>
+        <input id="price-slider-min" class="price-slider-min price-slider-input" type="text" value="<?php echo $this->_currentMinPrice;?>" />
+        <label for="price-slider-max"><?php echo $this->__('To');?></label>
+        <input class="price-slider-max price-slider-input" type="text" value="<?php echo $this->_currentMaxPrice;?>" />
+        <span class="currency"><?php echo Mage::app()->getStore()->getCurrentCurrencyCode() ?></span>
+        <button id="price-filter-button" class="button"><span><span><?php echo $this->__('OK');?></span></span></button>
+    </div>
     <script>
         (function ($) {
             var sliderInput = $('#price-slider'),

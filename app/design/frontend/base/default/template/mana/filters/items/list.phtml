@@ -23,12 +23,13 @@
     <li <?php if ($_item->getMShowSelected()): ?>class="m-selected-ln-item"<?php endif; ?>>
         <?php // MANA BEGIN ?>
         <?php if ($_item->getMSelected()): ?>
-        	<span class="m-selected-filter-item"><?php echo $this->escapeHtml($_item->getLabel()) ?></span>
+            <span class="m-selected-filter-item"><?php echo $this->escapeHtml($_item->getLabel()) ?></span>
         <?php else : ?>
-	        <?php if ($_item->getCount() > 0): ?>
-	        <a href="#" onclick="filterItems('<?php echo $filterUrls->getFilterUrl($this->urlEscape($_item->getUrl())); ?>');return false;" title="<?php echo $this->escapeHtml($_item->getLabel()) ?>"><?php echo $this->escapeHtml($_item->getLabel()) ?></a>
-	        <?php else: echo $this->escapeHtml($_item->getLabel()) ?>
-	        <?php endif; ?>
+            <?php if ($_item->getCount() > 0): ?>
+            <a href="#" onclick="filterItems('<?php echo $filterUrls->getFilterUrl($this->urlEscape($_item->getUrl())); ?>');return false;" title="<?php echo $this->escapeHtml($_item->getLabel()) ?>"><?php echo $this->escapeHtml($_item->getLabel()) ?></a>
+            <?php else: ?>
+                <span><?php echo $this->escapeHtml($_item->getLabel()) ?></span>
+            <?php endif; ?>
         <?php endif; ?>
         <?php // MANA END ?>
         <?php if (Mage::getStoreConfigFlag('mana_filters/display/count')) : ?>

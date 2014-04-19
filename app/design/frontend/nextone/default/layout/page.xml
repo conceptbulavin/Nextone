@@ -36,6 +36,7 @@ Default layout, loads most of the pages
 
             <block type="page/html_head" name="head" as="head">
                 <action method="addItem"><type>skin_js</type><name>js/jquery-1.8.2.min.js</name></action>
+                <action method="addItem"><type>skin_js</type><path>js/s2/collapsable_filters.js</path></action>
                 <action method="addJs"><script>prototype/prototype.js</script></action>
                 <action method="addJs"><script>lib/ccard.js</script></action>
                 <action method="addJs"><script>prototype/validation.js</script></action>

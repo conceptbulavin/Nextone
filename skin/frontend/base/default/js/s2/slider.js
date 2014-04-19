@@ -8,7 +8,6 @@
     };
 
     S2.slider.prototype = {
-
         init : function(options){
             this.settings = $.extend({
                 prefix: 's2',
@@ -125,7 +124,7 @@
             }
         },
 
-         paginationClickHandler : function(event){
+        paginationClickHandler : function(event){
             if(this.settings.cl.item.is(':animated') || !event) {
                 return false;
             }

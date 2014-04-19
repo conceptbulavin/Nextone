@@ -35,14 +35,14 @@
     $filterUrls = Mage::helper('mana_filters/url');
 ?>
 <?php if($this->getCollection()->getSize()): ?>
+<?php if($this->getLastPageNum() > 1): ?>
 <div class="toolbar">
     <div class="pager">
-        <?php echo $this->getPagerHtml() ?>
-        <?php if($this->getLastPageNum() > 1): ?>
         <a class="limiter" href="<?php echo $this->getLimitUrl('all')?>" title="< ?php echo $this->__('View All Products') ?>">
             <?php echo $this->__('View All') ?>
         </a>
-        <?php endif; ?>
-    </div>
+        <?php echo $this->getPagerHtml() ?>
+    </div>  
 </div>
+<?php endif; ?>
 <?php endif ?>

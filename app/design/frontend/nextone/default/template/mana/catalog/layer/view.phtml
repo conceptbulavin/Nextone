@@ -35,9 +35,12 @@
 <?php
     $filterUrls = Mage::helper('mana_filters/url');
 ?>
+<div id="loadingmask" style="display: none;">
+    <div class="loader" id="loading-mask-loader"><img src="<?php echo $this->getSkinUrl('images/mana/ajax-loader.gif');?>" alt="<?php echo $this->__('Loading...') ?>"/><?php echo $this->__('Loading...') ?></div>
+    <div id="loading-mask"></div>
+</div>
 <div class="block block-layered-nav">
-    <div class="block-content">
-        <?php echo $this->getStateHtml() ?>
+    <div class="block-content is-expanded">
         <?php if ($this->getLayer()->getState()->getFilters()): ?>
             <div class="actions"><a href="#" onclick="filterItems('<?php echo $filterUrls->getFilterUrl($this->getClearUrl()); ?>');return false;"><?php echo $this->__('Clear All') ?></a></div>
         <?php endif; ?>
