@@ -26,19 +26,12 @@ examples on what kind of actions can be applied to referenced blocks.
             </action>
         </reference>
         <reference name="left"> <!-- find left column block -->
-<!--             <block type="core/text_list" name="top.menu" as="topMenu" translate="label">
-                <label>Navigation Bar</label>
-                <block type="page/html_topmenu" name="catalog.topnav" template="page/html/topmenu.phtml"/>
-            </block>
- -->
             <remove name="catalog.leftnav"/>
-
-
-            <block type="catalog/navigation" name="leftaa" template="catalog/navigation/left.phtml" before="-"/>
             <!-- remove standard layered navigation -->
             <remove name="enterprisecatalog.leftnav"/>
             <!-- remove enterprise layered navigation -->
             <block type="mana_filters/view" name="mana.catalog.leftnav" before="-" template="mana/catalog/layer/view.phtml"/>
+            <block type="catalog/navigation" name="left.nav" template="catalog/navigation/left.phtml" before="-"/>
         </reference>
         <reference name="head">
             <action method="addCss">
