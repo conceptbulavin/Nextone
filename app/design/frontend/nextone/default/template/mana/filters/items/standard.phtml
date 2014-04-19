@@ -22,11 +22,12 @@
     <li <?php if ($_item->getMShowSelected()): ?>class="m-selected-ln-item"<?php endif; ?>>
         <?php // MANA BEGIN ?>
         <?php if ($_item->getMSelected()): ?>
-        	<span class="m-selected-filter-item"><?php echo $this->escapeHtml($_item->getLabel()) ?></span>
+            <a  class="m-selected-filter-item" onclick="filterItems('<?php echo $_item->getRemoveUrl() ?>');return false;"  href="<?php echo $_item->getRemoveUrl() ?>" title="<?php echo $this->escapeHtml($_item->getLabel()) ?>"><?php echo $this->escapeHtml($_item->getLabel()) ?></a>
         <?php else : ?>
 	        <?php if ($_item->getCount() > 0): ?>
 	        <a href="#" onclick="filterItems('<?php echo $filterUrls->getFilterUrl($this->urlEscape($_item->getReplaceUrl())); ?>');return false;" title="<?php echo $this->escapeHtml($_item->getLabel()) ?>"><?php echo $this->escapeHtml($_item->getLabel()) ?></a>
-	        <?php else: echo $this->escapeHtml($_item->getLabel()) ?>
+	        <?php else: ?>
+            <span><?php echo $this->escapeHtml($_item->getLabel()) ?></span>
 	        <?php endif; ?>
         <?php endif; ?>
         <?php // MANA END ?>

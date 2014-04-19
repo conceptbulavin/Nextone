@@ -1,11 +1,11 @@
-<?php 
+<?php
 /**
  * @category    Mana
  * @package     Mana_Filters
  * @copyright   Copyright (c) http://www.manadev.com
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-/** 
+/**
  * @author Mana Team
  */
 /* @var $this Mana_Filters_Block_Filter_Attribute */
@@ -25,12 +25,13 @@ list($rowCount, $columnCount) = $showmore->getPopupDimensions($items, $MAX_ROW_C
             <?php $_item = $items[$columnIndex * $rowCount + $rowIndex]; ?>
             <li <?php if ($_item->getMShowSelected()): ?>class="m-selected-ln-item"<?php endif; ?>>
                 <?php if ($_item->getMSelected()): ?>
-                <span class="m-selected-filter-item"><?php echo $this->escapeHtml($_item->getLabel()) ?></span>
+            <a  class="m-selected-filter-item" onclick="filterItems('<?php echo $_item->getRemoveUrl() ?>');return false;"  href="<?php echo $_item->getRemoveUrl() ?>" title="<?php echo $this->escapeHtml($_item->getLabel()) ?>"><?php echo $this->escapeHtml($_item->getLabel()) ?></a>
                 <?php else : ?>
                 <?php if ($_item->getCount() > 0): ?>
                     <a href="#" onClick="return jQuery.mShowMorePopupApply('<?php echo $_item->getSeoValue() ?>');"
                        title="<?php echo $this->escapeHtml($_item->getLabel()) ?>"><?php echo $this->escapeHtml($_item->getLabel()) ?></a>
-                    <?php else: echo $this->escapeHtml($_item->getLabel()) ?>
+                    <?php else: ?>
+                    <span><?php echo $this->escapeHtml($_item->getLabel()) ?></span>
                     <?php endif; ?>
                 <?php endif; ?>
                 <?php if ($this->shouldDisplayProductCount()): ?>
