@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <manufacturers_adminhtml_default_index>
+				<reference name="head">
+				</reference>
+        <reference name="content">
+						<!-- <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm"><params>0</params></action>
+            </block> -->
+            <block type="manufacturers/adminhtml_default" name="manufacturers" />
+        </reference>
+    </manufacturers_adminhtml_default_index>
+    
+</layout>

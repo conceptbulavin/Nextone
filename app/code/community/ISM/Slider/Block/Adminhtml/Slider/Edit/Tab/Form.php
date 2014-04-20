@@ -1,13 +1,13 @@
 <?php
 
 /**
- * S2 Slider slider edit form slider tab
+ * ISM Slider slider edit form slider tab
  *
- * @category    S2
- * @package     S2_Slider
- * @author      S2 FED Team
+ * @category    ISM
+ * @package     ISM_Slider
+ * @author      ISM FED Team
  */
-class S2_Slider_Block_Adminhtml_Slider_Edit_Tab_Form extends Mage_Adminhtml_Block_Widget_Form
+class ISM_Slider_Block_Adminhtml_Slider_Edit_Tab_Form extends Mage_Adminhtml_Block_Widget_Form
 {
     /**
      * @return Mage_Adminhtml_Block_Widget_Form
@@ -175,15 +175,17 @@ class S2_Slider_Block_Adminhtml_Slider_Edit_Tab_Form extends Mage_Adminhtml_Bloc
             ));
 
 
-        $field = $fieldset->addField('stores', 'multiselect', array(
-            'name'      => 'stores[]',
-            'label'     => Mage::helper('widget')->__('Assign to Store Views'),
-            'title'     => Mage::helper('widget')->__('Assign to Store Views'),
-            'required'  => true,
-            'values'    => Mage::getSingleton('adminhtml/system_store')->getStoreValuesForForm(false, true),
-        ));
-        $renderer = $this->getLayout()->createBlock('adminhtml/store_switcher_form_renderer_fieldset_element');
-        $field->setRenderer($renderer);
+
+            $field = $fieldset->addField('stores', 'multiselect', array(
+                'name'      => 'stores[]',
+                'label'     => Mage::helper('widget')->__('Assign to Store Views'),
+                'title'     => Mage::helper('widget')->__('Assign to Store Views'),
+                'required'  => true,
+                'values'    => Mage::getSingleton('adminhtml/system_store')->getStoreValuesForForm(false, true),
+            ));
+            $renderer = $this->getLayout()->createBlock('adminhtml/store_switcher_form_renderer_fieldset_element');
+            $field->setRenderer($renderer);
+
 
 
         if ( Mage::registry('slider_data') )

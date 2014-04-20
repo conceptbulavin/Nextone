@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Ma2_Manufacturers>
+      <active>true</active>
+      <codePool>community</codePool>
+      <version>0.1.0</version>
+    </Ma2_Manufacturers>
+  </modules>
+</config>
