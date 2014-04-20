@@ -1,0 +1,65 @@
+.b-tabs{
+    background:                         #FCFBF9;
+    margin:                             0 0 20px;
+}
+.b-tab-headers{
+    height:                             32px;
+    padding:                            9px 0 0 0;
+    margin:                             0px !important;
+    overflow:                           hidden;
+    background:                         #f6f6f6;
+}
+.b-tab-headers li{
+    float:                              left;
+    list-style:                         none;
+}
+.b-tab-headers .b-th-item{
+    margin-left:                        2px;
+    position:                           relative;
+    z-index:                            2;
+    margin-right:                       3px;
+}
+.b-tab-headers .b-th-item:first-child{
+    margin-left:                        8px;
+}
+.b-tab-headers .b-th-item a{
+    color:                              #3a3b3d;
+    font-weight:                        400;
+    background:                         #dedede;
+    font-size:                          14px;
+    text-decoration:                    none;
+    display:                            block;
+    padding:                            5px 11px 1px;
+    line-height:                        25px;
+}
+.b-tab-headers .b-th-item a:hover{
+    color:                              #000;
+}
+.b-tab-headers .b-th-item.b-th-item-active{
+    border:                             1px solid #8b8985;
+    border-bottom:                      0 none;
+}
+.b-tab-headers .b-th-item.b-th-item-active a{
+    background:                         #ccc;
+    border-bottom:                      0;
+    color:                              #3a3b3d;
+    padding:                            4px 10px 2px 10px;
+}
+.b-tabs .b-tab-item{
+    overflow:                           hidden;
+    position:                           absolute;
+    left:                               -9999px;
+    top:                                -9999px;
+    padding:                            18px 19px;
+    background:                         #fff;
+    border-width:                       1px;
+    border-style:                       solid;
+    border-color:                       #8b8985 #e2e1e0 #cac9c7 #e2e1e0;
+    text-align:                         left;
+}
+.b-tabs .b-tab-item.b-tab-item-active{
+    overflow:                           hidden;
+    position:                           relative;
+    top:                                -1px;
+    left:                               0px;
+}

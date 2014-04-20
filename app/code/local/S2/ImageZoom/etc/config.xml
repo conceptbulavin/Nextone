@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <S2_ImageZoom>
+            <version>0.1.0</version>
+        </S2_ImageZoom>
+    </modules>
+    <global>
+        <helpers>
+            <imagezoom>
+                    <class>S2_ImageZoom_Helper</class>
+            </imagezoom>
+        </helpers>
+    </global>
+    <frontend>
+        <layout> 
+            <updates>
+                <s2_imagezoom>
+                    <file>s2/imagezoom.xml</file>
+                </s2_imagezoom>
+            </updates>
+        </layout>  
+    </frontend>
+</config>

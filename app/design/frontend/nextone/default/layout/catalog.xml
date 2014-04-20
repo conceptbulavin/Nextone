@@ -170,7 +170,7 @@ Product view
         <label>Catalog Product View (Any)</label>
         <!-- Mage_Catalog -->
         <reference name="root">
-            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
         </reference>
         <reference name="head">
             <action method="addJs"><script>varien/product.js</script></action>
@@ -181,6 +181,17 @@ Product view
             <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
         </reference>
         <reference name="content">
+            <block type="core/template" name="s2.tabs" as="s2Tabs" template="s2/tabs.phtml" after="-">
+                <block type="catalog/product_view_description" name="product.description" as="description" template="catalog/product/view/description.phtml">
+                    <action method="addToParentGroup"><group>s2Tabs</group></action>
+                    <action method="setTitle" translate="value"><value>Details</value></action>
+                </block>
+                <block type="catalog/product_view_attributes" name="product.attributes" as="additional" template="catalog/product/view/attributes.phtml">
+                    <action method="addToParentGroup"><group>s2Tabs</group></action>
+                    <action method="setTitle" translate="value"><value>Additional Information</value></action>
+                </block>
+            </block>
+
             <block type="catalog/product_view" name="product.info" template="catalog/product/view.phtml">
                 <!--
                 <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/summary.phtml</template></action>
@@ -200,12 +211,7 @@ Product view
                 </block>
 
                 <block type="catalog/product_view_additional" name="product.info.additional" as="product_additional_data" />
-                <block type="catalog/product_view_description" name="product.description" as="description" template="catalog/product/view/description.phtml">
-                    <action method="addToParentGroup"><group>detailed_info</group></action>
-                </block>
-                <block type="catalog/product_view_attributes" name="product.attributes" as="additional" template="catalog/product/view/attributes.phtml">
-                    <action method="addToParentGroup"><group>detailed_info</group></action>
-                </block>
+
                 <block type="catalog/product_view" name="product.info.addto" as="addto" template="catalog/product/view/addto.phtml"/>
                 <block type="catalog/product_view" name="product.info.addtocart" as="addtocart" template="catalog/product/view/addtocart.phtml"/>
 
