@@ -86,9 +86,15 @@
                 <?php echo $this->getChildHtml('extra_buttons') ?>
             <?php endif; ?>
 
+            <?php $_attr = $_product->getResource()->getAttribute('delivery_period'); ?>
+
             <?php if ($_product->getDeliveryPeriod()):?>
             <div class="b-product-shop-delivery std">
                 <?php echo nl2br($_product->getDeliveryPeriod()) ?>
+            </div>
+            <?php elseif($_attr->getDefaultValue()): ?>
+            <div class="b-product-shop-delivery std">
+                <?php echo nl2br($_attr->getDefaultValue()) ?>
             </div>
             <?php endif;?>
 

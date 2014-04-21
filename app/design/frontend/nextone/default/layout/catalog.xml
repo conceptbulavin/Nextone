@@ -89,8 +89,9 @@ Category default layout
                     <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
                     <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
                     <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>4</count></action>
                     <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                    <action method="setColumnCount"><count>4</count></action>
                 </block>
             </block>
         </reference>
@@ -130,8 +131,9 @@ Category layered navigation layout
                     <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
                     <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
                     <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>4</count></action>
                     <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                    <action method="setColumnCount"><count>4</count></action>
                 </block>
             </block>
         </reference>
