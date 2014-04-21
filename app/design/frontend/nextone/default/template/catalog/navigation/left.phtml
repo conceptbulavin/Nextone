@@ -35,7 +35,7 @@
 <?php $_count = is_array($_categories)?count($_categories):$_categories->count(); ?>
 <?php if($_count): ?>
 <div class="block">
-    <div class="block-content1">
+    <div class="block-content is-expanded">
     <div class="category-list">
         <?php if ($this->getCurrentCategory()->getLevel() > 1): ?>
             <div class="category-name"><?php echo $this->getCurrentCategory()->getName(); ?></div>
@@ -53,7 +53,7 @@
 </div>
 <?php else: ?>
 <div class="block">
-    <div class="block-content1">
+    <div class="block-content is-expanded">
     <div class="category-list">
         <?php
           $_parentId = $this->getCurrentCategory()->getParentId();

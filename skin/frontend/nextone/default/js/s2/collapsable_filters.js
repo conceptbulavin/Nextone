@@ -6,7 +6,15 @@
                     .parent()
                     .toggleClass('is-expanded')
                     .next()
-                    .toggleClass('is-expanded');
+                    .slideToggle(200);
+            });
+
+        jQuery('.b-tabs').on('click', '.b-pdp-tabs-label',
+            function (event) {
+                jQuery(event.currentTarget)
+                    .toggleClass('is-expanded')
+                    .next()
+                    .slideToggle(200);
             });
     });
 }());

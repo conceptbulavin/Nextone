@@ -32,6 +32,18 @@ Default layout, loads most of the pages
 
     <default translate="label" module="page">
         <label>All Pages</label>
+
+
+        <remove name="sale.reorder.sidebar"/>
+        <remove name="checkout.links" />
+        <remove name="right.permanent.callout" />
+        <remove name="left.permanent.callout" />
+        <remove name="paypal.partner.right.logo" />
+        <remove name="currency" />
+        <remove name="cart_sidebar" />
+        <remove name="catalog.compare.sidebar" />
+
+
         <block type="page/html" name="root" output="toHtml" template="page/3columns.phtml">
 
             <block type="page/html_head" name="head" as="head">

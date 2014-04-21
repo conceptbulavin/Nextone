@@ -1,0 +1,21 @@
+.b-tabs {
+    margin: 0 0 20px;
+}
+.b-pdp-tabs-label {
+    cursor: pointer;
+    color: #383838;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-bottom: 1px dotted #999;
+    padding: 12px 0 2px;
+}
+.b-pdp-tabs-content {
+    display: none;
+    padding: 8px 0 15px;
+}
+.b-pdp-tabs-content.is-expanded {
+    display: block;
+}
+
+.b-pdp-tabs-label .collapse-filter { background:url(../../images/icon-arrow-right.png) 100% 0 no-repeat; display: inline-block; width: 14px; height: 17px; vertical-align: middle; margin: 0 3px; }
+.b-pdp-tabs-label.is-expanded .collapse-filter { background:url(../../images/icon-arrow-down.png) 100% 0 no-repeat; }

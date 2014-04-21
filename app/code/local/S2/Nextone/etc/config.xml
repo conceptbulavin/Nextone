@@ -2,14 +2,14 @@
 <config>
     <modules>
         <S2_Nextone>
-            <version>0.1.3</version>
+            <version>0.1.5</version>
         </S2_Nextone>
     </modules>
 
     <global>
         <helpers>
             <s2_nextone>
-                <class>S2_Nextone</class>
+                <class>S2_Nextone_Helper</class>
             </s2_nextone>
         </helpers>
         <resources>
@@ -26,7 +26,7 @@
         <layout>
             <updates>
                 <magentoce module="S2_Nextone">
-                    <file>magentoce.xml</file>
+                    <file>nextone.xml</file>
                 </magentoce>
             </updates>
         </layout>

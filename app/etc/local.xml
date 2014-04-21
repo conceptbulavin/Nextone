@@ -40,9 +40,9 @@
             </db>
             <default_setup>
                 <connection>
-                    <host><![CDATA[localhost]]></host>
+                    <host><![CDATA[127.0.0.1]]></host>
                     <username><![CDATA[root]]></username>
-                    <password><![CDATA[]]></password>
+                    <password><![CDATA[polesye]]></password>
                     <dbname><![CDATA[magento]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>

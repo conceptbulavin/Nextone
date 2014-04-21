@@ -181,23 +181,20 @@ Product view
             <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
         </reference>
         <reference name="content">
-            <block type="core/template" name="s2.tabs" as="s2Tabs" template="s2/tabs.phtml" after="-">
-                <block type="catalog/product_view_description" name="product.description" as="description" template="catalog/product/view/description.phtml">
-                    <action method="addToParentGroup"><group>s2Tabs</group></action>
-                    <action method="setTitle" translate="value"><value>Details</value></action>
-                </block>
-                <block type="catalog/product_view_attributes" name="product.attributes" as="additional" template="catalog/product/view/attributes.phtml">
-                    <action method="addToParentGroup"><group>s2Tabs</group></action>
-                    <action method="setTitle" translate="value"><value>Additional Information</value></action>
-                </block>
-            </block>
-
             <block type="catalog/product_view" name="product.info" template="catalog/product/view.phtml">
-                <!--
-                <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/summary.phtml</template></action>
-                <action method="addReviewSummaryTemplate"><type>short</type><template>review/helper/summary_short.phtml</template></action>
-                <action method="addReviewSummaryTemplate"><type>...</type><template>...</template></action>
-                -->
+                <action method="addReviewSummaryTemplate"><type>simple</type><template>review/helper/summary_simple.phtml</template></action>
+                <block type="catalog/product_view_description" name="product.description" as="description" template="catalog/product/view/description.phtml" />
+                <block type="catalog/product_view_attributes" name="product.attributes" as="additional" template="catalog/product/view/attributes.phtml" />
+
+                <block type="review/product_view_list" name="product.info.product_additional_data" as="review" template="review/product/view/list.phtml">
+                    <block type="review/form" name="product.review.form" as="review_form">
+                        <block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before" translate="label">
+                                <label>Review Form Fields Before</label>
+                                <action method="setMayBeInvisible"><value>1</value></action>
+                        </block>
+                    </block>
+                </block>
+
                 <block type="catalog/product_view_media" name="product.info.media" as="media" template="catalog/product/view/media.phtml"/>
                 <block type="core/text_list" name="alert.urls" as="alert_urls" translate="label">
                     <label>Alert Urls</label>
@@ -235,7 +232,7 @@ Product view
                     <action method="insert"><block>product.tierprices</block></action>
                     <block type="catalog/product_view" name="product.clone_prices" as="prices" template="catalog/product/view/price_clone.phtml"/>
                     <action method="append"><block>product.info.addtocart</block></action>
-                    <action method="append"><block>product.info.addto</block></action>
+                    <!-- <action method="append"><block>product.info.addto</block></action> -->
                 </block>
 
                 <block type="core/template_facade" name="product.info.container1" as="container1">
@@ -270,6 +267,12 @@ Additional block dependant on product type
                     <label>Product Extra Info</label>
                 </block>
             </block>
+            <block type="catalog/product_view_type_simple" name="product.stock" as="stock" template="catalog/product/view/type/stock/default.phtml" />
+        </reference>
+        <reference name="product.info.simple">
+            <action method="setTemplate">
+                <template>catalog/product/product_view_price.phtml</template>
+            </action>
         </reference>
     </PRODUCT_TYPE_simple>
     <PRODUCT_TYPE_configurable translate="label" module="catalog">
@@ -280,9 +283,15 @@ Additional block dependant on product type
                     <label>Product Extra Info</label>
                 </block>
             </block>
+            <block type="catalog/product_view_type_configurable" name="product.stock" as="stock" template="catalog/product/view/type/stock/default.phtml" />
         </reference>
         <reference name="product.info.options.wrapper">
             <block type="catalog/product_view_type_configurable" name="product.info.options.configurable" as="options_configurable" before="-" template="catalog/product/view/type/options/configurable.phtml"/>
+        </reference>
+        <reference name="product.info.configurable">
+            <action method="setTemplate">
+                <template>catalog/product/product_view_price.phtml</template>
+            </action>
         </reference>
     </PRODUCT_TYPE_configurable>
     <PRODUCT_TYPE_grouped translate="label" module="catalog">
@@ -293,6 +302,12 @@ Additional block dependant on product type
                     <label>Product Extra Info</label>
                 </block>
             </block>
+            <block type="catalog/product_view_type_grouped" name="product.stock" as="stock" template="catalog/product/view/type/stock/grouped.phtml" />
+        </reference>
+        <reference name="product.info.grouped">
+            <action method="setTemplate">
+                <template>catalog/product/product_view_price.phtml</template>
+            </action>
         </reference>
     </PRODUCT_TYPE_grouped>
     <PRODUCT_TYPE_virtual translate="label" module="catalog">
@@ -303,6 +318,12 @@ Additional block dependant on product type
                     <label>Product Extra Info</label>
                 </block>
             </block>
+            <block type="catalog/product_view_type_virtual" name="product.stock" as="stock" template="catalog/product/view/type/stock/default.phtml" />
+        </reference>
+        <reference name="product.info.virtual">
+            <action method="setTemplate">
+                <template>catalog/product/product_view_price.phtml</template>
+            </action>
         </reference>
     </PRODUCT_TYPE_virtual>
 

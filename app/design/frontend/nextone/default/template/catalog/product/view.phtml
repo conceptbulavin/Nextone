@@ -47,47 +47,76 @@
         </div>
 
         <div class="product-shop">
-            <div class="product-name">
-                <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+            <div class="product-info-container">
+                <div class="product-info-box">
+                    <div class="product-name">
+                        <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    </div>
+                    <div class="product-sku"><?php echo $this->__('Product number:') ?> <?php echo $_helper->productAttribute($_product, $_product->getSku(), 'sku') ?></div>
+                    <?php if ($this->canEmailToFriend()): ?>
+                        <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
+                    <?php endif; ?>
+                    <?php if (!$this->hasOptions()):?>
+                        <div class="add-to-box">
+                            <?php echo $this->getChildHtml('addto') ?>
+                        </div>
+                    <?php elseif (!$_product->isSaleable()): ?>
+                        <div class="add-to-box">
+                            <?php echo $this->getChildHtml('addto') ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="prodcut-price-box">
+                    <?php echo $this->getChildHtml('alert_urls') ?>
+                    <?php echo $this->getChildHtml('product_type_data') ?>
+                    <?php echo $this->getTierPriceHtml() ?>
+                    <?php echo $this->getChildHtml('extrahint') ?>
+                </div>
             </div>
 
-            <?php if ($this->canEmailToFriend()): ?>
-                <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
-            <?php endif; ?>
 
-            <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-            <?php echo $this->getChildHtml('alert_urls') ?>
-            <?php echo $this->getChildHtml('product_type_data') ?>
-            <?php echo $this->getTierPriceHtml() ?>
-            <?php echo $this->getChildHtml('extrahint') ?>
+            <?php echo $this->getChildHtml('stock') ?>
 
             <?php if (!$this->hasOptions()):?>
                 <div class="add-to-box">
                     <?php if($_product->isSaleable()): ?>
                         <?php echo $this->getChildHtml('addtocart') ?>
-                        <?php if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
-                            <span class="or"><?php echo $this->__('OR') ?></span>
-                        <?php endif; ?>
                     <?php endif; ?>
-                    <?php echo $this->getChildHtml('addto') ?>
                 </div>
                 <?php echo $this->getChildHtml('extra_buttons') ?>
-            <?php elseif (!$_product->isSaleable()): ?>
-                <div class="add-to-box">
-                    <?php echo $this->getChildHtml('addto') ?>
-                </div>
             <?php endif; ?>
 
-            <?php if ($_product->getShortDescription()):?>
-                <div class="short-description">
-                    <h2><?php echo $this->__('Quick Overview') ?></h2>
-                    <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
-                </div>
+            <?php if ($_product->getDeliveryPeriod()):?>
+            <div class="b-product-shop-delivery std">
+                <?php echo nl2br($_product->getDeliveryPeriod()) ?>
+            </div>
             <?php endif;?>
 
             <?php echo $this->getChildHtml('other');?>
-            <?php echo $this->getChildHtml('ismTabs') ?>
-            <?php echo $this->getChildHtml('s2.tabs') ?>
+
+            <?php
+                $_cms = ['delivery_and_payment', 'exchange', 'warranty', 'service'];
+                $_blocks = array();
+
+                $_blocks[$this->__('Description')] = $_blocks[] = $this->getChildHtml('description');
+                $_blocks[$this->__('Attributes')] = $_blocks[] = $this->getChildHtml('additional');
+                foreach ($_cms as $key => $value) {
+                    $block = Mage::getModel('cms/block')->load($value);
+                    $_blocks[$block->getTitle()] = $block->getContent();
+                }
+                $_blocks[$this->getReviewsSummaryHtml($_product, 'simple', true)] = $this->getChildHtml('review');
+            ?>
+
+            <dl class="b-tabs b-pdp-tabs">
+            <?php
+                $i = 0;
+                foreach ($_blocks as $_label => $_html): ?>
+            <?php if ($_label && $_html): ?>
+                <dt class="b-pdp-tabs-label<?php if($i == 0):?> is-expanded<?php endif; ?>"><?php echo $_label; ?><span class="collapse-filter"></span></dt>
+                <dd class="b-pdp-tabs-content<?php if($i++ == 0):?> is-expanded<?php endif; ?>"><?php echo $_html; ?></dd>
+            <?php endif; ?>
+            <?php endforeach; ?>
+            </dl>
 
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                 <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
@@ -104,6 +133,7 @@
             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
         <?php endif;?>
     </form>
+    <?php echo $this->getChildHtml('s2Tabs'); ?>
     <script type="text/javascript">
     //<![CDATA[
         var productAddToCartForm = new VarienForm('product_addtocart_form');
