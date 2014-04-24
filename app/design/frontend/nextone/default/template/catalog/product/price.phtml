@@ -210,7 +210,7 @@
 
         <?php if ($_weeeTaxAmount && $_weeeHelper->typeOfDisplay($_product, 0)): // including ?>
             <p class="old-price">
-                <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
+                <span class="price-label"><?php echo $this->__('Regular Price') ?></span>
                 <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
                     <?php echo $_coreHelper->currency($_regularPrice + $_originalWeeeTaxAmount, true, false) ?>
                 </span>
@@ -218,7 +218,7 @@
 
             <?php if ($_taxHelper->displayBothPrices()): ?>
                 <p class="special-price">
-                    <span class="price-label"><?php echo $this->__('Special Price:') ?></span>
+                    <span class="price-label"><?php echo $this->__('Special Price') ?></span>
                     <span class="price-excluding-tax">
                         <span class="label"><?php echo $this->helper('tax')->__('Excl. Tax:') ?></span>
                         <span class="price" id="price-excluding-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -234,7 +234,7 @@
                 </p>
             <?php else: ?>
             <p class="special-price">
-                <span class="price-label"><?php echo $this->__('Special Price:') ?></span>
+                <span class="price-label"><?php echo $this->__('Special Price') ?></span>
                 <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
                     <?php echo $_coreHelper->currency($_finalPrice + $_weeeTaxAmountInclTaxes, true, false) ?>
                 </span>
@@ -249,14 +249,14 @@
             </p>
         <?php elseif ($_weeeTaxAmount && $_weeeHelper->typeOfDisplay($_product, 1)): // incl. + weee ?>
             <p class="old-price">
-                <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
+                <span class="price-label"><?php echo $this->__('Regular Price') ?></span>
                 <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
                     <?php echo $_coreHelper->currency($_regularPrice + $_originalWeeeTaxAmount, true, false) ?>
                 </span>
             </p>
 
             <p class="special-price">
-                <span class="price-label"><?php echo $this->__('Special Price:') ?></span>
+                <span class="price-label"><?php echo $this->__('Special Price') ?></span>
                 <span class="price-excluding-tax">
                     <span class="label"><?php echo $this->helper('tax')->__('Excl. Tax:') ?></span>
                     <span class="price" id="price-excluding-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -277,23 +277,16 @@
                 </span>
             </span>
             </p>
-
-            <p class="action-price">
-                <span class="price-label"><?php echo $this->__('Discount:') ?></span>
-                <span class="price" id="action-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
-                    <?php echo $this->helper('s2_nextone')->getActionPrice($_product->getPrice(), $_product->getSpecialPrice()) . $this->__('%') . '&nbsp;' ?> ?>
-                </span>
-            </p>
         <?php elseif ($_weeeTaxAmount && $_weeeHelper->typeOfDisplay($_product, 4)): // incl. + weee ?>
             <p class="old-price">
-                <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
+                <span class="price-label"><?php echo $this->__('Regular Price') ?></span>
                 <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
                     <?php echo $_coreHelper->currency($_regularPrice + $_originalWeeeTaxAmount, true, false) ?>
                 </span>
             </p>
 
             <p class="special-price">
-                <span class="price-label"><?php echo $this->__('Special Price:') ?></span>
+                <span class="price-label"><?php echo $this->__('Special Price') ?></span>
                 <span class="price-excluding-tax">
                     <span class="label"><?php echo $this->helper('tax')->__('Excl. Tax:') ?></span>
                     <span class="price" id="price-excluding-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -314,23 +307,16 @@
                 </span>
             </span>
             </p>
-
-            <p class="action-price">
-                <span class="price-label"><?php echo $this->__('Discount:') ?></span>
-                <span class="price" id="action-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
-                    <?php echo '-'.$this->helper('s2_nextone')->getActionPrice($_product->getPrice(), $_product->getSpecialPrice()) . $this->__('%') . '&nbsp;' ?>
-                </span>
-            </p>
         <?php elseif ($_weeeTaxAmount && $_weeeHelper->typeOfDisplay($_product, 2)): // excl. + weee + final ?>
             <p class="old-price">
-                <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
+                <span class="price-label"><?php echo $this->__('Regular Price') ?></span>
                 <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
                     <?php echo $_coreHelper->currency($_regularPrice, true, false) ?>
                 </span>
             </p>
 
             <p class="special-price">
-                <span class="price-label"><?php echo $this->__('Special Price:') ?></span>
+                <span class="price-label"><?php echo $this->__('Special Price') ?></span>
                 <span class="price-excluding-tax">
                     <span class="label"><?php echo $this->helper('tax')->__('Excl. Tax:') ?></span>
                     <span class="price" id="price-excluding-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -349,16 +335,9 @@
                     </span>
                 </span>
             </p>
-
-            <p class="action-price">
-                <span class="price-label"><?php echo $this->__('Discount:') ?></span>
-                <span class="price" id="action-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
-                    <?php echo '-'.$this->helper('s2_nextone')->getActionPrice($_product->getPrice(), $_product->getSpecialPrice()) . $this->__('%') . '&nbsp;' ?>
-                </span>
-            </p>
         <?php else: // excl. ?>
             <p class="old-price">
-                <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
+                <span class="price-label"><?php echo $this->__('Regular Price') ?></span>
                 <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
                     <?php echo $_coreHelper->currency($_regularPrice, true, false) ?>
                 </span>
@@ -366,7 +345,7 @@
 
             <?php if ($_taxHelper->displayBothPrices()): ?>
                 <p class="special-price">
-                    <span class="price-label"><?php echo $this->__('Special Price:') ?></span>
+                    <span class="price-label"><?php echo $this->__('Special Price') ?></span>
                     <span class="price-excluding-tax">
                         <span class="label"><?php echo $this->helper('tax')->__('Excl. Tax:') ?></span>
                         <span class="price" id="price-excluding-tax-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -382,19 +361,12 @@
                 </p>
             <?php else: ?>
             <p class="special-price">
-                <span class="price-label"><?php echo $this->__('Special Price:') ?></span>
+                <span class="price-label"><?php echo $this->__('Special Price') ?></span>
                 <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
                     <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>
                 </span>
             </p>
             <?php endif; ?>
-
-            <p class="action-price">
-                <span class="price-label"><?php echo $this->__('Discount:') ?></span>
-                <span class="price" id="action-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
-                    <?php echo '-'.$this->helper('s2_nextone')->getActionPrice($_product->getPrice(), $_product->getSpecialPrice()) . $this->__('%') . '&nbsp;' ?>
-                </span>
-            </p>
         <?php endif; ?>
 
     <?php endif; /* if ($_finalPrice == $_price): */ ?>

@@ -190,6 +190,7 @@ Product view
 
                 <block type="review/product_view_list" name="product.info.product_additional_data" as="review" template="review/product/view/list.phtml">
                     <block type="review/form" name="product.review.form" as="review_form">
+                        <action method="setTemplate"><path>review/form_clone.phtml</path></action>
                         <block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before" translate="label">
                                 <label>Review Form Fields Before</label>
                                 <action method="setMayBeInvisible"><value>1</value></action>
@@ -251,6 +252,12 @@ Product view
                 </block>
                 <action method="unsetCallChild"><child>container1</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>
                 <action method="unsetCallChild"><child>container2</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>
+            </block>
+            <block type="review/form" name="product.review.form" as="review_form">
+                <block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before" translate="label">
+                        <label>Review Form Fields Before</label>
+                        <action method="setMayBeInvisible"><value>1</value></action>
+                </block>
             </block>
         </reference>
         <reference name="right">
