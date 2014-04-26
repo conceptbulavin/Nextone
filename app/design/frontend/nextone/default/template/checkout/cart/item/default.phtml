@@ -229,11 +229,12 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
     <script type="text/javascript">
 
 
+
         function  changeQty(item){
             element = 'cart[' + item +'][qty]';
             idchange='span-'+item;
             qty = document.getElementById(element).value;
-            jQuery.post("/ajax.php", {
+            jQuery.post("<?php echo Mage::getBaseUrl(); ?>/ajax.php", {
                 item: item,
                 qty: qty
 
