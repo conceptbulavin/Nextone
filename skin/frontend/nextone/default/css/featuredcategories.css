@@ -43,8 +43,8 @@
     min-height: 270px;
     height: auto !important;
     position: absolute;
-    top: -0px;
-    left: -50px;
+    top: -1px;
+    left: -1px;
     z-index: 100;
     background: #FFF;
     border: solid 1px #dadada !important;
@@ -71,6 +71,9 @@
 	text-align: center;
     margin-bottom: 10px;
 }
+
+.featured-cat:hover .cat-image { margin-right: 30px}
+
 
 .featured-cat .cat-image img {
 	width: 45px;
@@ -160,8 +163,6 @@
 }
 
 
-.std .category-list-home > .featured-cat:first-child:hover .wrap-cat{
-   left: 0;
-}
+
 
 

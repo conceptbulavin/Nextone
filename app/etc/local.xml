@@ -42,7 +42,7 @@
                 <connection>
                     <host><![CDATA[127.0.0.1]]></host>
                     <username><![CDATA[root]]></username>
-                    <password><![CDATA[polesye]]></password>
+                    <password><![CDATA[]]></password>
                     <dbname><![CDATA[magento]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>

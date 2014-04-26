@@ -84,6 +84,26 @@ class Mage_Checkout_Block_Cart extends Mage_Checkout_Block_Cart_Abstract
         }
     }
 
+
+    public function _prepareLayout()
+    {
+        parent::_prepareLayout();
+        $breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
+        if ($breadcrumbs) {
+            $title = $this->__('Checkout');
+
+            $breadcrumbs->addCrumb('home', array(
+                'label' => $this->__('Home'),
+                'title' => $this->__('Go to Home Page'),
+                'link' => Mage::getBaseUrl()
+            ))->addCrumb('item', array(
+                    'label' => $title,
+                    'title' => $title,
+                ));
+        }
+        return $this;
+    }
+
     public function chooseTemplate()
     {
         $itemsCount = $this->getItemsCount() ? $this->getItemsCount() : $this->getQuote()->getItemsCount();
