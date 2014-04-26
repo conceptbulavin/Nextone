@@ -7,13 +7,13 @@
             </ma2all>
         </updates>
     </layout>
-      <menu>
-        <ma2 translate="title" module="ma2all">
-          <title>MA2</title>
-          <sort_order>89</sort_order>
-        </ma2>
-      </menu>
-      
+      <!--<menu>-->
+        <!--<ma2 translate="title" module="ma2all">-->
+          <!--<title>MA2</title>-->
+          <!--<sort_order>89</sort_order>-->
+        <!--</ma2>-->
+      <!--</menu>-->
+
       <acl>
           <resources>
               <all>
