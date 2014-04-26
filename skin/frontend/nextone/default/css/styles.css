@@ -294,7 +294,7 @@ input.input-text:focus,select:focus,textarea:focus { background-color:#edf7fd; }
 .form-list .customer-dob .dob-year input.input-text { width:134px; }*/
 
 .buttons-set { clear:both; margin:0; padding:8px 0 0; text-align:right; }
-.buttons-set p.required { margin:0 0 10px; }
+.buttons-set p.required { margin:0 0 10px; display: none; }
 .buttons-set .back-link { float:left; margin:0; }
 .buttons-set button.button { float:right; margin-left:5px; }
 
@@ -2182,3 +2182,7 @@ button.button:hover {
 
 .ico-prev{left:0; background: url("../images/pointer-l.png") 100% 50% no-repeat;}
 .ico-next{right:0; background: url("../images/pointer.png") 100% 50% no-repeat;}
+.cms-page-view .page-title { text-align: center }
+button.button.btn-big > span{ height: 33px; font-size: 14px; line-height: 33px; padding: 0 33px; text-transform: none; }
+
+.buttons-set button.button.btn-big.f-left { margin: 0 5px 0 0; }
