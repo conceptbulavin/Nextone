@@ -74,16 +74,12 @@
         </fieldset>
     </form>
     <div class="cart-collaterals">
-        <div class="col2-set">
-            <div class="col-1">
-                <?php echo $this->getChildHtml('crosssell') ?>
-            </div>
-
-        </div>
         <div class="totals">
             <?php echo $this->getChildHtml('totals'); ?>
             <button type="button" title="Продолжить заказ" class="button totals-checkout" onclick="window.location='/checkout/onepage/';"><span><span>Продолжить заказ</span></span></button>
         </div>
+        <div class="clearer"><!-- --></div>
+        <?php echo $this->getChildHtml('crosssell') ?>
     </div>
 </div>
 

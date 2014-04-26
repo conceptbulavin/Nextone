@@ -924,7 +924,9 @@ button.button:hover {
 .products-grid { margin-bottom: 10px; }
 .products-grid.last { border-bottom:0; }
 .products-grid li.item { float:left; width:186px; padding:0 0 15px; border: 1px solid #ddd; margin-left: 10px; text-align: center; }
+.products-grid li.item:first-child,
 .products-grid li.item.first {  margin-left: 0; }
+.products-grid li .product-details {  overflow: hidden; text-overflow: ellipsis; padding: 0 10px; }
 .products-grid .product-image { display:block; width:186px; height:186px; margin:0 0 10px; }
 .products-grid .product-name { margin:0 0 5px; font-weight:bold; font-size:14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .products-grid .product-name a { color:#1d1d1b; text-decoration: none; }
@@ -1349,14 +1351,8 @@ button.button:hover {
 .cart .cart-collaterals .col2-set { float:left; width:605px; }
 .cart .cart-collaterals .col2-set .col-2 { width:294px; }
 
-.cart .crosssell { border:1px solid #cec3b6; background:#fafaec; padding:12px 15px; }
-.cart .crosssell h2 { font-size:13px; font-weight:bold; }
-.cart .crosssell .product-image { float:left; width:75px; height:75px; border:1px solid #d0cdc9; }
-.cart .crosssell .product-details { margin-left:90px; }
-.cart .crosssell .product-name { font-weight:bold; }
-.cart .crosssell li.item { margin:12px 0; }
-.cart .crosssell .link-compare { font-weight:normal; }
-
+.cart .crosssell { margin-top: 30px; }
+.cart .crosssell h2 { font-size: 16px; background: url(../images/bkg_divider1.gif) 0 100% repeat-x; padding: 0 0 3px; margin: 0 0 8px; }
 /* Discount Codes & Estimate Shipping and Tax Boxes */
 .cart .discount,
 .cart .shipping { border:1px solid #d0cbc1; background:#fff url(../images/bkg_block-title.gif) 0 0 repeat-x; padding:12px 15px; margin:0 0 18px; }
