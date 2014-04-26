@@ -1,7 +1,15 @@
 <?php
-require_once('/app/Mage.php'); // ABSOLUTH PATH TO MAGE
+$mageFilename = getcwd() . '/app/Mage.php';
+
+if (!file_exists($mageFilename)) {
+    echo 'Mage file not found';
+    exit;
+}
+require $mageFilename;
+
 umask(0);
-Mage::app ();
+
+Mage::app();
 
 Mage::getSingleton('core/session', array('name'=>'frontend'));   // GET THE SESSION
 $simbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();  // GET THE CURRENCY SIMBOL
