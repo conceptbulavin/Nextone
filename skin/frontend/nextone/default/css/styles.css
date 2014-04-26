@@ -1405,7 +1405,7 @@ button.button:hover {
 .cartQty{margin: 10px 0 0px;}
 
 
-.plus, .minus{
+.cartQty .plus, .cartQty .minus{
     float: left;
     border: 0;
     background: none;
@@ -1417,8 +1417,8 @@ button.button:hover {
 }
 
 
-.minus { font-size: 19px; padding: 0px 7px;}
-.input-text.qty{float: left; text-align: center; width: 42px !important;  padding: 2px 10px;}
+.cartQty .minus { font-size: 19px; padding: 0px 7px;}
+.cartQty .input-text.qty{float: left; text-align: center; width: 42px !important;  padding: 2px 10px;}
 
 
 /* Options Tool Tip */
