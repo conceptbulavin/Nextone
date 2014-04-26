@@ -3,3 +3,7 @@
 "Mage_Catalog::Special Price", "Ваша цена"
 "Buy", "Купить"
 "Choose qty", "Выберите колличество"
+"Address to deliver:", "Адресс доставки Ваших заказов:"
+"Email Address", "E-mail:"
+"Mage_Customer::Email Address", "E-mail:"
+"Mage_Customer::Confirm New Password", "Повторите пароль"

@@ -138,8 +138,8 @@ ul,ol         { list-style:none; }
 /* Global Styles ========================================================================= */
 /* Form Elements */
 input,select,textarea,button { font:12px/15px Arial, Helvetica, sans-serif; vertical-align:middle; color:#2f2f2f; }
-input.input-text,select,textarea { background:#fff; border:1px solid #b6b6b6; }
-input.input-text,textarea { padding:2px; }
+input.input-text,select,textarea { background:#fff; border:1px solid #b6b6b6;}
+input.input-text,textarea { padding:5px 10px; }
 select { padding:1px; }
 select option { padding-right:10px; }
 select.multiselect option { border-bottom:1px solid #b6b6b6; padding:2px 5px; }
@@ -169,21 +169,26 @@ input.input-text:focus,select:focus,textarea:focus { background-color:#edf7fd; }
 /* Form lists */
 /* Grouped fields */
 /*.form-list { width:535px; margin:0 auto; overflow:hidden; }*/
+.form-list input.input-text,
+.form-list select,
+.form-list textarea { box-sizing: border-box; }
 .form-list li { margin:0 0 8px; }
-.form-list label { float:left; position:relative; z-index:0; font-weight: 700; color: #4f4f4f; }
+.form-list label { display:inline-block; position:relative; z-index:0; font-weight: 700; color: #4f4f4f; width: 65px; margin-right: 7px; overflow: hidden; text-overflow: ellipsis; vertical-align: top; padding-top: 3px; }
 .form-list label.required {}
 .form-list label.required em { float:right; font-style:normal; color:#eb340a; position:absolute; top:0; right:-8px; }
-.form-list li.control label { float:none; }
+.form-list li.control label { float:none; width: auto; }
 .form-list li.control input.radio,
 .form-list li.control input.checkbox { margin-right:6px; }
 .form-list li.control .input-box { clear:none; display:inline; width:auto; }
 /*.form-list li.fields { margin-right:-15px; }*/
-.form-list .input-box { display:block; clear:both; width:260px; }
-.form-list .field { float:left; width:275px; }
-.form-list input.input-text { width:254px; }
-.form-list textarea { width:254px; height:10em; }
-.form-list select { width:260px; }
+.form-list .input-box { display:inline-block; width:176px; }
+.form-list .field { float:left; width:285px; }
+.form-list input.input-text { width:168px; }
+.form-list textarea { width:168px; height:10em; }
+.form-list select { width:168px; }
 .form-list li.wide .input-box { width:535px; }
+.form-list li.wide label + .input-box { margin-top: 5px; }
+.form-list li.wide label {display: block; width: auto;}
 .form-list li.wide input.input-text { width:529px; }
 .form-list li.wide textarea { width:529px; }
 .form-list li.wide select { width:535px; }
