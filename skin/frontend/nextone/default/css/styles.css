@@ -293,7 +293,7 @@ input.input-text:focus,select:focus,textarea:focus { background-color:#edf7fd; }
 .form-list .customer-dob .dob-year { width:140px; }
 .form-list .customer-dob .dob-year input.input-text { width:134px; }*/
 
-.buttons-set { clear:both; margin:4em 0 0; padding:8px 0 0; text-align:right; }
+.buttons-set { clear:both; margin:0; padding:8px 0 0; text-align:right; }
 .buttons-set p.required { margin:0 0 10px; }
 .buttons-set .back-link { float:left; margin:0; }
 .buttons-set button.button { float:right; margin-left:5px; }
@@ -2075,3 +2075,14 @@ button.button:hover {
 .product-info-container .price { font-size: 18px; }
 .product-info-container .action-price .price-label { color: #008ff8; }
 .product-info-container .action-price .price { font-weight: bold; }
+.a-center { text-align: center; }
+#contact_form .fieldset .legend { font-size: 18px; color: #008ff8; }
+#contact_form .form-list input.input-text,
+#contact_form .form-list textarea { width: 289px; border-color: #ddd; box-shadow: inset 1px 0 1px rgba(0, 0, 0, .11) }
+#contact_form .form-list input.input-text { height: 30px; }
+#contact_form .form-list li.wide .input-box,
+#contact_form .form-list .wide input.input-text,
+#contact_form .form-list .wide textarea { width: 100%; }
+.form-list .captcha-input-box label { font-weight: 400; color: #000; }
+.form-list .captcha-input-box { margin: 25px 0 15px; }
+.form-list .input-box.captcha{ margin: 10px 15px; }

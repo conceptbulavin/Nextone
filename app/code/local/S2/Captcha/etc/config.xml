@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config>
+  <global>
+    <events>
+      <controller_action_predispatch_contacts_index_index>
+        <observers>
+          <s2_captcha>
+            <class>captcha/observer</class>
+            <method>checkCaptcha</method>
+          </s2_captcha>
+        </observers>
+      </controller_action_predispatch_contacts_index_index>
+    </events>
+    <models>
+          <captcha>
+              <rewrite>
+                  <s2_captcha>S2_Captcha_Model_Observer</s2_captcha>
+              </rewrite>
+          </captcha>
+       </models>
+  </global>
+  <default>
+    <captcha>
+      <frontend>
+        <areas>
+          <contact_form>
+            <label>Contact Form</label>
+          </contact_form>
+        </areas>
+      </frontend>
+    </captcha>
+    <customer>
+      <captcha>
+        <always_for>
+          <contact_form>1</contact_form>
+        </always_for>
+      </captcha>
+    </customer>
+  </default>
+</config>
