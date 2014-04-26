@@ -1698,14 +1698,14 @@ button.button:hover {
 /********** Dashboard > */
 
 /* Address Book */
-.addresses-list h2 { font-weight:bold; font-size:13px; color:#e26703; text-transform:uppercase; }
-.addresses-list h3 { font-weight:bold; font-size:13px; }
+.addresses-list h2 { font-weight:bold; font-size:13px; background: url(../images/bkg_divider1.gif) 0 100% repeat-x; padding-bottom: 3px; }
+.addresses-list h3 { font-weight:bold; font-size:11px; text-transform: uppercase; }
 .addresses-list address { margin:0 0 3px; }
 .addresses-list p { margin:0; }
 .addresses-list a { font-weight:bold; }
 .addresses-list .link-remove { color:#646464; }
 .addresses-list .separator { margin:0 3px; }
-.addresses-list li.item { background:#fff url(../images/bkg_account_box.gif) 0 0 repeat-x; border:1px solid #ccc; padding:10px 13px; margin:0 0 10px; }
+.addresses-list li.item { padding:10px 0; margin:0 0 10px; }
 .addresses-list li.empty { background:none; border:0; padding:0; }
 .addresses-list li.empty p { font-weight:bold; }
 .addresses-list .addresses-additional li.item { background:none; border:0; padding:0; }
@@ -2060,7 +2060,7 @@ button.button:hover {
 .product-view .product-shop .price-box span { display: table-cell; }
 .product-info-container .price-label { text-align: right; padding-right: 25px; }
 
-.product-info-container { border-bottom: 1px dotted #999; display: table; width: 100%; }
+.product-info-container { background: url(../images/bkg_divider1.gif) 0 100% repeat-x; display: table; width: 100%; }
 .prodcut-price-box { display: table-cell; padding-left: 25px; }
 .product-info-box { display: table-cell; }
 .product-info-box > div { overflow: hidden; text-overflow: ellipsis; max-width: 250px; }

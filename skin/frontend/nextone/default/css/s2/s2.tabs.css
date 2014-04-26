@@ -6,7 +6,7 @@
     color: #383838;
     font-size: 14px;
     text-transform: uppercase;
-    border-bottom: 1px dotted #999;
+    background: url(../../images/bkg_divider1.gif) 0 100% repeat-x;
     padding: 12px 0 2px;
 }
 .b-pdp-tabs-content {

@@ -96,6 +96,17 @@ Layout for customer login page
         <reference name="content">
             <block type="customer/form_login" name="customer_form_login" template="customer/form/login.phtml" />
         </reference>
+
+        <reference name="breadcrumbs">
+            <action method="addCrumb">
+                <crumbName>home</crumbName>
+                <crumbInfo><label>Home</label><title>Go to Home Page</title><link>/</link> <translate>true</translate></crumbInfo>
+            </action>
+            <action method="addCrumb">
+                <crumbName>account-login</crumbName>
+                <crumbInfo><label>Login or Create an Account</label><title>Login or Create an Account</title><translate>true</translate><last>true</last></crumbInfo>
+            </action>
+        </reference>
     </customer_account_login>
 
 <!--
@@ -113,6 +124,17 @@ Layout for customer log out page
         </reference>
         <reference name="content">
             <block type="core/template" name="customer_logout" template="customer/logout.phtml"/>
+        </reference>
+
+        <reference name="breadcrumbs">
+            <action method="addCrumb">
+                <crumbName>home</crumbName>
+                <crumbInfo><label>Home</label><title>Go to Home Page</title><link>/</link> <translate>true</translate></crumbInfo>
+            </action>
+            <action method="addCrumb">
+                <crumbName>You are now logged out</crumbName>
+                <crumbInfo><label>You are now logged out</label><title>You are now logged out</title><translate>true</translate><last>true</last></crumbInfo>
+            </action>
         </reference>
     </customer_account_logoutsuccess>
 
@@ -136,12 +158,33 @@ New customer registration
                 </block>
             </block>
         </reference>
+        <reference name="breadcrumbs">
+            <action method="addCrumb">
+                <crumbName>home</crumbName>
+                <crumbInfo><label>Home</label><title>Go to Home Page</title><link>/</link> <translate>true</translate></crumbInfo>
+            </action>
+            <action method="addCrumb">
+                <crumbName>account-create</crumbName>
+                <crumbInfo><label>Create an Account</label><title>Create an Account</title><translate>true</translate><last>true</last></crumbInfo>
+            </action>
+        </reference>
     </customer_account_create>
 
     <customer_account_forgotpassword translate="label">
         <label>Customer Forgot Password Form</label>
         <remove name="right"/>
         <remove name="left"/>
+
+        <reference name="breadcrumbs">
+            <action method="addCrumb">
+                <crumbName>home</crumbName>
+                <crumbInfo><label>Home</label><title>Go to Home Page</title><link>/</link> <translate>true</translate></crumbInfo>
+            </action>
+            <action method="addCrumb">
+                <crumbName>account-forgot</crumbName>
+                <crumbInfo><label>Forgot Your Password?</label><title>Forgot Your Password?</title><translate>true</translate><last>true</last></crumbInfo>
+            </action>
+        </reference>
 
         <reference name="head">
             <action method="setTitle" translate="title" module="customer"><title>Forgot Your Password</title></action>
@@ -160,6 +203,17 @@ New customer registration
         <label>Reset a Password</label>
         <remove name="right"/>
         <remove name="left"/>
+
+        <reference name="breadcrumbs">
+            <action method="addCrumb">
+                <crumbName>home</crumbName>
+                <crumbInfo><label>Home</label><title>Go to Home Page</title><link>/</link> <translate>true</translate></crumbInfo>
+            </action>
+            <action method="addCrumb">
+                <crumbName>account-reset</crumbName>
+                <crumbInfo><label>Reset Your Password</label><title>Reset Your Password</title><translate>true</translate><last>true</last></crumbInfo>
+            </action>
+        </reference>
 
         <reference name="head">
             <action method="setTitle" translate="title" module="customer">
@@ -201,10 +255,6 @@ New customer registration
         <reference name="my.account.wrapper">
             <block type="customer/form_edit" name="customer_edit" template="customer/form/edit.phtml"/>
         </reference>
-
-        <reference name="left">
-          <action method="unsetChild"><name>left.permanent.callout</name></action>
-        </reference>
     </customer_account_edit>
 
 <!--
@@ -219,7 +269,16 @@ Customer account pages, rendered for all tabs in dashboard
         <reference name="root">
             <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
         </reference>
-
+        <reference name="breadcrumbs">
+            <action method="addCrumb">
+                <crumbName>home</crumbName>
+                <crumbInfo><label>Home</label><title>Go to Home Page</title><link>/</link> <translate>true</translate></crumbInfo>
+            </action>
+            <action method="addCrumb">
+                <crumbName>my-account</crumbName>
+                <crumbInfo><label>My Account</label><title>My Account</title><translate>true</translate><last>true</last></crumbInfo>
+            </action>
+        </reference>
         <reference name="content">
             <block type="page/html_wrapper" name="my.account.wrapper" translate="label">
                 <label>My Account Wrapper</label>
