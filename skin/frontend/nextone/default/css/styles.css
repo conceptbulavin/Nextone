@@ -357,6 +357,7 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
 
 /* BreadCrumbs */
 .breadcrumbs { font-size:14px; line-height:1.25; margin:0 0 13px; background:url(../images/bkg_divider1.gif) 0 100% repeat-x; padding: 1px 2px 2px; }
+.col2-left-category .breadcrumbs { margin-top: 10px; }
 .breadcrumbs li { display:inline; vertical-align: middle; }
 .breadcrumbs li a { color: #222220; text-decoration: none; }
 .breadcrumbs li a:hover { color: #008ff8; }
