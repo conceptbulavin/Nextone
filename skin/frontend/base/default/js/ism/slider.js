@@ -1,17 +1,43 @@
 (function($){
-    window.S2 = window.S2 || {};
+    window.ISM = window.ISM || {};
 
-    S2.slider = function(element, slides, options){
+    (function() {
+        var lastTime = 0;
+        var vendors = ['ms', 'moz', 'webkit', 'o'];
+        for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+            window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']||
+                                        window[vendors[x]+'CancelRequestAnimationFrame'];
+        }
+
+        if (!window.requestAnimationFrame)
+            window.requestAnimationFrame = function(callback, element) {
+                var currTime = new Date().getTime(),
+                    timeToCall = Math.max(0, 16 - (currTime - lastTime));
+
+                lastTime = currTime + timeToCall;
+                return window.setTimeout(function() { callback(currTime + timeToCall); },
+                  timeToCall);
+            };
+
+        if (!window.cancelAnimationFrame)
+            window.cancelAnimationFrame = function(id) {
+                clearTimeout(id);
+            };
+    }());
+
+
+    ISM.slider = function(element, slides, options){
         this.el = $(element);
         this.slides = slides;
-        this.init(options);
+        this.initialize(options);
     };
 
-    S2.slider.prototype = {
+    ISM.slider.prototype = {
 
-        init : function(options){
+        initialize: function(options){
             this.settings = $.extend({
-                prefix: 's2',
+                prefix: 'ism',
                 duration: 1000,
                 width: 960,
                 height:  400,
@@ -22,15 +48,17 @@
                 startIndx: 0,
                 effect: 'fade',
                 cl: {
-                    item :         this.el.find('.b-s2-slider-item'),
-                    pagination :   this.el.find('.b-s2-slider-pagination-item'),
-                    leftControl :  this.el.find('.b-s2-slider-control-left'),
-                    rightControl : this.el.find('.b-s2-slider-control-right'),
-                    preloader :    this.el.find('.b-s2-slider-preloader')
+                    item:         this.el.find('.b-ism-slider-item'),
+                    pagination:   this.el.find('.b-ism-slider-pagination-item'),
+                    leftControl:  this.el.find('.b-ism-slider-control-left'),
+                    rightControl: this.el.find('.b-ism-slider-control-right'),
+                    preloader:    this.el.find('.b-ism-slider-preloader'),
+                    progress:     this.el.find('.b-ism-slider-progress')
                 }
             }, options || {});
 
             this.size = this.settings.cl.item.length;
+            this.startTime = null;
 
             if (this.settings.pagination){
                 this.settings.cl.pagination.on(
@@ -46,7 +74,9 @@
                     'click', $.proxy(this.prevSlide, this)
                 );
             }
+
             this.getSlide(this.settings.startIndx);
+
             if (this.settings.autoSlide){
                 this.runTimer();
                 this.el.on({
@@ -57,6 +87,8 @@
         },
 
         runTimer: function () {
+            this.isProgressBlocked = false;
+            this.runProgressSlider();
             this.timer =  window.setInterval(
                 $.proxy(this.nextSlide, this),
                 this.settings.frequency
@@ -64,14 +96,58 @@
         },
 
         stopTimer: function () {
+            this.isProgressBlocked = true;
+            this.stopProgressSlider();
             window.clearInterval(this.timer);
         },
 
-        getSlide : function(page){
-            if (typeof page !== 'number' || page > this.size - 1 || page < 0) {
-                return fasle;
+        getTime: function () {
+            return new Date().getTime();
+        },
+
+        runProgressSlider: function () {
+            this.progressId = requestAnimationFrame(
+                this.updateProgressSlider.bind(this)
+            );
+        },
+
+        stopProgressSlider: function () {
+            this.startTime = null;
+            window.cancelAnimationFrame(this.proggressId);
+            this.settings.cl.progress.css({
+                'width': 0
+            });
+        },
+
+        updateProgressSlider: function () {
+            var progress, timeDiff;
+
+            if (this.isProgressBlocked) {
+                return false;
             }
 
+            if (this.startTime === null) {
+                this.startTime = this.getTime();
+            }
+
+            timeDiff = this.getTime() - this.startTime;
+            progress = timeDiff * 100 / this.settings.frequency;
+
+            this.settings.cl.progress.css({
+                'width': Math.min(progress, 100) + "%"
+            });
+
+            if (progress < 100) {
+                 this.progressId = requestAnimationFrame(
+                    this.updateProgressSlider.bind(this)
+                );
+            }
+        },
+
+        getSlide: function(page){
+            if (typeof page !== 'number' || page > this.size - 1 || page < 0) {
+                return false;
+            }
             var self = this,
                 curSlide = this.slides[page],
                 callback = function(){
@@ -93,20 +169,24 @@
                         function(){
                             $(this).siblings().hide(0);
                         });
+
+                    self.runProgressSlider();
                 };
 
+            this.stopProgressSlider();
+
             if (!curSlide.loaded){
-                var img = S2.loadImage(
+                var img = ISM.loadImage(
                     curSlide.src,
                     {
                         beforeLoad: function(img){
                             self.settings.cl.preloader.show();
                             $(img).css({
-                                width: self.settings.width,
-                                height: self.settings.height
-                            })
+                                    width: self.settings.width,
+                                    height: self.settings.height
+                                })
                                 .addClass([
-                                    'b-s2-slider-item-img ',
+                                    'b-ism-slider-item-img ',
                                     self.settings.prefix, '-item-img'
                                 ].join(''));
                         },
@@ -118,14 +198,14 @@
                     });
                 self.settings.cl.item
                     .eq(page)
-                    .find('.b-s2-slider-item-link')
+                    .find('.b-ism-slider-item-link')
                     .append(img);
-            }else{
+            } else {
                 callback();
             }
         },
 
-        paginationClickHandler : function(event){
+        paginationClickHandler: function(event){
             if(this.settings.cl.item.is(':animated') || !event) {
                 return false;
             }
@@ -134,7 +214,7 @@
             this.getSlide(pageIndx);
         },
 
-        nextSlide : function(){
+        nextSlide: function(){
             if (this.settings.cl.item.is(':animated')) {
                 return false;
             }
@@ -148,7 +228,7 @@
             this.getSlide(current);
         },
 
-        prevSlide : function(){
+        prevSlide: function(){
             if (this.settings.cl.item.is(':animated')) {
                 return false;
             }

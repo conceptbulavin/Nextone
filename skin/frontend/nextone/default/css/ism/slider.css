@@ -1,7 +1,7 @@
 .b-ism-slider{
     position:               relative;
     height:                 400px;
-	width: 					960px;
+    width:                  960px;
     overflow:               hidden;
     background-color:       #f7f7f7;
     border:                 1px solid #f7f7f7;
@@ -10,36 +10,36 @@
 .b-ism-slider-list{
     margin:                 0 !important;
     padding:                0 !important;
-	position:               relative;
+    position:               relative;
 }
 .b-ism-slider-item{
     list-style:             none;
     position:               absolute;
-	height: 				400px;
-	width: 					960px;
-	overflow: 				hidden;
+    height:                 400px;
+    width:                  960px;
+    overflow:               hidden;
     top:                    0;
     left:                   0;
     margin:                 0 !important;
     padding:                0 !important;
-	display: 				none;
+    display:                none;
 }
 .li.b-ism-slider-item:first-child{
-	display: 				block;
+    display:                block;
 }
 .b-ism-slider-item.current{
     z-index:                1;
 }
 .b-ism-slider-item-img{
-	display:				block;
-	text-align:				left;
-	min-height: 			400px;
-	min-width: 				960px;
+    display:                block;
+    text-align:             left;
+    min-height:             290px;
+    min-width:              730px;
 }
 .b-ism-slider-pagination{
-	display: 				none;
+    display:                none;
     bottom:                 20px;
-    left:                  	20px;
+    left:                   20px;
     color:                  #FFFFFF;
     position:               absolute;
     text-align:             right;
@@ -50,25 +50,25 @@
     user-select:            none;
 }
 .b-ism-slider-pagination-item{
-    float: 					left;
-	color:					#000;
-	background: 			#D7D6D6;
-	overflow:				hidden;
+    float:                  left;
+    color:                  #000;
+    background:             #D7D6D6;
+    overflow:               hidden;
     margin-left:            3px;
     text-decoration:        none;
-	padding: 				1px 5px;
-	text-align: 			center;
-	font-family: 			monospace;
+    padding:                1px 5px;
+    text-align:             center;
+    font-family:            monospace;
 }
 a.b-ism-slider-pagination-item:first-child{
     margin-left:            0px;
 }
 .b-ism-slider-pagination-item.current{
-	background: 			#000;
-	color: 					#fff;
+    background:             #000;
+    color:                  #fff;
 }
 .b-ism-slider-control{
-	display: 				none;
+    display:                none;
     top:                    50%;
     left:                   0;
     background-color:       #000;
@@ -93,37 +93,54 @@ a.b-ism-slider-control:hover{
     opacity: .8;
 }
 .b-ism-slider-item-title{
-	font-size: 				16px;
-	line-height: 			22px;
-	font-weight: 			700;
-	text-transform: 		uppercase;
+    font-size:              16px;
+    line-height:            22px;
+    font-weight:            700;
+    text-transform:         uppercase;
 }
 .b-ism-slider-item-info{
-	background: 			#EBEAEA;
-	position: 				absolute;
-	right: 					0;
-	bottom: 				0;
-	padding: 				19px 40px;
-	width: 					50%;
-	text-align: 			left;
-	text-decoration: 		none !important;
-	overflow: 				hidden;
+    background:             #EBEAEA;
+    position:               absolute;
+    right:                  0;
+    bottom:                 0;
+    padding:                19px 40px;
+    width:                  50%;
+    text-align:             left;
+    text-decoration:        none !important;
+    overflow:               hidden;
     display:                none;
 }
 .b-ism-slider-preloader{
-	position: 				absolute;
-	left: 					50%;
-	top: 					50%;
-	z-index: 				2;
-	white-space: 			nowrap;
-	display: 				none;
+    position:               absolute;
+    left:                   50%;
+    top:                    50%;
+    z-index:                2;
+    white-space:            nowrap;
+    display:                none;
 }
 .b-ism-slider-preloader span{
-	margin-left: 			-50%;
-	margin-top: 			-50%;
-	display: 				block;
-	background: 			#000;
-	padding: 				5px 0;
-	color: 					#fff;
-	text-align: 			center;
+    margin-left:            -50%;
+    margin-top:             -50%;
+    display:                block;
+    background:             #000;
+    padding:                5px 0;
+    color:                  #fff;
+    text-align:             center;
+}
+
+.b-ism-slider-progress{
+    background:             #008ff8;
+    position:               absolute;
+    left:                   0;
+    top:                    0;
+    bottom:                 0;
+}
+.b-ism-slider-progress-container{
+    position:               absolute;
+    bottom:                 0;
+    right:                  0;
+    left:                   0;
+    height:                 3px;
+    background:             #333333;
+    z-index:                3;
 }

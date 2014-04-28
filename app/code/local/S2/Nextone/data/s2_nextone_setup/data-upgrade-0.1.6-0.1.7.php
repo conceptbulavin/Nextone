@@ -83,13 +83,6 @@ HTML
         'id_new'  => 'manufacture',
         'title'   => 'Бренды',
         'content' => <<<HTML
-<div class="home-banner home-banner-bottom"><a href="#"><img src="{{skin url="images/home_banner_bottom.jpg"}}" alt="" /></a></div>
-HTML
-    ),
-    array(
-        'id_new'  => 'home_banner_bottom',
-        'title'   => 'Главная: нижний баннер',
-        'content' => <<<HTML
 {{block type="manufacturers/list" name="ma2.manufacturers1" template="ma2_manufacturers/slider.phtml" title="Our manufacturers - Slider" show_logo="1" grid_col="6" show_product_count="1" }}
 HTML
     ),

@@ -13,8 +13,8 @@ $_collection = $this->getSlides();
 
 if($_collection->count()):
     $_prefix = $_slider->class ? $_slider->class : 'b-ism' . $_slider->slider_id;
-    $_width = ($_slider->width > 0) ? $_slider->width : 960;
-    $_height = ($_slider->height > 0) ? $_slider->height : 400;
+    $_width = ($_slider->width > 0) ? $_slider->width : 730;
+    $_height = ($_slider->height > 0) ? $_slider->height : 290;
     $_preloadingText = $this->__('Loading...');
     ?>
 <div class="b-ism-slider <?php echo $_prefix . '-slider' ?>"
@@ -45,6 +45,9 @@ if($_collection->count()):
     <?php endif; ?>
     <div class="b-ism-slider-preloader <?php echo $_prefix . '-preloader' ?>">
         <span><?php echo $_preloadingText ?></span>
+    </div>
+    <div class="b-ism-slider-progress-container <?php echo $_prefix . '-progress-container' ?>">
+        <div class="b-ism-slider-progress <?php echo $_prefix . '-progress' ?>"><!-- --></div>
     </div>
 </div>
 <script type="text/javascript">
