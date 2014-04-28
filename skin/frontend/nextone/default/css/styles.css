@@ -185,7 +185,7 @@ input.input-text:focus,select:focus,textarea:focus { background-color:#edf7fd; }
 .form-list .field { float:left; width:285px; }
 .form-list input.input-text { width:168px; }
 .form-list textarea { width:168px; height:10em; }
-.form-list select { width:168px; }
+.form-list select { width:168px; min-height: 25px; padding: 5px 10px;}
 
 
 .form-list li.wide .input-box { width:535px; }
@@ -349,11 +349,11 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
 .error-msg,
 .success-msg,
 .note-msg,
-.notice-msg { border-style:solid !important; border-width:1px !important; background-position:10px 9px !important; background-repeat:no-repeat !important; min-height:24px !important; padding:8px 8px 8px 32px !important; font-size:11px !important; font-weight:bold !important; }
-.error-msg { border-color:#f16048; background-color:#faebe7; background-image:url(../images/i_msg-error.gif); color:#df280a; }
-.success-msg { border-color:#446423; background-color:#eff5ea; background-image:url(../images/i_msg-success.gif); color:#3d6611; }
+.notice-msg { border-style:solid !important; border-width:1px !important; background-position:10px 9px !important; background-repeat:no-repeat !important; min-height:17px !important; padding:8px 8px 8px 32px !important; font-size:11px !important; font-weight:bold !important; }
+.error-msg { border-color:#CCC; background-color:#FFF; background-image:url(../images/i_msg-error.gif); color:#df280a; }
+.success-msg { border-color:#CCC; background-color:#FFF; background-image:url(../images/i_msg-success.gif); color:#3d6611; }
 .note-msg,
-.notice-msg { border-color:#fcd344; background-color:#fafaec; background-image:url(../images/i_msg-note.gif); color:#3d6611; }
+.notice-msg { border-color:#CCC; background-color:#FFF; background-image:url(../images/i_msg-note.gif); color:#3d6611; }
 
 /* BreadCrumbs */
 .breadcrumbs { font-size:14px; line-height:1.25; margin:0 0 13px; background:url(../images/bkg_divider1.gif) 0 100% repeat-x; padding: 1px 2px 2px; }
@@ -714,7 +714,7 @@ button.button:hover {
 #nav ul li a,
 #nav ul li a:hover { color:#2f2f2f !important; }
 #nav ul span,
-#nav ul li.last li span { padding:3px 15px 4px 15px; }
+#nav ul li.last li span { padding:3px 7px 3px 7px; line-height: 20px }
 
 /* Show menu */
 #nav li ul.shown-sub,
@@ -1710,7 +1710,7 @@ button.button:hover {
 }
 
 /* Account Login/Create Pages ============================================================ */
-.account-login .content { min-height:345px; border-bottom:0; }
+.account-login .content { min-height:145px; border-bottom:0; }
 .account-login .content h2 { font-size:16px; margin:0 0 14px; padding:0 0 5px; background: url(../images/bkg_divider1.gif) 0 100% repeat-x; color:#4f4f4f; }
 .account-login .new-users h2 { }
 .account-login .registered-users h2 { }
