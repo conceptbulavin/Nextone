@@ -5,9 +5,10 @@
     if ($_minDiff != 0 || $_maxDiff != 0) {
         $_isExpandedClass = " m-selected-ln-item";
     }
+    $_symbol =  Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
 ?>
-<dt><span class="filter-name"><?php echo $this->__('Price') ?>
-        <span class="currency">(<?php echo Mage::app()->getStore()->getCurrentCurrencyCode() ?>)</span><span class="collapse-filter"></span></span></dt>
+<dt><span class="filter-name"><?php echo $this->__('Price'); ?>
+        <span class="currency">(<?php echo $_symbol; ?>)</span><span class="collapse-filter"></span></span></dt>
 <dd>
     <div class="slider price-slider-horizontal<?php echo $_isExpandedClass; ?>">
         <span class="price-slider-min-price"><?php echo $this->_minPrice;?></span>
@@ -19,7 +20,7 @@
         <input id="price-slider-min" class="price-slider-min price-slider-input" type="text" value="<?php echo $this->_currentMinPrice;?>" />
         <label for="price-slider-max"><?php echo $this->__('To');?></label>
         <input class="price-slider-max price-slider-input" type="text" value="<?php echo $this->_currentMaxPrice;?>" />
-        <span class="currency"><?php echo Mage::app()->getStore()->getCurrentCurrencyCode() ?></span>
+        <span class="currency"><?php echo $_symbol ?></span>
         <button id="price-filter-button" class="button"><span><span><?php echo $this->__('OK');?></span></span></button>
     </div>
     <script>

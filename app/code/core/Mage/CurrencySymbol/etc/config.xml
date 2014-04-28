@@ -65,7 +65,7 @@
             <adminhtml>
                 <args>
                     <modules>
-                        <currencysymbol>Mage_CurrencySymbol_Adminhtml</currencysymbol>
+                        <currencysymbol before="Mage_Adminhtml">Mage_CurrencySymbol_Adminhtml</currencysymbol>
                     </modules>
                 </args>
             </adminhtml>

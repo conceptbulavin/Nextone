@@ -69,8 +69,12 @@ foreach ($labels as $key => $option) {
 }
 
 $options = getAllOptions('manufacturer');
-$config->saveConfig('catalog/navigation/max_depth', 1);
 
 foreach ($options as $key => $option) {
     $config->saveConfig('manufacturers/image/'.$option['value'], $labels[$option['label']]);
 }
+
+$config->saveConfig('catalog/navigation/max_depth', 1);
+$config->saveConfig('currency/options/base', 'UAH');
+$config->saveConfig('currency/options/default', 'UAH');
+$config->saveConfig('currency/options/allow', 'UAH');
