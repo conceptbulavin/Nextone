@@ -1,5 +1,5 @@
 .b-tabs {
-    margin: 0 0 20px;
+    margin: 20px 0;
 }
 .b-pdp-tabs-label {
     cursor: pointer;
@@ -7,11 +7,11 @@
     font-size: 14px;
     text-transform: uppercase;
     background: url(../../images/bkg_divider1.gif) 0 100% repeat-x;
-    padding: 12px 0 2px;
+    padding: 10px 0 2px;
 }
 .b-pdp-tabs-content {
     display: none;
-    padding: 8px 0 15px;
+    padding: 8px 0 0;
 }
 .b-pdp-tabs-content.is-expanded {
     display: block;

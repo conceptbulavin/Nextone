@@ -19,7 +19,8 @@
  }
  .filter-actions {
   text-align: right;
-  margin-top: 5px;
+  margin-top: 7px;
+  text-transform: lowercase;
  }
  .filter-actions button > span{
   text-transform: uppercase;
@@ -58,6 +59,7 @@
 }
 .slider.slider-horizontal {
   height: 20px;
+  margin-top: -4px;
 }
 .slider.slider-horizontal .slider-track {
   height: 1px;

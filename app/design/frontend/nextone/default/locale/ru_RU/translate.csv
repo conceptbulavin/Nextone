@@ -11,3 +11,4 @@
 "Mage_Contacts::Email", "E-mail"
 "Mage_Customer::Confirm New Password", "Повторите пароль"
 "Please type the letters below", "Введите символы из проверочного кода:"
+"Product number:", "Кода товара:"

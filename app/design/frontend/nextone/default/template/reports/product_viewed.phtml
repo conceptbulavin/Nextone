@@ -34,7 +34,7 @@
         <ol id="recently-viewed-items">
         <?php foreach ($_products as $_product): ?>
             <li class="item">
-                <a href="<?php echo $this->getProductUrl($_product) ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(188, 120) ?>" width="186" height="120" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" /></a>
+                <a href="<?php echo $this->getProductUrl($_product) ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(188, 105) ?>" width="186" height="105" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" /></a>
                 <h3 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName() , 'name') ?></a></h3>
                 <?php echo $this->getPriceHtml($_product, true, '-widget-viewed-list') ?>
             </li>
