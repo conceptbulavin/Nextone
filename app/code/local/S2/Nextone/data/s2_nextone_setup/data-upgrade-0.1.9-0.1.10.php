@@ -50,10 +50,6 @@ function deleteAttributeOption($attribute_code, $attribute_value) {
 deleteAttributeOption('manufacturer','*');
 
 $labels = array(
-    'Braun_Copy' => 'manufacturers/braun.png',
-    'Tefal_Copy' => 'manufacturers/tefal.png',
-    'Samsung_Copy' => 'manufacturers/braun.png',
-    'Whirlpool_Copy' => 'manufacturers/tefal.png',
     'Braun' => 'manufacturers/braun.png',
     'Tefal' => 'manufacturers/tefal.png',
     'Whirlpool' => 'manufacturers/werpool.png',

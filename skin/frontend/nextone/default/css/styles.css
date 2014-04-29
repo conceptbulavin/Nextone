@@ -2170,13 +2170,13 @@ button.button:hover {
 .product-info-container .action-price .price-label { color: #008ff8; }
 .product-info-container .action-price .price { font-weight: bold; line-height: 23px; }
 .a-center { text-align: center; }
-#contact_form .fieldset .legend { font-size: 18px; color: #008ff8; }
-#contact_form .form-list input.input-text,
-#contact_form .form-list textarea { width: 289px; border-color: #ddd; box-shadow: inset 1px 0 1px rgba(0, 0, 0, .11) }
-#contact_form .form-list input.input-text { height: 30px; }
-#contact_form .form-list li.wide .input-box,
-#contact_form .form-list .wide input.input-text,
-#contact_form .form-list .wide textarea { width: 100%; }
+#contactForm .fieldset .legend { font-size: 18px; color: #008ff8; }
+#contactForm .form-list input.input-text,
+#contactForm .form-list textarea { width: 289px; border-color: #ddd; box-shadow: inset 1px 0 1px rgba(0, 0, 0, .11) }
+#contactForm .form-list input.input-text { height: 30px; }
+#contactForm .form-list li.wide .input-box,
+#contactForm .form-list .wide input.input-text,
+#contactForm .form-list .wide textarea { width: 100%; }
 .form-list .captcha-input-box label { font-weight: 400; color: #000; }
 .form-list .captcha-input-box { margin: 25px 0 15px; }
 .form-list .input-box.captcha{ margin: 10px 15px; }

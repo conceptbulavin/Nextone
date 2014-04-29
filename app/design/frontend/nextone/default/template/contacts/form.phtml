@@ -31,7 +31,7 @@
 <div class="std">
     <?php echo $this->getChildHtml('contact'); ?>
 </div>
-<form action="<?php echo $this->getFormAction(); ?>" id="contact_form" method="post">
+<form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post">
     <div class="fieldset">
         <h2 class="legend"><?php echo Mage::helper('contacts')->__('Contact Information') ?></h2>
         <ul class="form-list">
@@ -66,6 +66,6 @@
 </form>
 <script type="text/javascript">
 //<![CDATA[
-    var contactForm = new VarienForm('contact_form', true);
+    var contactForm = new VarienForm('contactForm', true);
 //]]>
 </script>

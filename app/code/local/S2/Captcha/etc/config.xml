@@ -11,13 +11,6 @@
         </observers>
       </controller_action_predispatch_contacts_index_index>
     </events>
-    <models>
-          <captcha>
-              <rewrite>
-                  <s2_captcha>S2_Captcha_Model_Observer</s2_captcha>
-              </rewrite>
-          </captcha>
-       </models>
   </global>
   <default>
     <captcha>
