@@ -1444,7 +1444,7 @@ button.button:hover {
 
 
 /* Options Tool Tip */
-.item-options dt { float: left;  margin-right: 3px; }
+.item-options dt { float: left; margin-right: 3px; }
 .item-options dt:after {content: ':'; }
 .item-options dd {  }
 .truncated { cursor:help; }
@@ -1561,10 +1561,10 @@ button.button:hover {
 .block-progress .block-title strong { font-size:13px; color:#0a263c; }
 .block-progress .block-content { background:none; }
 .block-progress dt {
-    font-size:13px; font-weight:bold; line-height:1.35;    margin:0px; padding:2px 0px; color:#999;
+    font-size:12px; font-weight:bold; line-height:1.35;    margin:0px; padding:2px 0px; color:#383838;
 
 }
-.block-progress dd {   margin: 5px 0 10px; }
+.block-progress dd {   margin: 0 0 10px; }
 .block-progress dt.complete {  }
 
 
