@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+	<config>
+    <menu>
+      <ma2 translate="title" module="ma2all">
+        <title>Brands</title>
+        <sort_order>89</sort_order>
+        <children>
+          <manufacturers_manager translate="title" module="manufacturers">
+            <title>Brands Images</title>
+            <sort_order>1</sort_order>
+            <action>manufacturers/adminhtml_default</action>
+          </manufacturers_manager>
+        </children>
+      </ma2>
+    </menu>
+	</config>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+    <modules>
+        <S2_ImageZoom>
+            <active>true</active>
+            <codePool>local</codePool>
+        </S2_ImageZoom>
+    </modules>
+</config>

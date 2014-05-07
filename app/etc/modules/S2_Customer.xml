@@ -1,0 +1,9 @@
+﻿<?xml version="1.0"?>
+<config>
+    <modules>
+        <S2_Customer>
+            <active>true</active>
+            <codePool>local</codePool>
+        </S2_Customer>
+    </modules>
+</config>

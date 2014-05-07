@@ -1,3 +1,5 @@
-/var/cache/
-/var/locks/
-/var/session/
+/media/catalog/
+/media/captcha/
+/var/
+/app/etc/*.xml
+/.idea/

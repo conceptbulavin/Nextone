@@ -1,0 +1,168 @@
+/**
+ * SFC - Featured Catagories Extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to support@storefrontconsulting.com so we can send you a copy immediately.
+ *
+ *
+ * @package    SFC_FeaturedCategories
+ * @copyright  (C)Copyright 2010 StoreFront Consulting, Inc (http://www.StoreFrontConsulting.com/)
+ * @author     Adam Lundrigan
+ */
+
+.featured-cat {
+   display: inline-block;
+	width: 170px;
+    margin: 0;
+    position: relative;
+    overflow: visible;
+}
+
+
+.wrap-cat{
+    width: 170px;
+    overflow: hidden;
+    display: block;
+    margin: 0px auto;
+    overflow: hidden;
+    padding: 20px 20px 20px 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+
+}
+
+.featured-cat:hover .wrap-cat{
+    /*width: 200px;*/
+    /*min-height: 270px;*/
+    /*height: auto !important;*/
+    /*position: absolute;*/
+    /*top: -1px;*/
+    /*left: -1px;*/
+    /*z-index: 100;*/
+    /*background: #FFF;*/
+    /*border: solid 1px #dadada !important;*/
+    /*border-bottom: solid 1px #b7b7b7 !important;*/
+    /*-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);*/
+    /*-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);*/
+    /*box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.05);*/
+    /*background: #ffffff; *//* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    /*background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijc5JSIgc3RvcC1jb2xvcj0iI2YxZjFmMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMGYwZjAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);*/
+    /*background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 79%, #f0f0f0 100%); *//* FF3.6+ */
+    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(79%,#f1f1f1), color-stop(100%,#f0f0f0)); *//* Chrome,Safari4+ */
+    /*background: -webkit-linear-gradient(top,  #ffffff 0%,#f1f1f1 79%,#f0f0f0 100%); *//* Chrome10+,Safari5.1+ */
+    /*background: -o-linear-gradient(top,  #ffffff 0%,#f1f1f1 79%,#f0f0f0 100%); *//* Opera 11.10+ */
+    /*background: -ms-linear-gradient(top,  #ffffff 0%,#f1f1f1 79%,#f0f0f0 100%); *//* IE10+ */
+    /*background: linear-gradient(to bottom,  #ffffff 0%,#f1f1f1 79%,#f0f0f0 100%); *//* W3C */
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f0f0f0',GradientType=0 ); *//* IE6-8 */
+    /*transition: background-color 0.5s ease;*/
+}
+
+
+
+.featured-cat .cat-image {
+	text-align: center;
+    margin-bottom: 10px;
+}
+
+/*.featured-cat:hover .cat-image { margin-right: 30px}*/
+
+
+.featured-cat .cat-image img {
+	width: 45px;
+	height: 45px;
+}
+
+.featured-cat .cat-title {
+    font-size: 16px;
+    line-height: 17px;
+    color: #008ff8;
+    width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.featured-cat .cat-title a,
+.featured-cat .cat-title a:hover
+{
+
+    text-decoration: underline;
+    font-weight: 600;
+	color: black;
+    color: #008ff8;
+}
+
+.featured-cat .cat-title a:hover{
+    text-decoration: none;
+}
+
+.featured-cat li,
+.featured-cat ul {
+    margin: 0;
+    padding: 0;
+}
+
+.featured-cat li{
+    list-style: none;
+    width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+
+/*.featured-cat:hover .wrap-cat li,*/
+/*.featured-cat:hover .wrap-cat .cat-title{*/
+    /*white-space: normal;*/
+    /*width: auto;*/
+/*}*/
+
+
+.featured-cat li a, 
+.featured-cat li a:hover
+{
+    padding: 0;
+    color: #4f4f4f;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.featured-cat li a:hover{
+    color: #008ff8;
+}
+
+
+
+.std .category-list-home{
+    margin: 30px 0px 30px;
+    padding: 0;
+    clear: both;
+    background: url("../images/hrdot.png") 0 100% repeat-x;
+    min-height: 300px;
+    width: 100%;
+}
+
+.std .category-list-home>li{
+    margin-left: 22px;
+    padding-bottom: 30px;
+    vertical-align: top;
+}
+
+.std .category-list-home>li:first-child{
+    margin-left: 10px;
+}
+
+
+
+
+

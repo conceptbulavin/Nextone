@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <S2_Nextone>
+            <active>true</active>
+            <codePool>local</codePool>
+        </S2_Nextone>
+    </modules>
+</config>

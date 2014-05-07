@@ -1,0 +1,18 @@
+<?php
+    /**
+     * Shoping cart top
+     *
+     * @see Mage_Checkout_Block_Cart_Sidebar
+     */
+
+    ?>
+<?php if ($this->getIsNeedToDisplaySideBar()): ?>
+<div class="checkout-cart">
+    <a href="<?php echo $this->getUrl('checkout/cart') ?>">
+        <span class="b-topcart">
+            <?php $_cartQty = $this->getSummaryCount() ? $this->getSummaryCount() : 0 ?>
+            <?php echo $this->__('%s', '<span>' . $_cartQty . '</span>') ?>
+        </span>
+    </a>
+</div>
+<?php endif ?>

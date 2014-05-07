@@ -1,0 +1,85 @@
+<?php
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ * @see S2_ImageZoom_Block_Product_View_Media
+ */
+?>
+<?php
+$_product = $this->getProduct();
+$_helper = $this->helper('catalog/image');
+
+$_imageWidth = 370; // Width of main image
+$_imageHeight = 370; // Height of main image
+$_thumbImageWidth = 48; // Width of thumbnails
+$_thumbImageHeight = 48; // Height of thumbnails
+$_countThumbsPerSlide = 6; // Number of visible thumbnails. If count of thumbnails less than $_countThumbsPerSlide, they will be centered
+$_backgroundColor = array(255, 255, 255); // Background color for main images (RGB)
+$_thumbBackgroundColor = array(255, 255, 255); // Background color for thumbnails (RGB)
+$_zoomNotice = $this->__('Click on the picture to zoom'); // Notice for image
+$_zoomNoticeImage = '<img src="'. $this->getSkinUrl('images/image.zoom/ico-loop.png') .'" alt="" />'; // Notice image
+$_cloudZoomRel = "position: 'right' , showTitle: false, adjustX:20, adjustY:0, zoomWidth: 370, zoomHeight: 370";
+// http://www.professorcloud.com/mainsite/cloud-zoom-integration.htm
+// position: {left, right, top, bottom, inside}
+
+$_label = method_exists($_product, 'getLabel') ? $_product->getLabel() : false;
+$_labelText = method_exists($_product, 'getLabelText') ? $_product->getLabelText() : '<!-- -->';
+$_labelClassName = "";
+?>
+<div class="image-zoom">
+    <div class="product-image" id="main-image">
+        <?php
+        $_image = $_helper->init($this->getProduct(), 'image')->backgroundColor($_backgroundColor);;
+        list($_imgWidth, $_imgHeight) = $_helper->init($_product, 'image')->getOriginalSizeArray();
+        $_imageUrl = ($_imgWidth > $_imageWidth && $_imgHeight > $_imageHeight) ? $_image : NULL;
+        ?>
+        <?php if (!empty($_imageUrl)): ?>
+        <a onclick="return false;" class="cloud-zoom" style="width: <?php echo $_imageWidth; ?>px; height: <?php echo $_imageHeight; ?>px;" href="<?php echo $_helper->init($_product, 'image')->backgroundColor($_backgroundColor); ?>" title="<?php echo $this->htmlEscape($_product->getImageLabel()) ?>" rel="<?php echo $_cloudZoomRel ?>"><img class="photo fn iz-current" src="<?php echo $_image->resize($_imageWidth, $_imageHeight); ?>" width="<?php echo $_imageWidth ?>" height="<?php echo $_imageHeight ?>" alt="<?php echo $this->htmlEscape($_product->getImageLabel()) ?>"/>
+            <?php if ($_label): ?><span class="product-label <?php echo $_labelClassName; ?>"><?php echo $_labelText ?></span><?php endif; ?></a>
+        <script type="text/javascript">
+            //<![CDATA[
+            jQuery(document).ready(function(){
+                jQuery('#main-image .cloud-zoom').CloudZoom();
+            });
+            //]]>
+        </script>
+        <?php else: ?>
+            <a onclick="return false;" class="cloud-zoom iz-false" style="width: <?php echo $_imageWidth; ?>px; height: <?php echo $_imageHeight; ?>px;" href="javascript: void(0)" title="<?php echo $this->htmlEscape($_product->getImageLabel()) ?>" rel="<?php echo $_cloudZoomRel ?>"><img src="<?php echo $_image->resize($_imageWidth, $_imageHeight); ?>" width="<?php echo $_imageWidth ?>" height="<?php echo $_imageHeight ?>" alt="<?php echo $this->htmlEscape($_product->getImageLabel()) ?>"/>
+                <?php if ($_label): ?><span class="product-label <?php echo $_labelClassName; ?>"><?php echo $_labelText ?></span><?php endif; ?></a>
+        <?php endif; ?>
+        <span class="iz-notice" style="<?php if($_imageUrl): ?>display:block;<?php else: ?>display:none;<?php endif; ?>"><?php echo $_zoomNoticeImage; echo $_zoomNotice ?></span>
+        <span class="iz-preloader"><span><?php echo $this->__('Loading...'); ?></span></span>
+    </div>
+    <?php if (count($this->getGalleryImages()) > 0): ?>
+    <div class="more-views-container">
+        <a href="javascript: void(0);" class="iz-btn-prev iz-btn-controls iz-btn-hidden" title="<?php echo $this->__('Previous'); ?>"><?php echo $this->__('Previous'); ?></a>
+        <a href="javascript: void(0);" class="iz-btn-next iz-btn-controls iz-btn-hidden" title="<?php echo $this->__('Next'); ?>"><?php echo $this->__('Next'); ?></a>
+        <?php $_arrayOfSlides = array() ?>
+        <?php $_count = count($this->getGalleryImages()) ?>
+        <div class="more-views<?php if ($_count < $_countThumbsPerSlide) echo ' more-views-less' ?>">
+            <ul>
+                <?php foreach ($this->getGalleryImages() as $_item): ?>
+                <?php $_thumbImage = $_helper->init($this->getProduct(), 'thumbnail', $_item->getFile())->backgroundColor($_backgroundColor) ?>
+                <?php $_arrayOfSlides[] = $this->helper('imagezoom')->getJsLiteral($_thumbImage, $_item, $_imageWidth, $_imageHeight) ?>
+                <li<?php if($_item->getFile() == $_product->getImage()) echo ' class="iz-item-current"' ?>>
+                    <a style="width: <?php echo $_thumbImageWidth; ?>px; height: <?php echo $_thumbImageHeight; ?>px" href="<?php echo $_thumbImage; ?>" title="<?php echo $this->htmlEscape($_item->getLabel()) ?>" />
+                    <img src="<?php echo $_thumbImage->backgroundColor($_thumbBackgroundColor)->resize($_thumbImageWidth, $_thumbImageHeight); ?>" alt="<?php echo $this->htmlEscape($_item->getLabel()) ?>"/>
+                    </a>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+    <?php endif; ?>
+    <script type="text/javascript">
+        //<![CDATA[
+            window.izJson = <?php echo $this->helper('imagezoom')->getJson($_arrayOfSlides) ?>;
+            
+            jQuery(document).ready(function(){
+                S2.imageZoom.init();
+            });
+
+        //]]>
+    </script>
+</div>

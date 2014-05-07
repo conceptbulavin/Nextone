@@ -1,0 +1,60 @@
+<?php
+/**
+ * MagenMarket.com
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Edit or modify this file with yourown risk.
+ *
+ * @category    Extensions
+ * @package     Ma2_Manufacturers Free
+ * @copyright   Copyright (c) 2013 MagenMarket. (http://www.magenmarket.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+**/
+/* $Id: default.phtml 3 2014-01-13 09:15:57Z linhnt $ */
+
+$manu_code = Mage::getStoreConfig('manufacturers/general/attr_code');
+$manufacturers = $this->getManufacturers();
+$thumbW = intval(Mage::getStoreConfig('manufacturers/general/thumb_w')) > 0 ? intval(Mage::getStoreConfig('manufacturers/general/thumb_w')) : 120;
+$thumbH = intval(Mage::getStoreConfig('manufacturers/general/thumb_h')) > 0 ? intval(Mage::getStoreConfig('manufacturers/general/thumb_h')) : 60;
+$dimension_spec = intval(Mage::getStoreConfig('manufacturers/general/dimension_spec')) == 1;
+$showLogo = true;
+if ($this->getShowLogo() != null && (int)$this->getShowLogo() == 0) $showLogo = false; // default is show
+$showName = true;
+if ($this->getShowName() != null && (int)$this->getShowName() == 0) $showName = false; // default is show
+$showProductCount = false;
+if ($this->getShowProductCount() != null && (int)$this->getShowProductCount() == 1) $showProductCount = true; // default is not show
+
+if(is_array($manufacturers) && count($manufacturers)): ?>
+<div class="ma2-manufacturers block">
+  <div class="block-inner">
+    <?php if ($this->getTitle()): ?>
+    <h3 class="block-title">
+      <span class="format-span">
+        <span><?php echo $this->getTitle(); ?></span>
+      </span>
+    </h3>
+    <?php endif; ?>
+    <ul class="manufacturers list">
+    <?php
+    foreach($manufacturers as $manufacturer){
+      $link = '{{store url="catalogsearch/advanced/result" _query="' . $manu_code . '='.$manufacturer['value'].'"}}';
+      $link_text = '';
+      if ($showLogo) $link_text .= '<img class="manufacturer-logo" '. ($dimension_spec ? 'width="'.$thumbW.'" height="'.$thumbH.'"' : '') . 'src="'.Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . ($manufacturer['image'] != '' ? $manufacturer['image'] : 'manufacturers/noimage.jpg') . '" alt="'. $manufacturer['label'] .'" />';
+      if ($showName) $link_text .= '<span class="manufacturer-name">' . $manufacturer['label'];
+      $link_text .= $showProductCount ? ' (' . $manufacturer['product_count'] . ')' : '';
+      $link_text .= '</span>';
+      echo '<li class="manufacturer"><a href="'.Mage::helper('cms')->getPageTemplateProcessor()->filter($link).'" title="'.$this->escapeHtml($manufacturer['label']).'">'. $link_text . '</a></li>';
+    }
+    ?>
+    </ul>
+  </div>
+</div>
+<?php endif; ?>

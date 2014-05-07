@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <default>
+        <reference name="header">
+            <block type="checkout/cart_sidebar" name="cart_top" as="topCart" template="checkout/cart/top.phtml">
+                <action method="addItemRender">
+                    <type>simple</type>
+                    <block>checkout/cart_item_renderer</block>
+                    <template>checkout/cart/top/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>checkout/cart_item_renderer_grouped</block>
+                    <template>checkout/cart/top/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>configurable</type>
+                    <block>checkout/cart_item_renderer_configurable</block>
+                    <template>checkout/cart/top/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>virtual</type>
+                    <block>checkout/cart_item_renderer</block>
+                    <template>checkout/cart/top/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>checkout/cart_item_renderer</block>
+                    <template>checkout/cart/top/default.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </default>
+
+</layout>

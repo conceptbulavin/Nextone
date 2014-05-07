@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<config>
+  	<tabs>
+      <ma2 translate="label" module="ma2all">
+        <label>MagenMarket Extensions</label>
+        <sort_order>168</sort_order>
+      </ma2>
+    </tabs>
+    
+	  <sections>
+      <manufacturers translate="label" module="manufacturers">                    
+      <label>Manufacturers</label>
+      <tab>ma2</tab>
+      <frontend_type>text</frontend_type>
+      <sort_order>1</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>            
+            <groups>
+                <general translate="label"> 
+                <label>General</label>
+                <frontend_type>text</frontend_type>
+                <sort_order>1</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>1</show_in_website>
+                <show_in_store>1</show_in_store>
+                <fields>
+                  <attr_code translate="label">
+                    <label>Manufacturers attribute code</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[
+                      Attribute code for Manufacturer. <br /> Please fill the attribute code and save the configuration first!
+                      ]]> 
+                    </comment>
+                  </attr_code>
+                  <thumb_w translate="label">
+                    <label>Thumbnail width</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>4</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[
+                      Type a number for thummnail width (px). Example: 120
+                      ]]> 
+                    </comment>
+                  </thumb_w>
+                  <thumb_h translate="label">
+                    <label>Thumbnail height</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>6</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[
+                      Type a number for thummnail height (px). Example: 60
+                      ]]> 
+                    </comment>
+                  </thumb_h>
+                  <dimension_spec translate="label">
+                    <label>Specify dimension for image tag</label>
+                    <frontend_type>select</frontend_type>
+                    <sort_order>8</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                    <comment><![CDATA[
+                      Choose YES to put 'width="Wpx" height="Hpx"' in img tag. Where Wpx and Hpx is defined above.
+                      ]]> 
+                    </comment>
+                  </dimension_spec>
+                  <thumb_upload_resize translate="label">
+                    <label>Resize images when upload</label>
+                    <frontend_type>select</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                    <comment><![CDATA[
+                      Choose YES to enable resizing image when upload in backend. The resized dimension is defined above.
+                      ]]> 
+                    </comment>
+                  </thumb_upload_resize>
+               </fields>
+               </general>
+            </groups>
+      </manufacturers>
+	  </sections>
+</config>

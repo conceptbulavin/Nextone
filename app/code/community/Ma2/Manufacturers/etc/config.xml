@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Ma2_Manufacturers>
+      <version>0.1.0</version>
+    </Ma2_Manufacturers>
+  </modules>
+  
+  <admin>
+    <routers>
+      <manufacturers>
+        <use>admin</use>
+        <args>
+          <module>Ma2_Manufacturers</module>
+          <frontName>manufacturers</frontName>
+        </args>
+      </manufacturers>
+    </routers>
+  </admin>
+  
+  <adminhtml>
+    <layout>
+			<updates>
+				<manufacturers>
+					<file>ma2_manufacturers.xml</file>
+				</manufacturers>
+			</updates>
+		</layout>
+  </adminhtml>
+  
+  <frontend>
+    <layout>
+			<updates>
+				<manufacturers>
+					<file>ma2_manufacturers.xml</file>
+				</manufacturers>
+			</updates>
+		</layout>
+  </frontend>
+  
+  <global>
+    <blocks>
+        <manufacturers>
+            <class>Ma2_Manufacturers_Block</class>
+        </manufacturers>
+    </blocks>
+    <models>
+        <manufacturers>
+            <class>Ma2_Manufacturers_Model</class>
+        </manufacturers>
+    </models>
+    <helpers>
+      <manufacturers>
+        <class>Ma2_Manufacturers_Helper</class>
+      </manufacturers>
+    </helpers>
+  </global>
+  
+  <default>
+    <manufacturers>
+        <general>
+            <attr_code>manufacturer</attr_code>
+            <thumb_w>120</thumb_w>
+            <thumb_h>60</thumb_h>
+            <dimension_spec>1</dimension_spec>
+            <thumb_upload_resize>0</thumb_upload_resize>
+        </general>
+    </manufacturers>
+  </default>
+</config> 
