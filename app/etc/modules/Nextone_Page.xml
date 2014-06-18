@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Nextone_Page>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Nextone_Page>
+    </modules>
+</config>

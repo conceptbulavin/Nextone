@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--config>
+    <tabs>
+        <nextone translate="label" module="nextone_page">
+            <label>Локальные настройки</label>
+            <sort_order>50</sort_order>
+        </nextone>
+    </tabs>
+    <sections>
+        <nextone_loc translate="label" module="nextone_page">
+            <label>Локальная конфигурация</label>
+            <tab>nextone</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>Глобальные опции</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <category_inc translate="label">
+                            <label>Увеличение ИД категории</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-number</validate>
+                            <comment><![CDATA[Brain API дает нам первую категорию с ИД 1, но в Мадженто этот ИД уже занят базовой системной категорией, поэтому мы увеличим все ИД на это число, что б нормально заимпортить]]></comment>
+                        </category_inc>
+                    </fields>
+                </general>
+                
+            </groups>
+        </nextone_loc>
+    </sections>
+</config-->
