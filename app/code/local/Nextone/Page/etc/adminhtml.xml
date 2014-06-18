@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <nextone>
+                        <title>Nextone page</title>
+                        <sort_order>95</sort_order>
+                    </nextone>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <nextone_page translate="title" module="nextone_page">
+                                        <title>Базовые настройки</title>
+                                        <sort_order>1100</sort_order>
+                                    </nextone_page>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -24,7 +24,7 @@
 ############################################
 ## default index file
 
-    DirectoryIndex lightspeed.php
+    DirectoryIndex index.html
 
 <IfModule mod_php5.c>
 
