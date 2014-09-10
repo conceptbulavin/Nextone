@@ -41,9 +41,9 @@
             <default_setup>
                 <connection>
                     <host><![CDATA[127.0.0.1]]></host>
-                    <username><![CDATA[nextone_db]]></username>
-                    <password><![CDATA[pmTTDp8u]]></password>
-                    <dbname><![CDATA[nextone_db]]></dbname>
+                    <username><![CDATA[root]]></username>
+                    <password><![CDATA[goblin21]]></password>
+                    <dbname><![CDATA[magento]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
                     <type><![CDATA[pdo_mysql]]></type>

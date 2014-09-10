@@ -375,3 +375,29 @@ function render_time() {
     $_TIME_END = microtime_float();
     return $_TIME_END-$_TIME_START;
 }
+
+// DOWNLOADER
+function update_image_product($data) {
+	global $db;
+	$sql = "UPDATE `product` SET `real_image` = :real_image WHERE `productID` = :productID";
+	$stmt = $db->prepare($sql);
+	$stmt->bindParam(':productID', $data['productID']);
+	$stmt->bindParam(':real_image', $data['real_image']);
+	$stmt->execute();
+}
+
+function download_image($url, $dest) {
+	$ch = curl_init($url);
+	$fp = fopen($dest, 'wb');
+	curl_setopt($ch, CURLOPT_FILE, $fp);
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_exec($ch);
+	curl_close($ch);
+	fclose($fp);
+}
+
+function get_image_name($url) {
+	$exp = explode("/", $url);
+	$file_name = end($exp);
+	return $file_name;
+}

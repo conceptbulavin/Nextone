@@ -84,8 +84,16 @@
         
         die;
         */
-       
-        $connect =  mysql_connect('127.0.0.1', 'root', 'goblin21');
+        /*
+        $attributeSetModel = Mage::getModel('eav/entity_attribute_set');
+                ->getCollection();
+        die($attributeSetId->getSelect());
+        $a        ->addFieldToFilter('entity_type_id', 3)
+                ->addFieldToFilter('attribute_set_name', 'Default')
+                ->getFirstItem();
+        pr_ar($attributeSetId);
+        */
+        $connect =  mysql_connect('127.0.0.1', 'root', 'spywszxvxqvc');
         if($connect){
             mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $connect);
             $db = mysql_select_db ('brain', $connect);
@@ -245,6 +253,7 @@
                     $result = mysql_query($sql);
                     if($result){
                         $i = 0;
+                        $j=0;
                         while( $row = mysql_fetch_assoc($result)){
                             $csvArray = $csvArrayBase;
                             foreach ($row as $key => $value ){
@@ -268,6 +277,8 @@
                                         break;
                                         case 'price':
                                             $csvArray['price'] = $row['price_uah'];
+                                        case 'real_image':
+                                            $csvArray['real_image'] = '../web/images/' . $row['real_image'];
                                         break;
                                         case 'brief_description':
                                             $csvArray['brief_description'] = empty($row['brief_description']) ? $row['name']: $row['brief_description'];
@@ -279,8 +290,18 @@
                                     }
                                 }
                             }
-                            fputcsv($file, $csvArray);
-                            //$i++; if($i == 5 ){break;}
+                            fputcsv( $file , $csvArray);
+                            /*$i++;
+                            if($i == 20000 ){
+                                $i = 0; $j++;
+                                fclose($file);
+                                echo 'You can find you\'r csv file here: '.$filename. '<br/>';
+                                $filename = Mage::getBaseDir(). DS . 'var'. DS .'import'. DS . 'catalog_product_'. date('Ymd_His') .'_part_'.$j.'.csv';
+                                $file = fopen( $filename,"w");
+                                if($file){
+                                    fputcsv($file, $all_attrs);
+                                } else die('Cant create new file');
+                            }*/
                         }
                     }
                 }
@@ -363,14 +384,29 @@ function checkAttributeValue( $value, $options)
     return false;
 }
 $max_attr_values = 30;
-function createAttribute($code, $label, $attribute_type, $product_type = null )
+function createAttribute($code, $label, $attribute_type /*, $attribute_set*/, $product_type = null )
 {
+    /*$attributeSetName   = $attribute_set;
+    $attributeSetId = Mage::getModel('eav/entity_attribute')
+                ->getCollection()
+                ->addFieldToFilter('entity_type_id', 3)
+                ->addFieldToFilter('attribute_set_name', $attributeSetName)
+                ->getFirstItem();
     
+    */
     $attr_model = Mage::getModel('catalog/resource_eav_attribute');
     $attr = $attr_model->loadByCode('catalog_product', $code );
     if($attr->getAttributeId()){
         return;
     }
+    /*
+    public function addAttributeSet($entityTypeId, $name, $sortOrder = null)
+    {
+        $data = array(
+            'entity_type_id'        => $this->getEntityTypeId($entityTypeId),
+            'attribute_set_name'    => $name,
+            'sort_order'            => $this->getAttributeSetSortOrder($entityTypeId, $sortOrder),
+        );*/
     
     //$model=Mage::getModel('eav/entity_setup','core_setup');
     $model = new Mage_Catalog_Model_Resource_Eav_Mysql4_Setup();

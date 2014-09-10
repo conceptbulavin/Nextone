@@ -1,4 +1,5 @@
 > php index.php | tee _log1.log
+> php downloader.php | tee _log2.log
 
 
 

@@ -1,0 +1,1 @@
+ALTER TABLE `product` ADD `real_image` TEXT NOT NULL AFTER `large_image`;

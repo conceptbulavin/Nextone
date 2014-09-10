@@ -24,7 +24,7 @@
 ############################################
 ## default index file
 
-    DirectoryIndex index.html
+    DirectoryIndex index.php
 
 <IfModule mod_php5.c>
 
@@ -143,7 +143,7 @@
 ############################################
 ## rewrite everything else to index.php
 
-    RewriteRule .* lightspeed.php [L]
+    RewriteRule .* index.php [L]
 
 </IfModule>
 
